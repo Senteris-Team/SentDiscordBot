@@ -6,9 +6,13 @@ client.on("ready", () => {
 });
 
 client.on("message", msg => {
-    if (msg.content === "I") {
-        msg.reply("am Pidor");
+    switch (msg.content.toLowerCase()) {
+        case '!-hi':
+            msg.reply("Hi! I am super cool bot!");
+            break;
+        case '!-showhomework':
+            msg.reply("Oh, it do not work yet");
     }
 });
 
-client.login(process.argv[2]);
+client.login(process.argv[3]);
