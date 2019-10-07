@@ -15,4 +15,4 @@ client.on("message", msg => {
     }
 });
 
-client.login(process.argv[3]);
+client.login(process.argv[2]);
