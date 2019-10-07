@@ -11,7 +11,8 @@ client.on("message", msg => {
     switch (commandArray[0]) {
         case '!-help':
             msg.reply(`!-showhomework \n` +
-                      `!-createchannel \n`);
+                `!-createchannel *name* *slots*\n`);
+            break;
         case '!-hi':
             msg.reply("Hi! I am super cool bot!");
             break;
