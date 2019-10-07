@@ -1,3 +1,14 @@
-'use strict';
+const Discord = require("discord.js");
+const client = new Discord.Client();
 
-console.log('Hello world');
+client.on("ready", () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.on("message", msg => {
+  if (msg.content === "I") {
+    msg.reply("Pidor");
+  }
+});
+
+client.login(process.argv[0]);
