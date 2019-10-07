@@ -6,12 +6,21 @@ client.on("ready", () => {
 });
 
 client.on("message", msg => {
-    switch (msg.content.toLowerCase()) {
+    var command = msg.content.toLowerCase();
+    var commandArray = command.split(" ");
+    switch (commandArray[0]) {
+        case '!-help':
+            msg.reply(`!-showhomework \n` +
+                      `!-createchannel \n`);
         case '!-hi':
             msg.reply("Hi! I am super cool bot!");
             break;
         case '!-showhomework':
-            msg.reply("Oh, it do not work yet");
+            msg.reply("Oh, it does not work yet");
+            break;
+        case '!-createchannel':
+            msg.reply("Oh, it does not work yet");
+            break;
     }
 });
 
