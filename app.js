@@ -20,20 +20,18 @@ client.on("message", msg => {
             msg.reply("Oh, it does not work yet");
             break;
         case '!-createchannel':
-            makeChannel(msg) 
+            makeChannel(msg, commandArray[1], commandArray[2]) 
             msg.reply("Ok");
             break;
     }
 });
 
-function makeChannel(message){
+function makeChannel(message, name, limit){
     var server = message.guild;
-    var name = "Test" ;
 
     server.createChannel(name, "voice")
     .then(channel => {
-    channel.setUserLimit(3);
-    channel.userLimit = 3;
+    channel.userLimit = limit;
     let category = server.channels.find(c => c.name == "Игровые" && c.type == "category");
 
     if (!category) throw new Error("Category channel does not exist");
