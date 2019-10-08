@@ -32,6 +32,7 @@ client.on("message", msg => {
     }
 });
 
+// Wait for DevelooperQ's update and my hands..
 function makeChannel(message, name, limit){
     var server = message.guild;
 
