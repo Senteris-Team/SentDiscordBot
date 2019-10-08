@@ -37,5 +37,6 @@ function makeChannel(message){
     if (!category) throw new Error("Category channel does not exist");
     channel.setParent(category.id);
     }).catch(console.error);
+  };
 
 client.login(process.argv[2]);
