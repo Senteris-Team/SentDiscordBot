@@ -31,3 +31,11 @@ function select(table) {
         return result, fields;
     });
 }
+
+function insert(table, column, value) {
+    let connection = connect();
+    connection.query(`INSERT INTO ${table} (${column}) values (${value})`, function (err, result, fields) {
+        if (err) throw err;
+        endConnect(connection);
+    });
+}
