@@ -23,6 +23,8 @@ function endConnect(connection) { // stop... IT'S END CONNECTION?! FOR WHAT?!
     });
 }
 
+// CopyPaste))
+// DON'T USE THESE FUNCTIONS! NOWAY!
 function select(table) {
     let connection = connect();
     connection.query(`SELECT * FROM ${table}`, function (err, result, fields) {
