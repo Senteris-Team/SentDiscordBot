@@ -39,3 +39,11 @@ function insert(table, column, value) {
         endConnect(connection);
     });
 }
+
+function update(table, column, value) {
+    let connection = connect();
+    connection.query(`UPDATE ${table} SET ${column}=${value}`, function (err, result, fields) {
+        if (err) throw err;
+        endConnect(connection);
+    });
+}
