@@ -32,7 +32,7 @@ function makeChannel(message){
 
     server.createChannel(name, "voice")
     .then(channel => {
-    channel.setUserLimit(2)
+    channel.setUserLimit(3);
     let category = server.channels.find(c => c.name == "Игровые" && c.type == "category");
 
     if (!category) throw new Error("Category channel does not exist");
