@@ -6,22 +6,28 @@ client.on("ready", () => {
 });
 
 client.on("message", msg => {
-    var command = msg.content.toLowerCase();
-    var commandArray = command.split(" ");
-    switch (commandArray[0]) {
+    var command = msg.content.split(" ");
+    switch (command[0].toLowerCase()) {
         case '!-help':
-            msg.reply(`!-showhomework \n` +
-                `!-createchannel *name* *slots*\n`);
+            msg.reply(
+                "```" +
+                "!-showhomework \n" +
+                "!-createchannel *name* *slots* \n" +
+                "```"
+            );
             break;
         case '!-hi':
             msg.reply("Hi! I am super cool bot!");
             break;
         case '!-showhomework':
-            msg.reply("Oh, it does not work yet");
+            msg.reply("Oh, it does not work yet=(");
+            break;
+        case `!-addhomework`:
+            msg.reply("Oh, it does not work yet=(");
             break;
         case '!-createchannel':
             makeChannel(msg, commandArray[1], commandArray[2]) 
-            msg.reply("Ok");
+            msg.reply("The channel is created.");
             break;
     }
 });
@@ -31,12 +37,12 @@ function makeChannel(message, name, limit){
 
     server.createChannel(name, "voice")
     .then(channel => {
-    channel.userLimit = limit;
-    let category = server.channels.find(c => c.name == "Игровые" && c.type == "category");
+        channel.userLimit = limit;
+        let category = server.channels.find(c => c.name == "Игровые" && c.type == "category");
 
-    if (!category) throw new Error("Category channel does not exist");
-    channel.setParent(category.id);
+        if (!category) throw new Error("Category channel does not exist");
+        channel.setParent(category.id);
     }).catch(console.error);
-  };
+};
 
 client.login(process.argv[2]);
