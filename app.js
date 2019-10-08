@@ -20,9 +20,17 @@ client.on("message", msg => {
             msg.reply("Oh, it does not work yet");
             break;
         case '!-createchannel':
-            msg.reply("Oh, it does not work yet");
+            makeChannel(msg) 
+            msg.reply("Ok");
             break;
     }
 });
+
+function makeChannel(message){
+    var server = message.guild;
+    var name = "Test" ;
+
+    server.createChannel(name, "voice");
+}
 
 client.login(process.argv[2]);
