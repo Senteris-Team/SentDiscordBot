@@ -30,7 +30,12 @@ function makeChannel(message){
     var server = message.guild;
     var name = "Test" ;
 
-    server.createChannel(name, "voice");
-}
+    server.createChannel(name, "voice ")
+    .then(channel => {
+    let category = server.channels.find(c => c.name == "Игровые" && c.type == "category");
+
+    if (!category) throw new Error("Category channel does not exist");
+    channel.setParent(category.id);
+    }).catch(console.error);
 
 client.login(process.argv[2]);
