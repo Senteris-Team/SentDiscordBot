@@ -46,8 +46,11 @@ client.on("message", msg => {
 
 client.on("voiceStateUpdate", (oldMember, newMember) => {
   if (oldMember.voiceChannel) {
-    if (oldMember.voiceChannel.members.size == 0)
-      oldMember.voiceChannel.delete();
+    if (oldMember.voiceChannel.members.size == 0) {
+      var noDelete = ["69", "for unconfirmed", "AFK"];
+      if (!noDelete.includes(oldMember.voiceChannel.name))
+        oldMember.voiceChannel.delete();
+    }
   }
 });
 
