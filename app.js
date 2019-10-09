@@ -45,7 +45,9 @@ client.on("message", msg => {
 });
 
 client.on("voiceStateUpdate", (oldMember, newMember) => {
-  console.log(`${oldMember}\n----------------\n${newMember}`);
+  if (oldMember.voiceChannel) {
+    console.log(oldMember.voiceChannel.members.length);
+  }
 });
 
 function makeChannel(message, name, limit) {
