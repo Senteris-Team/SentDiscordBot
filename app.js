@@ -82,7 +82,6 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
 
 function makeChannel(message, name, limit) {
   var server = message.guild;
-  var channelReturn = null;
   let category = server.channels.find(
     c => c.name == "Игровые" && c.type == "category"
   );
@@ -100,10 +99,9 @@ function makeChannel(message, name, limit) {
         })
         .then(vc => {})
         .catch(console.error);
-      channelReturn = channel;
+      return channel
     })
     .catch(console.error);
-  return channelReturn;
 }
 
 client.login(process.argv[2]);
