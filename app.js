@@ -66,7 +66,7 @@ function makeChannel(message, name, limit) {
 
       if (!category) throw new Error("Category of this channel does not exist");
       channel.setParent(category.id);
-
+      channel.lockPermissions();
       channel
         .edit({
           bitrate: 96000
@@ -74,10 +74,7 @@ function makeChannel(message, name, limit) {
         .then(vc => {})
         .catch(console.error);
     })
-    .catch(console.error)
-    .then(m => {
-      m.lockPermissions();
-    });
+    .catch(console.error);
 }
 
 client.login(process.argv[2]);
