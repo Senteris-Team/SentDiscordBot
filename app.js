@@ -55,7 +55,7 @@ client.on("message", msg => {
           channel = makeChannel(msg, command[1], command[2]);
           msg.reply("The channel is created.");
           allowNewChannel = false;
-          console.log(msg.author.voiceChannel);
+          console.log(msg.author);
           if (msg.author.voiceChannel) {
             msg.author.setVoiceChannel(channel);
           }
