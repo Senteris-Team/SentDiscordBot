@@ -24,7 +24,15 @@ client.on("message", msg => {
             break;
         case `!-addhomework`:
             msg.reply("Oh, it does not work yet=(");
-            break;
+			break;
+			case '!-deletechannel':
+			const fetchedChannel = message.guild.channels.find(r => r.name === commandArray[1]);
+			fetchedChannel.delete();
+			if (!fetchedChannel) throw new Error("Channel with this name do not exist") 
+			else { 
+			msg.reply("The channel is deleted.");
+			}
+			break;
         case '!-createchannel':
             makeChannel(msg, commandArray[1], commandArray[2]) 
             msg.reply("The channel is created.");
@@ -32,7 +40,6 @@ client.on("message", msg => {
     }
 });
 
-// Wait for DevelooperQ's update and my hands..
 function makeChannel(message, name, limit){
     var server = message.guild;
 
@@ -41,7 +48,7 @@ function makeChannel(message, name, limit){
         channel.userLimit = limit;
         let category = server.channels.find(c => c.name == "Игровые" && c.type == "category");
 
-        if (!category) throw new Error("Category channel does not exist");
+        if (!category) throw new Error("Category of this channel does not exist");
         channel.setParent(category.id);
     }).catch(console.error);
 };
