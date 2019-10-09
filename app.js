@@ -1,90 +1,89 @@
-const Discord = require("discord.js");
+const Discord = require("../discord.js");
 const client = new Discord.Client();
 
-var allowNewChannel = true;
-
 client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-  client.user.setActivity("!-help for DogeHelp");
+    console.log(`Logged in as ${client.user.tag}!`);
 });
 
 client.on("message", msg => {
-  var command = msg.content.split(" ");
-  switch (command[0].toLowerCase()) {
-    case "!-help":
-      msg.reply(
-        "```" +
-        "!-showhomework \n" +
-        "!-createchannel *name* *slots* \n" +
-        "```"
-      );
-      break;
-    case "!-hi":
-      msg.reply("Hi! I am super cool bot!");
-      break;
-    case "!-showhomework":
-      msg.reply("Oh, it does not work yet=(");
-      break;
-    case `!-addhomework`:
-      msg.reply("Oh, it does not work yet=(");
-      break;
-    case "!-createchannel":
-      if (allowNewChannel) {
-        if (command.length == 1) {
-          msg.reply("Not enough arguments. Type !-help");
-        } else if (command.length == 2) {
-          channel = makeChannel(msg, command[1], 0, msg);
-          msg.reply("The channel is created.");
-          allowNewChannel = false;
-        } else {
-          channel = makeChannel(msg, command[1], command[2], msg);
-          msg.reply("The channel is created.");
-          allowNewChannel = false;
-        }
-      } else {
-        msg.reply("First enter the previously created channel");
-      }
-      break;
-  }
+    var command = msg.content.split(" ");
+    switch (command[0].toLowerCase()) {
+        case '!-help':
+            msg.reply(
+                "```" +
+                "!-showhomework \n" +
+                "!-createchannel *name* *slots* \n" +
+                "```"
+            );
+            break;
+        case '!-hi':
+            msg.reply("Hi! I am super cool bot!");
+            break;
+        case '!-showhomework':
+            msg.reply("Oh, it does not work yet=(");
+            break;
+        case `!-addhomework`:
+            msg.reply("Oh, it does not work yet=(");
+			break;
+			case '!-deletechannel':
+			const fetchedChannel = message.guild.channels.find(r => r.name === commandArray[1]);
+			fetchedChannel.delete();
+			if (!fetchedChannel) throw new Error("Channel with this name do not exist") 
+			else { 
+			msg.reply("The channel is deleted.");
+			}
+			break;
+        case '!-createchannel':
+            makeChannel(msg, commandArray[1], commandArray[2]) 
+            msg.reply("The channel is created.");
+			break;
+		case '!-mute':
+		const memberrule = guild.member(message.author);
+		// TODO: permission check
+		let tobemuted = message.guild.member(message.mentions.users.first() || message.guild.members.get(commandArray[1]));
+		if(!tobemuted) return message.reply("Couldn't find user.");
+		if(tobemuted.hasPermission("MANAGE_MESSAGES")) return message.reply("You can't mute them!");
+		let muterole = message.guild.roles.find(muterole => muterole.name === "muted");
+		if(!muterole){
+			try {
+			  muterole = await message.guild.createRole({
+				name: "muted",
+				color: "#000000",
+				permissions:[]
+			  })
+			  message.guild.channels.forEach(async (channel, id) => {
+				await channel.overwritePermissions(muterole, {
+				  SEND_MESSAGES: false,
+				  ADD_REACTIONS: false
+				});
+			  });
+			} catch(e){
+			  console.log(e.stack);
+			}
+		  }
+		  let mutetime = commandArray[2];
+		  if(!mutetime) return message.reply("You didn't write a time to mute!");
+		  await(tobemuted.addRole(muterole.id));
+		  message.reply(`<@${tobemuted.id}> has been muted for ${ms(ms(mutetime))}`);
+		  setTimeout(function(){
+			tobemuted.removeRole(muterole.id);
+			message.channel.send(`<@${tobemuted.id}> has been unmuted!`);
+		  }, ms(mutetime));
+			break;
+    }
 });
 
-client.on("voiceStateUpdate", (oldMember, newMember) => {
-  if (oldMember.voiceChannel) {
-    if (oldMember.voiceChannel.members.size == 0) {
-      var noDelete = ["69", "for unconfirmed", "AFK", "GParty!", "Invisible"];
-      if (!noDelete.includes(oldMember.voiceChannel.name))
-        oldMember.voiceChannel.delete();
-    }
-    if (newMember.voiceChannel) {
-      allowNewChannel = true;
-    }
-  }
-});
+function makeChannel(message, name, limit){
+    var server = message.guild;
 
-function makeChannel(message, name, limit, msg) {
-  var server = message.guild;
-  let category = server.channels.find(
-    c => c.name == "Игровые" && c.type == "category"
-  );
-  server
-    .createChannel(name, { type: "voice" })
+    server.createChannel(name, "voice")
     .then(channel => {
-      channel.userLimit = limit;
+        channel.userLimit = limit;
+        let category = server.channels.find(c => c.name == "Игровые" && c.type == "category");
 
-      if (!category) throw new Error("Category of the channel does not exist");
-      channel.setParent(category.id);
-      channel
-        .edit({
-          bitrate: 96000
-        })
-        .then(vc => {})
-        .catch(console.error);
-      if (msg.member.voiceChannel) {
-        msg.member.setVoiceChannel(channel);
-      }
-      console.log(`User ${msg.member.tag} create voice channel ${name}`);
-    })
-    .catch(console.error);
-}
+        if (!category) throw new Error("Category of this channel does not exist");
+        channel.setParent(category.id);
+    }).catch(console.error);
+};
 
 client.login(process.argv[2]);
