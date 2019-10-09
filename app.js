@@ -28,7 +28,7 @@ client.on("message", msg => {
       break;
     case "!-deletechannel":
       const fetchedChannel = message.guild.channels.find(
-        r => r.name === commandArray[1]
+        r => r.name === command[1]
       );
       fetchedChannel.delete();
       if (!fetchedChannel)
@@ -38,7 +38,7 @@ client.on("message", msg => {
       }
       break;
     case "!-createchannel":
-      makeChannel(msg, commandArray[1], commandArray[2]);
+      makeChannel(msg, command[1], command[2]);
       msg.reply("The channel is created.");
       break;
   }
