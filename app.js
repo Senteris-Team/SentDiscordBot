@@ -14,9 +14,9 @@ client.on("message", msg => {
     case "!-help":
       msg.reply(
         "```" +
-          "!-showhomework \n" +
-          "!-createchannel *name* *slots* \n" +
-          "```"
+        "!-showhomework \n" +
+        "!-createchannel *name* *slots* \n" +
+        "```"
       );
       break;
     case "!-hi":
@@ -71,7 +71,7 @@ function makeChannel(message, name, limit, msg) {
     .then(channel => {
       channel.userLimit = limit;
 
-      if (!category) throw new Error("Category of this channel does not exist");
+      if (!category) throw new Error("Category of the channel does not exist");
       channel.setParent(category.id);
       channel
         .edit({
@@ -82,7 +82,7 @@ function makeChannel(message, name, limit, msg) {
       if (msg.member.voiceChannel) {
         msg.member.setVoiceChannel(channel);
       }
-      console.log("User ${msg.member.tag} create voice channel ${name}");
+      console.log(`User ${msg.member.tag} create voice channel ${name}`);
     })
     .catch(console.error);
 }
