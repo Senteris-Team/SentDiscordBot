@@ -48,16 +48,15 @@ client.on("message", msg => {
           msg.reply("The channel is created.");
           allowNewChannel = false;
 
-          if (msg.author.voiceChannel) {
-            msg.author.setVoiceChannel(channel);
+          if (msg.member.voiceChannel) {
+            msg.member.setVoiceChannel(channel);
           }
         } else {
           channel = makeChannel(msg, command[1], command[2]);
           msg.reply("The channel is created.");
           allowNewChannel = false;
-          console.log(msg.author);
-          if (msg.author.voiceChannel) {
-            msg.author.setVoiceChannel(channel);
+          if (msg.member.voiceChannel) {
+            msg.member.setVoiceChannel(channel);
           }
         }
       } else {
