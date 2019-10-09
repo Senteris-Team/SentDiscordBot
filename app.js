@@ -61,19 +61,19 @@ function makeChannel(message, name, limit) {
   );
   server
     .createChannel(name, "voice")
-    .then(async channel => {
+    .then(channel => {
       channel.userLimit = limit;
 
       if (!category) throw new Error("Category of this channel does not exist");
-      await channel.setParent(category.id);
+      channel.setParent(category.id);
 
-      await channel
+      channel
         .edit({
           bitrate: 96000
         })
         .then(vc => {})
         .catch(console.error);
-      await channel.lockPermissions();
+      channel.lockPermissions();
     })
     .catch(console.error);
 }
