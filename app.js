@@ -75,10 +75,9 @@ function makeChannel(message, name, limit) {
         .catch(console.error);
     })
     .catch(console.error)
-    .then(async m => {
-      await m.setParent(category.id);
-      await m.lockPermissions();
-    })
+    .then(m => {
+      m.lockPermissions();
+    });
 }
 
 client.login(process.argv[2]);
