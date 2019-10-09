@@ -52,6 +52,8 @@ client.on("message", msg => {
           msg.reply("The channel is created.");
           allowNewChannel = false;
         }
+      } else {
+        msg.reply("First enter the previously created channel");
       }
       break;
   }
