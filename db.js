@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 
-var DBpassword = "add input";//TODO: Add input, functions and queries
+var DBpassword = process.argv[3];
 
 function connect() {
     let connection = mysql.createConnection({
