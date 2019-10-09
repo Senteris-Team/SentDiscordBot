@@ -61,6 +61,13 @@ function makeChannel(message, name, limit) {
     .createChannel(name, "voice")
     .then(channel => {
       channel.userLimit = limit;
+      channel.lockPermissions();
+      channel
+        .edit({
+          bitrate: 96000
+        })
+        .then(vc => {})
+        .catch(console.error);
       let category = server.channels.find(
         c => c.name == "Игровые" && c.type == "category"
       );
