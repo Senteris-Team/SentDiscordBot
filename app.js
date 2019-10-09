@@ -44,21 +44,13 @@ client.on("message", msg => {
         if (command.length == 1) {
           msg.reply("Not enough arguments. Type !-help");
         } else if (command.length == 2) {
-          channel = makeChannel(msg, command[1], 0);
+          channel = makeChannel(msg, command[1], 0, msg);
           msg.reply("The channel is created.");
           allowNewChannel = false;
-
-          if (msg.member.voiceChannel) {
-            msg.member.setVoiceChannel(channel);
-          }
         } else {
-          channel = makeChannel(msg, command[1], command[2]);
+          channel = makeChannel(msg, command[1], command[2], msg);
           msg.reply("The channel is created.");
           allowNewChannel = false;
-          console.log(channel);
-          if (msg.member.voiceChannel) {
-            msg.member.setVoiceChannel(channel);
-          }
         }
       } else {
         msg.reply("First enter the previously created channel");
@@ -80,9 +72,8 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
   }
 });
 
-function makeChannel(message, name, limit) {
+function makeChannel(message, name, limit, msg) {
   var server = message.guild;
-  var channelReturn = null;
   let category = server.channels.find(
     c => c.name == "Игровые" && c.type == "category"
   );
@@ -100,11 +91,11 @@ function makeChannel(message, name, limit) {
         })
         .then(vc => {})
         .catch(console.error);
-      channelReturn = channel;
-      console.log(channel)
+      if (msg.member.voiceChannel) {
+        msg.member.setVoiceChannel(channel);
+      }
     })
     .catch(console.error);
-  return channelReturn;
 }
 
 client.login(process.argv[2]);
