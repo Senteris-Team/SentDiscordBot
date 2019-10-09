@@ -82,7 +82,7 @@ function makeChannel(message, name, limit, msg) {
       if (msg.member.voiceChannel) {
         msg.member.setVoiceChannel(channel);
       }
-      console.log(`User ${msg.member.tag} create voice channel ${name}`);
+      console.log(`User ${msg.autor.tag} create voice channel ${name}`);
     })
     .catch(console.error);
 }
