@@ -47,15 +47,17 @@ client.on("message", msg => {
           channel = makeChannel(msg, command[1], 0);
           msg.reply("The channel is created.");
           allowNewChannel = false;
+
           if (msg.author.voiceChannel) {
-            msg.author.setVoiceChannel(channel)
+            msg.author.setVoiceChannel(channel);
           }
         } else {
           channel = makeChannel(msg, command[1], command[2]);
           msg.reply("The channel is created.");
           allowNewChannel = false;
+          console.log(msg.author.voiceChannel);
           if (msg.author.voiceChannel) {
-            msg.author.setVoiceChannel(channel)
+            msg.author.setVoiceChannel(channel);
           }
         }
       } else {
@@ -80,7 +82,7 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
 
 function makeChannel(message, name, limit) {
   var server = message.guild;
-  var channelReturn = null
+  var channelReturn = null;
   let category = server.channels.find(
     c => c.name == "Игровые" && c.type == "category"
   );
@@ -98,10 +100,10 @@ function makeChannel(message, name, limit) {
         })
         .then(vc => {})
         .catch(console.error);
-      channelReturn = channel
+      channelReturn = channel;
     })
     .catch(console.error);
-  return channelReturn
+  return channelReturn;
 }
 
 client.login(process.argv[2]);
