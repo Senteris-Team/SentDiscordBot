@@ -3,6 +3,7 @@ const client = new Discord.Client();
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
+  client.user.setActivity("!-help for DogeHelp");
 });
 
 client.on("message", msg => {
@@ -64,5 +65,4 @@ function makeChannel(message, name, limit) {
     .catch(console.error);
 }
 
-client.user.setActivity("!-help for DogeHelp");
 client.login(process.argv[2]);
