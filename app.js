@@ -62,20 +62,21 @@ function makeChannel(message, name, limit) {
     .then(channel => {
       channel.userLimit = limit;
       channel.lockPermissions();
-      channel
-        .edit({
-          bitrate: 96000
-        })
-        .then(vc => {})
-        .catch(console.error);
-      let category = server.channels.find(
-        c => c.name == "Игровые" && c.type == "category"
-      );
 
       if (!category) throw new Error("Category of this channel does not exist");
       channel.setParent(category.id);
     })
     .catch(console.error);
+
+  channel
+    .edit({
+      bitrate: 96000
+    })
+    .then(vc => {})
+    .catch(console.error);
+  let category = server.channels.find(
+    c => c.name == "Игровые" && c.type == "category"
+  );
 }
 
 client.login(process.argv[2]);
