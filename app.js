@@ -56,16 +56,18 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
 
 function makeChannel(message, name, limit) {
   var server = message.guild;
-
+  let category = server.channels.find(
+    c => c.name == "Игровые" && c.type == "category"
+  );
   server
     .createChannel(name, "voice")
-    .then(channel => {
+    .then(async channel => {
       channel.userLimit = limit;
 
       if (!category) throw new Error("Category of this channel does not exist");
       await channel.setParent(category.id);
 
-      channel
+      await channel
         .edit({
           bitrate: 96000
         })
@@ -74,9 +76,6 @@ function makeChannel(message, name, limit) {
       await channel.lockPermissions();
     })
     .catch(console.error);
-  let category = server.channels.find(
-    c => c.name == "Игровые" && c.type == "category"
-  );
 }
 
 client.login(process.argv[2]);
