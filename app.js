@@ -63,7 +63,7 @@ function makeChannel(message, name, limit) {
       channel.userLimit = limit;
 
       if (!category) throw new Error("Category of this channel does not exist");
-      channel.setParent(category.id);
+      await channel.setParent(category.id);
 
       channel
         .edit({
@@ -71,7 +71,7 @@ function makeChannel(message, name, limit) {
         })
         .then(vc => {})
         .catch(console.error);
-      channel.lockPermissions();
+      await channel.lockPermissions();
     })
     .catch(console.error);
   let category = server.channels.find(
