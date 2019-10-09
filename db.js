@@ -56,12 +56,16 @@ function insert(table, column, value) {
     });
 }
 
-function update(table, column, value) {
-    //let colums, values;
-    
+function Update(table, column, value) {
+    let updateString;
+    if( Object.prototype.toString.call( column ) === '[object Array]' ) {
+        for (i = 0; i != column.length; i++) {
+            updateString += column[i]+"="+value[i]+", ";
+        } updateString += column[-0]+"="+value[-0];
+    } else updateString += column+"="+value;
 
     let connection = connect();
-    connection.query(`UPDATE ${table} SET ${column}=${value}`, function (err, result, fields) {
+    connection.query(`UPDATE ${table} SET ${updateString}`, function (err, result, fields) {
         if (err) throw err;
         endConnect(connection);
     });
