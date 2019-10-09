@@ -46,7 +46,8 @@ client.on("message", msg => {
 
 client.on("voiceStateUpdate", (oldMember, newMember) => {
   if (oldMember.voiceChannel) {
-    console.log(oldMember.voiceChannel.members.size);
+    if (oldMember.voiceChannel.members.size == 0)
+      oldMember.voiceChannel.delete();
   }
 });
 
