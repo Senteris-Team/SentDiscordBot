@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
+var allowNewChannel = true;
+
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
   client.user.setActivity("!-help for DogeHelp");
@@ -38,8 +40,19 @@ client.on("message", msg => {
       }
       break;
     case "!-createchannel":
-      makeChannel(msg, command[1], command[2]);
-      msg.reply("The channel is created.");
+      if (allowNewChannel) {
+        if (command.length == 1) {
+          msg.reply("Not enough arguments. Type !-help");
+        } else if (command.length == 2) {
+          makeChannel(msg, command[1], 0);
+          msg.reply("The channel is created.");
+          allowNewChannel = false;
+        } else {
+          makeChannel(msg, command[1], command[2]);
+          msg.reply("The channel is created.");
+          allowNewChannel = false;
+        }
+      }
       break;
   }
 });
@@ -50,6 +63,9 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
       var noDelete = ["69", "for unconfirmed", "AFK"];
       if (!noDelete.includes(oldMember.voiceChannel.name))
         oldMember.voiceChannel.delete();
+    }
+    if (newMember.voiceChannel) {
+      allowNewChannel = true;
     }
   }
 });
