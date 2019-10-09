@@ -28,17 +28,6 @@ client.on("message", msg => {
     case `!-addhomework`:
       msg.reply("Oh, it does not work yet=(");
       break;
-    case "!-deletechannel":
-      const fetchedChannel = message.guild.channels.find(
-        r => r.name === command[1]
-      );
-      fetchedChannel.delete();
-      if (!fetchedChannel)
-        throw new Error("Channel with this name do not exist");
-      else {
-        msg.reply("The channel is deleted.");
-      }
-      break;
     case "!-createchannel":
       if (allowNewChannel) {
         if (command.length == 1) {
