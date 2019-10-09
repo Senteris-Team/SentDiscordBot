@@ -67,13 +67,12 @@ function makeChannel(message, name, limit, msg) {
     c => c.name == "Игровые" && c.type == "category"
   );
   server
-    .createChannel(name, "voice")
+    .createChannel(name, { type: "voice" })
     .then(channel => {
       channel.userLimit = limit;
 
       if (!category) throw new Error("Category of this channel does not exist");
       channel.setParent(category.id);
-      channel.lockPermissions();
       channel
         .edit({
           bitrate: 96000
@@ -83,6 +82,7 @@ function makeChannel(message, name, limit, msg) {
       if (msg.member.voiceChannel) {
         msg.member.setVoiceChannel(channel);
       }
+      console.log("User ${msg.member.tag} create voice channel ${name}");
     })
     .catch(console.error);
 }
