@@ -61,7 +61,6 @@ function makeChannel(message, name, limit) {
     .createChannel(name, "voice")
     .then(channel => {
       channel.userLimit = limit;
-      channel.lockPermissions();
 
       if (!category) throw new Error("Category of this channel does not exist");
       channel.setParent(category.id);
@@ -72,6 +71,7 @@ function makeChannel(message, name, limit) {
         })
         .then(vc => {})
         .catch(console.error);
+      channel.lockPermissions();
     })
     .catch(console.error);
   let category = server.channels.find(
