@@ -12,9 +12,9 @@ client.on("message", msg => {
     case "!-help":
       msg.reply(
         "```" +
-          "!-showhomework \n" +
-          "!-createchannel *name* *slots* \n" +
-          "```"
+        "!-showhomework \n" +
+        "!-createchannel *name* *slots* \n" +
+        "```"
       );
       break;
     case "!-hi":
