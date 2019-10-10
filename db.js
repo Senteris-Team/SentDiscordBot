@@ -15,44 +15,24 @@ var pool = mysql.createPool({
 function connect() {
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    //return conn;
+    //return conn; // Xef - Why?
   });
 }
 
-function endConnect(connection) {
-  // stop... IT'S END CONNECTION?! FOR WHAT?!
+function endConnect(connection) { // stop... IT'S END CONNECTION?! FOR WHAT?!
   connection.release(function(err) {
     if (err) throw err;
     console.log("A connection is closed:)");
   });
 }
 
-// CopyPaste))
-// DON'T USE THESE FUNCTIONS! NOWAY!
-function select(table) {
-  //let connection = connect();
+function select(table, col, value) {
+  //let connection = connect(); // Xef - Why?
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    //return conn;
-
-    conn.query(`SELECT * FROM ${table}`, function(err, result, fields) {
-      if (err) throw err;
-      endConnect(connection);
-      return result, fields;
-    });
-  });
-}
-
-function select_where(table, col, value) {
-  //let connection = connect();
-  pool.getConnection(function(err, conn) {
-    if (err) return console.log(err);
-    //return conn;
-    conn.query(`SELECT * FROM ${table} WHERE ${col} = '${value}'`, function(
-      err,
-      result,
-      fields
-    ) {
+    //return conn; // Xef - Why?
+    conn.query(`SELECT * FROM ${table} WHERE ${col} = '${value}'`, function( err, result, fields ) // TODO select ${STH} from
+    {
       if (err) throw err;
       endConnect(conn);
       console.log(result);
@@ -66,26 +46,22 @@ function get_giuld_settings(guild) {
   if (settings === undefined) {
     return settings;
   } else {
-    insert("settings", "`guild_id`", guild.id);
+    insert("settings", "`guild_id`", guild.id); // Xef - "`guild_id`"?? What is it?
     return select_where("settings", "guild_id", guild.id);
   }
 }
 
 function insert(table, column, value) {
   let columns;
-  if (Object.prototype.toString.call(column) === "[object Array]") {
-    // if column == array => columns = "column1, column2..."
+  if (Object.prototype.toString.call(column) === "[object Array]") { // if column == array => columns = "column1, column2..."
     for (i = 0; i != column.length; i++) {
       columns += column[i] + ", ";
     }
     columns += column[-0]; // columns = "... column5, column6 (w/o ',')"
-  } else {
-    columns = column;
-  } // else columns == column
+  } else { columns = column; } // else columns == column
 
   let values;
-  if (Object.prototype.toString.call(value) === "[object Array]") {
-    //Same
+  if (Object.prototype.toString.call(value) === "[object Array]") { //Same
     for (i = 0; i != value.length; i++) {
       values += value[i] + ", ";
     }
@@ -98,11 +74,8 @@ function insert(table, column, value) {
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
     //return conn;
-    conn.query(`INSERT INTO ${table} (${columns}) values (${values})`, function(
-      err,
-      result,
-      fields
-    ) {
+    conn.query(`INSERT INTO ${table} (${columns}) values (${values})`, function( err, result, fields ) 
+    {
       if (err) throw err;
       endConnect(connection);
     });
@@ -111,19 +84,15 @@ function insert(table, column, value) {
 
 function update(table, column, value) {
   let updateString;
-  if (Object.prototype.toString.call(column) === "[object Array]") {
+  if (Object.prototype.toString.call(column) === "[object Array]") { // as in the function insert
     for (i = 0; i != column.length; i++) {
       updateString += column[i] + "=" + value[i] + ", ";
-    }
-    updateString += column[-0] + "=" + value[-0];
+    } updateString += column[-0] + "=" + value[-0];
   } else updateString += column + "=" + value;
 
   let connection = connect();
-  connection.query(`UPDATE ${table} SET ${updateString}`, function(
-    err,
-    result,
-    fields
-  ) {
+  connection.query(`UPDATE ${table} SET ${updateString}`, function( err, result, fields ) 
+  {
     if (err) throw err;
     endConnect(connection);
   });
