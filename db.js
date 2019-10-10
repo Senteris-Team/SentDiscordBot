@@ -4,7 +4,7 @@ var DBpassword = process.argv[3];
 var pool = mysql.createPool({
   host: "localhost",
   user: "admin",
-  password: "DBpassword",
+  password: DBpassword,
   database: "Discord",
   queueLimit: 0, // unlimited queueing
   connectionLimit: 0, // unlimited connections
