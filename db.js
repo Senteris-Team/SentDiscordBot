@@ -60,7 +60,7 @@ function select_where(table, col, value) {
 
 function get_giuld_settings(guild) {
   let settings = select_where("settings", "guild_id", guild.id);
-  if (typeof settings.fields !== "undefined") {
+  if (settings.fields === undefined) {
     return settings;
   } else {
     insert("settings", "`guild_id`", guild.id);
