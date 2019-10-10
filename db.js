@@ -14,6 +14,14 @@ var pool = mysql.createPool({
 function connect() {
   pool.getConnection(function(err, conn) {
     if (err) return res.send(400);
+    var sql = mysql.format("SELECT * FROM settings");
+    connection.query(sql, function(error, results, fields) {
+      if (error) {
+        console.log(error);
+      }
+      console.log(results);
+      connection.release();
+    });
     return conn;
   });
 }
