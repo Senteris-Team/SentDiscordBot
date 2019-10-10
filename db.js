@@ -8,7 +8,8 @@ var pool = mysql.createPool({
   database: "Discord",
   queueLimit: 0, // unlimited queueing
   connectionLimit: 0, // unlimited connections
-  multipleStatements: true // I like this because it helps prevent nested sql statements, it can be buggy though, so be careful
+  multipleStatements: true, // I like this because it helps prevent nested sql statements, it can be buggy though, so be careful
+  socketPath: " /var/lib/mysql/mysql.sock"
 });
 
 function connect() {
@@ -20,7 +21,7 @@ function connect() {
 
 function endConnect(connection) {
   // stop... IT'S END CONNECTION?! FOR WHAT?!
-  connection.conn.release(function(err) {
+  connection.release(function(err) {
     if (err) throw err;
     console.log("A connection is closed:)");
   });
@@ -61,12 +62,12 @@ function select_where(table, col, value) {
 function get_giuld_settings(guild) {
   let settings = select_where("settings", "guild_id", guild.id);
   console.log(settings);
-//   if (settings.fields === undefined) {
-//     return settings;
-//   } else {
-//     insert("settings", "`guild_id`", guild.id);
-//     return select_where("settings", "guild_id", guild.id);
-//   }
+  //   if (settings.fields === undefined) {
+  //     return settings;
+  //   } else {
+  //     insert("settings", "`guild_id`", guild.id);
+  //     return select_where("settings", "guild_id", guild.id);
+  //   }
 }
 
 function insert(table, column, value) {
