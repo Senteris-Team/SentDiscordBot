@@ -55,22 +55,19 @@ function select_where(table, col, value) {
     ) {
       if (err) throw err;
       endConnect(conn);
-      console.log(result);
-      console.log(fields);
-      return fields;
+      return result;
     });
   });
 }
 
 function get_giuld_settings(guild) {
   let settings = select_where("settings", "guild_id", guild.id);
-  console.log(settings);
-  //   if (settings.fields === undefined) {
-  //     return settings;
-  //   } else {
-  //     insert("settings", "`guild_id`", guild.id);
-  //     return select_where("settings", "guild_id", guild.id);
-  //   }
+  if (settings === undefined) {
+    return settings;
+  } else {
+    insert("settings", "`guild_id`", guild.id);
+    return select_where("settings", "guild_id", guild.id);
+  }
 }
 
 function insert(table, column, value) {
