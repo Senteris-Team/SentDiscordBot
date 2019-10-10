@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const db = require("db.js");
+const db = require("./db.js");
 
 var allowNewChannel = true;
 
