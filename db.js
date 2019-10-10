@@ -55,6 +55,7 @@ function select_where(table, col, value) {
     ) {
       if (err) throw err;
       endConnect(conn);
+      console.log(result);
       return result;
     });
   });
