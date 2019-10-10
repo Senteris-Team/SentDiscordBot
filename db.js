@@ -6,7 +6,8 @@ var pool = mysql.createPool({
   user: "admin",
   password: "DBpassword",
   database: "Discord",
-  connectionLimit: 10, // this is the max number of connections before your pool starts waiting for a release
+  queueLimit: 0, // unlimited queueing
+  connectionLimit: 0, // unlimited connections
   multipleStatements: true // I like this because it helps prevent nested sql statements, it can be buggy though, so be careful
 });
 
