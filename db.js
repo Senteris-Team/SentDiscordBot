@@ -62,12 +62,12 @@ function select_where(table, col, value) {
 }
 
 function get_giuld_settings(guild) {
-  let settings = select_where("settings", "guild_id", guild.id);
-  if (settings === undefined) {
-    return settings;
-  } else {
-    insert("settings", "`guild_id`", guild.id);
-    return select_where("settings", "guild_id", guild.id);
+  let settings = select_where("settings", "guild_id", guild.id); //Полчаем текущие настройки бота на сервере
+  if (settings.length !== 0) { //Если настройки есль
+    return settings; //Вернуть настройки
+  } else { //Если настроек нету
+    insert("settings", "`guild_id`", guild.id); //Добавить настройки
+    return select_where("settings", "guild_id", guild.id); //и вернуть их
   }
 }
 
@@ -118,14 +118,19 @@ function update(table, column, value) {
     updateString += column[-0] + "=" + value[-0];
   } else updateString += column + "=" + value;
 
-  let connection = connect();
-  connection.query(`UPDATE ${table} SET ${updateString}`, function(
-    err,
-    result,
-    fields
-  ) {
-    if (err) throw err;
-    endConnect(connection);
+  //let connection = connect();
+  pool.getConnection(function(err, conn) {
+    if (err) return console.log(err);
+    //return conn;
+
+    conn.query(`UPDATE ${table} SET ${updateString}`, function(
+      err,
+      result,
+      fields
+    ) {
+      if (err) throw err;
+      endConnect(connection);
+    });
   });
 }
 
