@@ -2,26 +2,24 @@ var mysql = require("mysql");
 
 var DBpassword = process.argv[3];
 var pool = mysql.createPool({
-    host: 'localhost',
-    user: 'admin',
-    password: 'DBpassword',
-    database: 'Discord',
-    connectionLimit: 10,               // this is the max number of connections before your pool starts waiting for a release
-    multipleStatements: true           // I like this because it helps prevent nested sql statements, it can be buggy though, so be careful
+  host: "localhost",
+  user: "admin",
+  password: "DBpassword",
+  database: "Discord",
+  connectionLimit: 10, // this is the max number of connections before your pool starts waiting for a release
+  multipleStatements: true // I like this because it helps prevent nested sql statements, it can be buggy though, so be careful
 });
 
 function connect() {
-    pool.getConnection(function (err, conn) {
-        if (err)
-            return res.send(400);
-        return conn
-        }
-});
+  pool.getConnection(function(err, conn) {
+    if (err) return res.send(400);
+    return conn;
+  });
 }
 
 function endConnect(connection) {
   // stop... IT'S END CONNECTION?! FOR WHAT?!
-    connection.conn.release(function(err) {
+  connection.conn.release(function(err) {
     if (err) throw err;
     console.log("A connection is closed:)");
   });
