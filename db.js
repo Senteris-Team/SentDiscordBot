@@ -9,7 +9,7 @@ var pool = mysql.createPool({
   queueLimit: 0, // unlimited queueing
   connectionLimit: 0, // unlimited connections
   multipleStatements: true, // I like this because it helps prevent nested sql statements, it can be buggy though, so be careful
-  socketPath: " /var/lib/mysql/mysql.sock"
+  socketPath: "/var/lib/mysql/mysql.sock"
 });
 
 function connect() {
