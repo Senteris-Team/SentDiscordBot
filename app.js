@@ -47,6 +47,7 @@ client.on("message", msg => {
       }
       break;
     case "!-testmysql":
+      msg.reply(msg.guild.id)
       msg.reply(db.get_giuld_settings(msg.guild));
       break;
   }
