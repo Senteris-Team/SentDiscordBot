@@ -42,12 +42,12 @@ function select(table, col, value) {
 }
 
 function get_giuld_settings(guild) {
-  let settings = select_where("settings", "guild_id", guild.id);
-  if (settings === undefined) {
+  let settings = select("settings", "guild_id", guild.id);
+  if (settings.length !== 0) { // if setting is not empty
     return settings;
   } else {
-    insert("settings", "`guild_id`", guild.id); // Xef - "`guild_id`"?? What is it?
-    return select_where("settings", "guild_id", guild.id);
+    insert("settings", "`guild_id`", guild.id); // Add the settings // Xef - "`guild_id`"?? What is it?
+    return select("settings", "guild_id", guild.id); // return one
   }
 }
 
@@ -90,11 +90,17 @@ function update(table, column, value) {
     } updateString += column[-0] + "=" + value[-0];
   } else updateString += column + "=" + value;
 
-  let connection = connect();
-  connection.query(`UPDATE ${table} SET ${updateString}`, function( err, result, fields ) 
-  {
-    if (err) throw err;
-    endConnect(connection);
+
+  //let connection = connect();
+  pool.getConnection(function(err, conn) {
+    if (err) return console.log(err);
+    //return conn;
+
+    conn.query(`UPDATE ${table} SET ${updateString}`, function(err, result, fields ) 
+    {
+      if (err) throw err;
+      endConnect(connection);
+    });
   });
 }
 
