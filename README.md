@@ -11,5 +11,3 @@ Soon:
 !-mute
 !-addhomework !-removehomework !-showhomework
 !-changeprefix
-
-TODO: Come up with what else the bot will do.
