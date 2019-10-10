@@ -6,7 +6,8 @@ function connect() {
     let connection = mysql.createConnection({
         host: "localhost",
         user: "admin",
-        password: DBpassword
+        password: DBpassword,
+        database: 'Discord'
     });
 
     connection.connect(function (err) { //connect 
@@ -28,6 +29,15 @@ function endConnect(connection) { // stop... IT'S END CONNECTION?! FOR WHAT?!
 function select(table) {
     let connection = connect();
     connection.query(`SELECT * FROM ${table}`, function (err, result, fields) {
+        if (err) throw err;
+        endConnect(connection);
+        return result, fields;
+    });
+}
+
+function select_where(table, col, value) {
+    let connection = connect();
+    connection.query(`SELECT * FROM ${table} WHERE ${col} = '${value}'`, function (err, result, fields) {
         if (err) throw err;
         endConnect(connection);
         return result, fields;

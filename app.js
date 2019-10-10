@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
+var allowNewChannel = true;
+
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
   client.user.setActivity("!-help for DogeHelp");
@@ -26,20 +28,22 @@ client.on("message", msg => {
     case `!-addhomework`:
       msg.reply("Oh, it does not work yet=(");
       break;
-    case "!-deletechannel":
-      const fetchedChannel = message.guild.channels.find(
-        r => r.name === command[1]
-      );
-      fetchedChannel.delete();
-      if (!fetchedChannel)
-        throw new Error("Channel with this name do not exist");
-      else {
-        msg.reply("The channel is deleted.");
-      }
-      break;
     case "!-createchannel":
-      makeChannel(msg, command[1], command[2]);
-      msg.reply("The channel is created.");
+      if (allowNewChannel) {
+        if (command.length == 1) {
+          msg.reply("Not enough arguments. Type !-help");
+        } else if (command.length == 2) {
+          channel = makeChannel(msg, command[1], 0, msg);
+          msg.reply("The channel is created.");
+          allowNewChannel = false;
+        } else {
+          channel = makeChannel(msg, command[1], command[2], msg);
+          msg.reply("The channel is created.");
+          allowNewChannel = false;
+        }
+      } else {
+        msg.reply("First enter the previously created channel");
+      }
       break;
   }
 });
@@ -47,32 +51,38 @@ client.on("message", msg => {
 client.on("voiceStateUpdate", (oldMember, newMember) => {
   if (oldMember.voiceChannel) {
     if (oldMember.voiceChannel.members.size == 0) {
-      var noDelete = ["69", "for unconfirmed", "AFK"];
+      var noDelete = ["69", "for unconfirmed", "AFK", "GParty!", "Invisible"];
       if (!noDelete.includes(oldMember.voiceChannel.name))
         oldMember.voiceChannel.delete();
+    }
+    if (newMember.voiceChannel) {
+      allowNewChannel = true;
     }
   }
 });
 
-function makeChannel(message, name, limit) {
+function makeChannel(message, name, limit, msg) {
   var server = message.guild;
   let category = server.channels.find(
     c => c.name == "Игровые" && c.type == "category"
   );
   server
-    .createChannel(name, "voice")
+    .createChannel(name, { type: "voice" })
     .then(channel => {
       channel.userLimit = limit;
 
-      if (!category) throw new Error("Category of this channel does not exist");
+      if (!category) throw new Error("Category of the channel does not exist");
       channel.setParent(category.id);
-      channel.lockPermissions();
       channel
         .edit({
           bitrate: 96000
         })
         .then(vc => {})
         .catch(console.error);
+      if (msg.member.voiceChannel) {
+        msg.member.setVoiceChannel(channel);
+      }
+      console.log(`User ${msg.member.tag} create voice channel ${name}`);
     })
     .catch(console.error);
 }
