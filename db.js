@@ -35,7 +35,7 @@ function select(table) {
     if (err) return console.log(err);
     //return conn;
 
-    connection.query(`SELECT * FROM ${table}`, function(err, result, fields) {
+    conn.query(`SELECT * FROM ${table}`, function(err, result, fields) {
       if (err) throw err;
       endConnect(connection);
       return result, fields;
@@ -48,14 +48,15 @@ function select_where(table, col, value) {
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
     //return conn;
-    connection.query(
-      `SELECT * FROM ${table} WHERE ${col} = '${value}'`,
-      function(err, result, fields) {
-        if (err) throw err;
-        endConnect(connection);
-        return result, fields;
-      }
-    );
+    conn.query(`SELECT * FROM ${table} WHERE ${col} = '${value}'`, function(
+      err,
+      result,
+      fields
+    ) {
+      if (err) throw err;
+      endConnect(connection);
+      return result, fields;
+    });
   });
 }
 
@@ -97,13 +98,14 @@ function insert(table, column, value) {
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
     //return conn;
-    connection.query(
-      `INSERT INTO ${table} (${columns}) values (${values})`,
-      function(err, result, fields) {
-        if (err) throw err;
-        endConnect(connection);
-      }
-    );
+    conn.query(`INSERT INTO ${table} (${columns}) values (${values})`, function(
+      err,
+      result,
+      fields
+    ) {
+      if (err) throw err;
+      endConnect(connection);
+    });
   });
 }
 
