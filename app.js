@@ -47,8 +47,7 @@ client.on("message", msg => {
       }
       break;
     case "!-testmysql":
-      msg.reply(db);
-      //msg.reply(db.get_giuld_settings(msg.guild));
+      msg.reply(db.get_giuld_settings(msg.guild));
       break;
   }
 });
