@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const db = require("db.js");
 
 var allowNewChannel = true;
 
@@ -44,6 +45,9 @@ client.on("message", msg => {
       } else {
         msg.reply("First enter the previously created channel");
       }
+      break;
+    case "!-testmysql":
+      msg.reply(db.get_giuld_settings(msg.guild));
       break;
   }
 });
