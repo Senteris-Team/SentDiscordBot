@@ -60,7 +60,7 @@ function select_where(table, col, value) {
 
 function get_giuld_settings(guild) {
   let settings = select_where("settings", "guild_id", guild.id);
-  if (settings.fields) {
+  if (typeof settings.fields !== "undefined") {
     return settings;
   } else {
     insert("settings", "`guild_id`", guild.id);
@@ -91,14 +91,18 @@ function insert(table, column, value) {
     values = value;
   }
 
-  let connection = connect();
-  connection.query(
-    `INSERT INTO ${table} (${columns}) values (${values})`,
-    function(err, result, fields) {
-      if (err) throw err;
-      endConnect(connection);
-    }
-  );
+  //let connection = connect();
+  pool.getConnection(function(err, conn) {
+    if (err) return console.log(err);
+    //return conn;
+    connection.query(
+      `INSERT INTO ${table} (${columns}) values (${values})`,
+      function(err, result, fields) {
+        if (err) throw err;
+        endConnect(connection);
+      }
+    );
+  });
 }
 
 function update(table, column, value) {
