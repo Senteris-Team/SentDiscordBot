@@ -13,16 +13,8 @@ var pool = mysql.createPool({
 
 function connect() {
   pool.getConnection(function(err, conn) {
-    if (err) return res.send(400);
-    var sql = mysql.format("SELECT * FROM settings");
-    connection.query(sql, function(error, results, fields) {
-      if (error) {
-        console.log(error);
-      }
-      console.log(results);
-      connection.release();
-    });
-    return conn;
+    if (err) return console.log(err);
+    //return conn;
   });
 }
 
@@ -37,24 +29,32 @@ function endConnect(connection) {
 // CopyPaste))
 // DON'T USE THESE FUNCTIONS! NOWAY!
 function select(table) {
-  let connection = connect();
-  connection.query(`SELECT * FROM ${table}`, function(err, result, fields) {
-    if (err) throw err;
-    endConnect(connection);
-    return result, fields;
+  //let connection = connect();
+  pool.getConnection(function(err, conn) {
+    if (err) return console.log(err);
+    //return conn;
+
+    connection.query(`SELECT * FROM ${table}`, function(err, result, fields) {
+      if (err) throw err;
+      endConnect(connection);
+      return result, fields;
+    });
   });
 }
 
 function select_where(table, col, value) {
-  let connection = connect();
-  connection.query(`SELECT * FROM ${table} WHERE ${col} = '${value}'`, function(
-    err,
-    result,
-    fields
-  ) {
-    if (err) throw err;
-    endConnect(connection);
-    return result, fields;
+  //let connection = connect();
+  pool.getConnection(function(err, conn) {
+    if (err) return console.log(err);
+    //return conn;
+    connection.query(
+      `SELECT * FROM ${table} WHERE ${col} = '${value}'`,
+      function(err, result, fields) {
+        if (err) throw err;
+        endConnect(connection);
+        return result, fields;
+      }
+    );
   });
 }
 
