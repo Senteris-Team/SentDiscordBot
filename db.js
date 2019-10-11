@@ -52,7 +52,7 @@ function get_giuld_settings(guild) {
   let settings = select("settings", "guild_id", guild.id);
   //select("settings", "guild_id", guild.id);
   //var settings = [];
-  if (settings.length !== 0) {
+  if (typeof settings == "undefined") {
     // if setting is not empty
     return settings;
   } else {
