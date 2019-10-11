@@ -15,9 +15,9 @@ client.on("message", msg => {
     case "!-help":
       msg.reply(
         "```" +
-        "!-showhomework \n" +
-        "!-createchannel *name* *slots* \n" +
-        "```"
+          "!-showhomework \n" +
+          "!-createchannel *name* *slots* \n" +
+          "```"
       );
       break;
     case "!-hi":
@@ -47,7 +47,7 @@ client.on("message", msg => {
       }
       break;
     case "!-testmysql":
-      msg.reply(db.get_giuld_settings(msg.guild));
+      msg.reply(db.get_giuld_settings(msg.guild).guid_id);
       break;
   }
 });
@@ -71,22 +71,22 @@ function makeChannel(message, name, limit, msg) {
     c => c.name == "Игровые" && c.type == "category"
   );
   server
-  .createChannel(name, { type: "voice" })
-  .then(channel => {
-    channel.userLimit = limit;
+    .createChannel(name, { type: "voice" })
+    .then(channel => {
+      channel.userLimit = limit;
 
-    if (!category) throw new Error("Category of the channel does not exist");
-    channel.setParent(category.id);
-    channel
-    .edit({ bitrate: 96000 })
-    .then(vc => {})
+      if (!category) throw new Error("Category of the channel does not exist");
+      channel.setParent(category.id);
+      channel
+        .edit({ bitrate: 96000 })
+        .then(vc => {})
+        .catch(console.error);
+      if (msg.member.voiceChannel) {
+        msg.member.setVoiceChannel(channel);
+      }
+      console.log(`User ${msg.member.tag} create voice channel ${name}`);
+    })
     .catch(console.error);
-    if (msg.member.voiceChannel) {
-      msg.member.setVoiceChannel(channel);
-    }
-    console.log(`User ${msg.member.tag} create voice channel ${name}`);
-  })
-  .catch(console.error);
 }
 
 client.login(process.argv[2]);
