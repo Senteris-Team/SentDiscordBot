@@ -54,6 +54,7 @@ function select(table, col, value) {
 
 function get_giuld_settings(guild) {
   let settings = select("settings", "guild_id", guild.id);
+  console.log(settings);
   //select("settings", "guild_id", guild.id);
   //var settings = [];
   if (typeof settings == "undefined") {
