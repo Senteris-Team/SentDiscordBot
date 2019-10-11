@@ -44,7 +44,7 @@ function select(table, col, value) {
         var result = row;
       });
       endConnect(conn);
-      result = [];
+      result = ["1"];
       return result;
     });
   });
