@@ -39,21 +39,19 @@ function select(table, col, value) {
     ) {
       if (err) throw err;
       console.log(result);
-      rows.forEach(function(row) {
+      result.forEach(function(row) {
         console.log(row);
         var result = row;
       });
       endConnect(conn);
-      var result = ["1"];
       return result;
     });
   });
 }
 
 function get_giuld_settings(guild) {
-  //let settings = select("settings", "guild_id", guild.id);
-  select("settings", "guild_id", guild.id);
-  var settings = [];
+  let settings = select("settings", "guild_id", guild.id);
+  //select("settings", "guild_id", guild.id);
   if (settings.length !== 0) {
     // if setting is not empty
     return settings;
