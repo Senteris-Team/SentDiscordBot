@@ -42,7 +42,9 @@ function select(table, col, value) {
       endConnect(conn);
       result.forEach(function(row) {
         console.log(row);
-        return row;
+        let string = JSON.stringify(row);
+        let json = JSON.parse(string);
+        return json;
       });
     });
   });
