@@ -39,12 +39,11 @@ function select(table, col, value) {
     ) {
       if (err) throw err;
       console.log(result);
+      endConnect(conn);
       result.forEach(function(row) {
         console.log(row);
-        var result = row;
+        return row;
       });
-      endConnect(conn);
-      return result;
     });
   });
 }
@@ -95,7 +94,8 @@ function insert(table, column, value) {
       fields
     ) {
       if (err) throw err;
-      endConnect(connection);
+      endConnect(conn);
+      console.wite(err)
     });
   });
 }
