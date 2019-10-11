@@ -43,7 +43,9 @@ function select(table, col, value) {
       result.forEach(function(row) {
         console.log(row);
         let string = JSON.stringify(row);
+        console.log(string);
         let json = JSON.parse(string);
+        console.log(json);
         return json;
       });
     });
