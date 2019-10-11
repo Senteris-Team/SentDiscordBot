@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-
+const ms = require("ms")
 var allowNewChannel = true;
 
 client.on("ready", () => {
@@ -8,11 +8,11 @@ client.on("ready", () => {
   client.user.setActivity("!-help for DogeHelp");
 });
 
-client.on("message", msg => {
-  var command = msg.content.split(" ");
+client.on("message", message => {
+  var command = message.content.split(" ");
   switch (command[0].toLowerCase()) {
     case "!-help":
-      msg.reply(
+      message.reply(
         "```" +
         "!-showhomework \n" +
         "!-createchannel *name* *slots* \n" +
@@ -20,13 +20,13 @@ client.on("message", msg => {
       );
       break;
     case "!-hi":
-      msg.reply("Hi! I am super cool bot!");
+      message.reply("Hi! I am super cool bot!");
       break;
     case "!-showhomework":
-      msg.reply("Oh, it does not work yet=(");
+      message.reply("Oh, it does not work yet=(");
       break;
     case `!-addhomework`:
-      msg.reply("Oh, it does not work yet=(");
+      message.reply("Oh, it does not work yet=(");
       break;
       case "!-mute":
           if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You don't have the **Mute Members** permission!");
@@ -64,22 +64,22 @@ client.on("message", msg => {
     case "!-createchannel":
       if (allowNewChannel) {
         if (command.length == 1) {
-          msg.reply("Not enough arguments. Type !-help");
+          message.reply("Not enough arguments. Type !-help");
         } else if (command.length == 2) {
-          channel = makeChannel(msg, command[1], 0, msg);
-          msg.reply("The channel is created.");
+          channel = makeChannel(message, command[1], 0, message);
+          message.reply("The channel is created.");
           allowNewChannel = false;
         } else {
-          channel = makeChannel(msg, command[1], command[2], msg);
-          msg.reply("The channel is created.");
+          channel = makeChannel(message, command[1], command[2], message);
+          message.reply("The channel is created.");
           allowNewChannel = false;
         }
       } else {
-        msg.reply("First enter the previously created channel");
+        message.reply("First enter the previously created channel");
       }
       break;
     case "!-testmysql":
-      msg.reply(db.get_giuld_settings(msg.guild));
+      message.reply(db.get_giuld_settings(message.guild));
       break;
   }
 });
@@ -97,7 +97,7 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
   }
 });
 
-function makeChannel(message, name, limit, msg) {
+function makeChannel(message, name, limit, message) {
   var server = message.guild;
   let category = server.channels.find(
     c => c.name == "Игровые" && c.type == "category"
@@ -113,10 +113,10 @@ function makeChannel(message, name, limit, msg) {
     .edit({ bitrate: 96000 })
     .then(vc => {})
     .catch(console.error);
-    if (msg.member.voiceChannel) {
-      msg.member.setVoiceChannel(channel);
+    if (message.member.voiceChannel) {
+      message.member.setVoiceChannel(channel);
     }
-    console.log(`User ${msg.member.tag} create voice channel ${name}`);
+    console.log(`User ${message.member.tag} create voice channel ${name}`);
   })
   .catch(console.error);
 }
