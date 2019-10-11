@@ -50,8 +50,9 @@ function select(table, col, value) {
 }
 
 function get_giuld_settings(guild) {
-  let settings = select("settings", "guild_id", guild.id);
-  //select("settings", "guild_id", guild.id);
+  //let settings = select("settings", "guild_id", guild.id);
+  select("settings", "guild_id", guild.id);
+  var settings = [];
   if (settings.length !== 0) {
     // if setting is not empty
     return settings;
