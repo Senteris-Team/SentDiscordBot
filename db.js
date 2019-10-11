@@ -95,7 +95,7 @@ function insert(table, column, value) {
     ) {
       if (err) throw err;
       endConnect(conn);
-      console.wite(err)
+      console.write(err);
     });
   });
 }
