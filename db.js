@@ -38,12 +38,14 @@ function select(table, col, value) {
       fields // TODO select ${STH} from
     ) {
       if (err) throw err;
-      endConnect(conn);
       console.log(result);
       rows.forEach(function(row) {
         console.log(row);
-        return row;
+        var result = row;
       });
+      endConnect(conn);
+      result = [];
+      return result;
     });
   });
 }
