@@ -18,6 +18,11 @@ client.on("ready", () => {
 client.on("message", message => {
   var prefix = "!-";
   var command = message.content.split(" ");
+
+  if(message.author.bot) return;
+  if(!message.guild) return; // !if message sent in something kind of PM
+  if(!message.content.startsWith(prefix)) return;
+  
   switch (command[0].toLowerCase()) {
     case `${prefix}help`: {
       message.reply(
