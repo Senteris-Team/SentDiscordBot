@@ -191,10 +191,6 @@ function makeChannel(message, name, limit, message) {
       console.log(`User ${message.member.tag} create voice channel ${name}`);
     })
     .catch(console.error);
-  if (message.member.voiceChannel) {
-    message.member.setVoiceChannel(channel);
-  }
-  console.log(`User ${message.member.tag} create voice channel ${name}`);
 }
 
 client.login(process.argv[2]);
