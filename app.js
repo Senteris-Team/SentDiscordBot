@@ -14,51 +14,56 @@ client.on("message", message => {
     case "!-help":
       message.reply(
         "```" +
-          "!-showhomework \n" +
-          "!-createchannel *name* *slots* \n" +
-          "```"
+        "!-showhomework \n" +
+        "!-createchannel *name* *slots* \n" +
+        "```"
       );
       break;
+
     case "!-hi":
       message.reply("Hi! I am super cool bot!");
       break;
+
     case "!-showhomework":
       message.reply("Oh, it does not work yet=(");
       break;
+
     case `!-addhomework`:
       message.reply("Oh, it does not work yet=(");
       break;
+
     case `!-unmute`:
-        if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You don't have the **Unmute Members** permission!");
-        let toumute = message.guild.member(message.mentions.users.first() || message.guild.members.get(command[1]));
-        if(!toumute) return message.reply("Couldn't find user.");
-        let unmuterole = message.guild.roles.find(muterole => muterole.name === "Muted");
-        tomute.removeRole(unmuterole.id);
+      if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You don't have the **Unmute Members** permission!");
+      let toumute = message.guild.member(message.mentions.users.first() || message.guild.members.get(command[1]));
+      if(!toumute) return message.reply("Couldn't find user.");
+      let unmuterole = message.guild.roles.find(muterole => muterole.name === "Muted");
+      tomute.removeRole(unmuterole.id);
       break;
+
     case "!-mute":
-          if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You don't have the **Mute Members** permission!");
-          let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(command[1]));
-          if(!tomute) return message.reply("Couldn't find user.");
-          if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Can't mute them!");
-          let muterole = message.guild.roles.find(muterole => muterole.name === "Muted");
-          tomute.addRole(muterole.id);
-          message.guild.channels.forEach(channel => channel.overwritePermissions(muterole, {
-          SEND_MESSAGES: false,
-          ADD_REACTIONS: false
-          })
-          .then(updated => console.log(updated.permissionOverwrites.get(muterole.id)))
-          .catch(console.error))
-          let mutetime = command[2];
-          if(!mutetime) return message.reply("You didn't specify a time!");
-          
-          message.reply(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
-          
-          setTimeout(function(){
-          tomute.removeRole(muterole.id);
-          message.channel.send(`<@${tomute.id}> has been unmuted!`);
-          }, ms(mutetime));
-          
-          break;
+      if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You don't have the **Mute Members** permission!");
+      let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(command[1]));
+      if(!tomute) return message.reply("Couldn't find user.");
+      if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Can't mute them!");
+      let muterole = message.guild.roles.find(muterole => muterole.name === "Muted");
+      tomute.addRole(muterole.id);
+      message.guild.channels.forEach(channel => channel.overwritePermissions(muterole, {
+        SEND_MESSAGES: false,
+        ADD_REACTIONS: false
+      })
+      .then(updated => console.log(updated.permissionOverwrites.get(muterole.id)))
+      .catch(console.error))
+      let mutetime = command[2];
+      if(!mutetime) return message.reply("You didn't specify a time!");
+      message.reply(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
+
+      setTimeout(function()
+      {
+        tomute.removeRole(muterole.id);
+        message.channel.send(`<@${tomute.id}> has been unmuted!`);
+      }, ms(mutetime));
+     break;
+
     case "!-createchannel":
       if (allowNewChannel) {
         if (command.length == 1) {
@@ -76,6 +81,7 @@ client.on("message", message => {
         message.reply("First enter the previously created channel");
       }
       break;
+
     case "!-testmysql":
       console.log(db.get_giuld_settings(message.guild));
       message.reply(db.get_giuld_settings(message.guild));
@@ -87,8 +93,7 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
   if (oldMember.voiceChannel) {
     if (oldMember.voiceChannel.members.size == 0) {
       var noDelete = ["69", "for unconfirmed", "AFK", "GParty!", "Invisible"];
-      if (!noDelete.includes(oldMember.voiceChannel.name))
-        oldMember.voiceChannel.delete();
+      if (!noDelete.includes(oldMember.voiceChannel.name)) oldMember.voiceChannel.delete();
     }
     if (newMember.voiceChannel) {
       allowNewChannel = true;
