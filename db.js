@@ -57,10 +57,12 @@ function get_giuld_settings(guild) {
   console.log(settings);
   //select("settings", "guild_id", guild.id);
   //var settings = [];
-  if (typeof settings == "undefined") {
+  if (!(typeof settings == "undefined")) {
     // if setting is not empty
+    console.log("Send settings:");
     return settings;
   } else {
+    console.log("New guild");
     insert("settings", "`guild_id`", guild.id); // Add the settings // Xef - "`guild_id`"?? What is it?
     return select("settings", "guild_id", guild.id); // return one
   }
