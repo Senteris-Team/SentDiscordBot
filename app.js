@@ -135,11 +135,11 @@ client.on("message", message => {
     }
 
     case `${prefix}testmysql`: {
-      new Promise(function (resolve) {
+      new Promise(function(resolve) {
         db.get_giuld_settings(message.guild, resolve);
-      }).then(function (settings) {
+      }).then(function(settings) {
         console.log(settings);
-        message.reply(settings);
+        message.reply(settings.guild_id);
       });
       break;
     }
