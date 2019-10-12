@@ -40,31 +40,30 @@ function select(table, col, value) {
       if (err) throw err;
       console.log(result);
       endConnect(conn);
+      var json;
       result.forEach(function(row) {
         console.log(row);
         let string = JSON.stringify(row);
         console.log(string);
-        let json = JSON.parse(string);
+        json = JSON.parse(string);
         console.log(json);
-        return json;
       });
+      return json;
     });
   });
 }
 
 function get_giuld_settings(guild) {
-  let settings = select("settings", "guild_id", guild.id);
+  var settings = select("settings", "guild_id", guild.id);
   console.log("Getted settings:");
   console.log(settings);
-  //select("settings", "guild_id", guild.id);
-  //var settings = [];
   if (!(typeof settings == "undefined")) {
     // if setting is not empty
     console.log("Send settings:");
     return settings;
   } else {
     console.log("New guild");
-    insert("settings", "`guild_id`", guild.id); // Add the settings // Xef - "`guild_id`"?? What is it?
+    insert("settings", "`guild_id`", guild.id); // Add the settings
     return select("settings", "guild_id", guild.id); // return one
   }
 }
