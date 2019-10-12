@@ -14,8 +14,20 @@ client.on("message", message => {
     case "!-help": {
       message.reply(
         "```" +
-        "!-showhomework \n" +
+        "!-hi"+
         "!-createchannel *name* *slots* \n" +
+        "!-mute *user* *time**Unit* // *Unit* (time unit) can be s,m,h,d. for example !-mute TSDoge 666d "+
+        "!-unmute *user*"+
+        "```"
+      );
+      break;
+    }
+
+    case "!-homework_help": case "!-homework": {
+      message.reply(
+        "```" +
+        "!-showhomework"+
+        "!-addhomework \n" +
         "```"
       );
       break;
