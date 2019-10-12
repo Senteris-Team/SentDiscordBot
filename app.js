@@ -139,14 +139,13 @@ client.on("message", message => {
         return message.reply("**Error:** You don't have the need permission!");
       new Promise(function(resolve) {
         db.get_giuld_settings(message.guild, resolve);
-      }).then(function(settings) {
-        settings.white_channel_list = JSON.parse(settings.white_channel_list);
-        console.log(settings);
-        let strWhiteList = settings.white_channel_list.join(", ");
+      }).then(function(settings) {        
+        console.log(settings);       
         message.reply(
           "Bot server settings:\n" +
             "```" +
-            `ID сервера ${settings.guild_id}\n Белый список каналов ${strWhiteList}` +
+            `ID сервера: ${settings.guild_id}\n` +
+            `Белый список каналов: ${settings.output.white_channel_list}` +
             "```"
         );
       });
