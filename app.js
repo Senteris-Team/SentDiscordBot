@@ -139,9 +139,9 @@ client.on("message", message => {
         return message.reply("**Error:** You don't have the need permission!");
       new Promise(function(resolve) {
         db.get_giuld_settings(message.guild, resolve);
-      }).then(function(settings) {        
-        console.log(settings);       
-        let str_white_channel_list = settings.output.white_channel_list.join(", ");
+      }).then(function(settings) {
+        console.log(settings);
+        let str_white_channel_list = settings.white_channel_list.join(", ");
         message.reply(
           "Bot server settings:\n" +
             "```" +
