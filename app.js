@@ -19,30 +19,28 @@ client.on("message", message => {
   var prefix = "!-";
   var command = message.content.split(" ");
 
-  if(message.author.bot) return;
-  if(!message.guild) return; // !if message sent in something kind of PM
-  if(!message.content.startsWith(prefix)) return;
-  
+  if (message.author.bot) return;
+  if (!message.guild) return; // !if message sent in something kind of PM
+  if (!message.content.startsWith(prefix)) return;
+
   switch (command[0].toLowerCase()) {
     case `${prefix}help`: {
       message.reply(
         "```" +
-        `${prefix}hi\n`+
-        `${prefix}createchannel *name* *slots*\n`+
-        `${prefix}mute *user* *time**Unit*\n`+
-        `// *Unit* (time unit) can be s, m, h, d. for example ${prefix}mute TSDoge 666d\n`+
-        `${prefix}unmute *user*`+
-        "```"
+          `${prefix}hi\n` +
+          `${prefix}createchannel *name* *slots*\n` +
+          `${prefix}mute *user* *time**Unit*\n` +
+          `// *Unit* (time unit) can be s, m, h, d. for example ${prefix}mute TSDoge 666d\n` +
+          `${prefix}unmute *user*` +
+          "```"
       );
       break;
     }
 
-    case `${prefix}homework_help`: case `${prefix}homework`: {
+    case `${prefix}homework_help`:
+    case `${prefix}homework`: {
       message.reply(
-        "```" +
-        `${prefix}showhomework\n`+
-        `${prefix}addhomework\n`+
-        "```"
+        "```" + `${prefix}showhomework\n` + `${prefix}addhomework\n` + "```"
       );
       break;
     }
@@ -63,10 +61,17 @@ client.on("message", message => {
     }
 
     case `${prefix}unmute`: {
-      if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You don't have the **Unmute Members** permission!");
-      let toumute = message.guild.member(message.mentions.users.first() || message.guild.members.get(command[1]));
-      if(!toumute) return message.reply("Couldn't find user.");
-      let unmuterole = message.guild.roles.find(muterole => muterole.name === "Muted");
+      if (!message.member.hasPermission("MUTE_MEMBERS"))
+        return message.reply(
+          "**Error:** You don't have the **Unmute Members** permission!"
+        );
+      let toumute = message.guild.member(
+        message.mentions.users.first() || message.guild.members.get(command[1])
+      );
+      if (!toumute) return message.reply("Couldn't find user.");
+      let unmuterole = message.guild.roles.find(
+        muterole => muterole.name === "Muted"
+      );
       tomute.removeRole(unmuterole.id);
       break;
     }
@@ -88,12 +93,14 @@ client.on("message", message => {
       tomute.addRole(muterole.id);
       message.guild.channels.forEach(channel =>
         channel
-        .overwritePermissions(muterole, {
-          SEND_MESSAGES: false,
-          ADD_REACTIONS: false
-        }).then(updated =>
-          console.log(updated.permissionOverwrites.get(muterole.id))
-        ).catch(console.error)
+          .overwritePermissions(muterole, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false
+          })
+          .then(updated =>
+            console.log(updated.permissionOverwrites.get(muterole.id))
+          )
+          .catch(console.error)
       );
       let mutetime = command[2];
       if (!mutetime) return message.reply("You didn't specify a time!");
@@ -128,8 +135,12 @@ client.on("message", message => {
     }
 
     case `${prefix}testmysql`: {
-      console.log(db.get_giuld_settings(message.guild));
-      message.reply(db.get_giuld_settings(message.guild));
+      new Promise(function (resolve) {
+        db.get_giuld_settings(message.guild, resolve);
+      }).then(function (settings) {
+        console.log(settings);
+        message.reply(settings);
+      });
       break;
     }
   }
@@ -139,7 +150,8 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
   if (oldMember.voiceChannel) {
     if (oldMember.voiceChannel.members.size == 0) {
       var noDelete = ["69", "for unconfirmed", "AFK", "GParty!", "Invisible"];
-      if (!noDelete.includes(oldMember.voiceChannel.name)) oldMember.voiceChannel.delete();
+      if (!noDelete.includes(oldMember.voiceChannel.name))
+        oldMember.voiceChannel.delete();
     }
     if (newMember.voiceChannel) {
       allowNewChannel = true;
@@ -167,7 +179,8 @@ function makeChannel(message, name, limit, message) {
         message.member.setVoiceChannel(channel);
       }
       console.log(`User ${message.member.tag} create voice channel ${name}`);
-    }).catch(console.error);
+    })
+    .catch(console.error);
   if (message.member.voiceChannel) {
     message.member.setVoiceChannel(channel);
   }

@@ -49,12 +49,12 @@ function select(table, col, value, resolve) {
         console.log(json);
         resolve(json);
         return json;
-      });      
+      });
     });
   });
 }
 
-function get_giuld_settings(guild) {
+function get_giuld_settings(guild, resolveMain) {
   new Promise(function(resolve) {
     console.log("Start promise");
     select("settings", "guild_id", guild.id, resolve);
@@ -65,11 +65,11 @@ function get_giuld_settings(guild) {
     if (!(typeof settings == "undefined")) {
       // if setting is not empty
       console.log("Send settings:");
-      return settings;
+      resolveMain(settings);
     } else {
       console.log("New guild");
       insert("settings", "`guild_id`", guild.id); // Add the settings
-      return select("settings", "guild_id", guild.id); // return one
+      get_giuld_settings(guild, resolveMain);
     }
   });
 }
