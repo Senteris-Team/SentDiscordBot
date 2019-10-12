@@ -32,7 +32,7 @@ function select(table, col, value) {
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
     //return conn; // Xef - Why?
-    conn.query(`SELECT * FROM ${table} WHERE ${col} = '${value}'`, function(
+    await conn.query(`SELECT * FROM ${table} WHERE ${col} = '${value}'`, function(
       err,
       result,
       fields // TODO select ${STH} from
