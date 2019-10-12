@@ -38,15 +38,11 @@ function select(table, col, value, resolve) {
       fields // TODO select ${STH} from
     ) {
       if (err) throw err;
-      console.log(result);
       endConnect(conn);
       var json;
       result.forEach(function(row) {
-        console.log(row);
         let string = JSON.stringify(row);
-        console.log(string);
         json = JSON.parse(string);
-        console.log(json);
         resolve(json);
         return json;
       });
@@ -56,19 +52,13 @@ function select(table, col, value, resolve) {
 
 function get_giuld_settings(guild, resolveMain) {
   new Promise(function(resolve) {
-    console.log("Start promise");
     select("settings", "guild_id", guild.id, resolve);
-    console.log("End");
   }).then(function(settings) {
-    console.log("Getted settings:");
-    console.log(settings);
     if (!(typeof settings == "undefined")) {
       // if setting is not empty
-      console.log("Send settings:");
       settings.white_channel_list = JSON.parse(settings.white_channel_list);
       resolveMain(settings);
     } else {
-      console.log("New guild");
       insert("settings", "`guild_id`", guild.id); // Add the settings
       get_giuld_settings(guild, resolveMain);
     }

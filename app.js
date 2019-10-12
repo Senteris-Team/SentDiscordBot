@@ -140,13 +140,13 @@ client.on("message", message => {
       new Promise(function(resolve) {
         db.get_giuld_settings(message.guild, resolve);
       }).then(function(settings) {
-        console.log(settings);
+        console.log("Requested settings: " + settings);
         let str_white_channel_list = settings.white_channel_list.join(", ");
         message.reply(
           "Bot server settings:\n" +
             "```" +
-            `ID сервера: ${settings.guild_id}\n` +
-            `Белый список каналов: ${str_white_channel_list}` +
+            `ID server: ${settings.guild_id}\n` +
+            `White channel list: ${str_white_channel_list}` +
             "```"
         );
       });
