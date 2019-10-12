@@ -27,7 +27,7 @@ function endConnect(connection) {
   });
 }
 
-function select(table, col, value) {
+function select(table, col, value, resolve) {
   //let connection = connect(); // Xef - Why?
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
@@ -47,17 +47,19 @@ function select(table, col, value) {
         console.log(string);
         json = JSON.parse(string);
         console.log(json);
-      });
-      return json;
+        resolve(json);
+        return json;
+      });      
     });
   });
 }
 
 function get_giuld_settings(guild) {
-  new Promise(function (resolve) {
-    let settings = select("settings", "guild_id", guild.id);
-    resolve(settings)
-  }).then(function (settings) {
+  new Promise(function(resolve) {
+    console.log("Start promise");
+    select("settings", "guild_id", guild.id, resolve);
+    console.log("End");
+  }).then(function(settings) {
     console.log("Getted settings:");
     console.log(settings);
     if (!(typeof settings == "undefined")) {
