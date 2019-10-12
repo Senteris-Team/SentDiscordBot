@@ -28,22 +28,20 @@ client.on("message", message => {
     case `!-addhomework`:
       message.reply("Oh, it does not work yet=(");
       break;
-      case "!-mute":
+    case `!-unmute`:
+        if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You don't have the **Unmute Members** permission!");
+        let toumute = message.guild.member(message.mentions.users.first() || message.guild.members.get(command[1]));
+        if(!toumute) return message.reply("Couldn't find user.");
+        let unmuterole = message.guild.roles.find(muterole => muterole.name === "Muted");
+        tomute.removeRole(unmuterole.id);
+      break;
+    case "!-mute":
           if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You don't have the **Mute Members** permission!");
           let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(command[1]));
           if(!tomute) return message.reply("Couldn't find user.");
           if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Can't mute them!");
           let muterole = message.guild.roles.find(muterole => muterole.name === "Muted");
           tomute.addRole(muterole.id);
-          if (!muterole) {
-          muterole = message.guild.createRole({
-              name: "Muted",
-              color: "#000000",
-              permissions:[]
-            })
-          } else {
-          console.error()
-          }
           message.guild.channels.forEach(channel => channel.overwritePermissions(muterole, {
           SEND_MESSAGES: false,
           ADD_REACTIONS: false
