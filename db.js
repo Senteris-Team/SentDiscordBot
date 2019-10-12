@@ -66,7 +66,6 @@ function get_giuld_settings(guild, resolveMain) {
       // if setting is not empty
       console.log("Send settings:");
       settings.white_channel_list = JSON.parse(settings.white_channel_list);
-      settings.output.white_channel_list = settings.white_channel_list.join(", ");
       resolveMain(settings);
     } else {
       console.log("New guild");

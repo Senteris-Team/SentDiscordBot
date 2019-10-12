@@ -141,11 +141,12 @@ client.on("message", message => {
         db.get_giuld_settings(message.guild, resolve);
       }).then(function(settings) {        
         console.log(settings);       
+        let str_white_channel_list = settings.output.white_channel_list.join(", ");
         message.reply(
           "Bot server settings:\n" +
             "```" +
             `ID сервера: ${settings.guild_id}\n` +
-            `Белый список каналов: ${settings.output.white_channel_list}` +
+            `Белый список каналов: ${str_white_channel_list}` +
             "```"
         );
       });
