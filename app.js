@@ -134,12 +134,20 @@ client.on("message", message => {
       break;
     }
 
-    case `${prefix}testmysql`: {
+    case `${prefix}getsettings`: {
+      if (!message.member.hasPermission("VIEW_AUDIT_LOG"))
+        return message.reply("**Error:** You don't have the need permission!");
       new Promise(function(resolve) {
         db.get_giuld_settings(message.guild, resolve);
       }).then(function(settings) {
         console.log(settings);
-        message.reply(settings.guild_id);
+        let strWhiteList = settings.white_channel_list.join(", ");
+        message.reply(
+          "Bot server settings:\n" +
+            "```" +
+            `ID сервера ${settings.guild_id}\n Белый список каналов settings ${strWhiteList}` +
+            "```"
+        );
       });
       break;
     }
