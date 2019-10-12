@@ -12,7 +12,7 @@ client.on("ready", () => {
     status: "online",
     game: {
       status: "you:b !-help for DogeHelp",
-      type: "Watching"
+      type: "WATCHING"
     }
   })
 });
