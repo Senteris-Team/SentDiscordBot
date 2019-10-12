@@ -11,10 +11,10 @@ client.on("ready", () => {
   client.user.setPresence({
     status: "online",
     game: {
-      status: "you:b !-help for DogeHelp",
+      name: "you:b !-help for DogeHelp",
       type: "WATCHING"
     }
-  })
+  });
 });
 
 client.on("message", message => {
