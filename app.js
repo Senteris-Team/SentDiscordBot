@@ -37,7 +37,7 @@ client.on("message", message => {
       break;
     }
 
-    case `${prefix}!-homework_help`: case `${prefix}!-homework`: {
+    case `${prefix}homework_help`: case `${prefix}homework`: {
       message.reply(
         "```" +
         `${prefix}showhomework\n`+
