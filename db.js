@@ -32,7 +32,7 @@ function select(table, col, value) {
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
     //return conn; // Xef - Why?
-    await conn.query(`SELECT * FROM ${table} WHERE ${col} = '${value}'`, function(
+    conn.query(`SELECT * FROM ${table} WHERE ${col} = '${value}'`, function(
       err,
       result,
       fields // TODO select ${STH} from
@@ -54,18 +54,22 @@ function select(table, col, value) {
 }
 
 function get_giuld_settings(guild) {
-  var settings = select("settings", "guild_id", guild.id);
-  console.log("Getted settings:");
-  console.log(settings);
-  if (!(typeof settings == "undefined")) {
-    // if setting is not empty
-    console.log("Send settings:");
-    return settings;
-  } else {
-    console.log("New guild");
-    insert("settings", "`guild_id`", guild.id); // Add the settings
-    return select("settings", "guild_id", guild.id); // return one
-  }
+  new Promise(function (resolve) {
+    let settings = select("settings", "guild_id", guild.id);
+    resolve(settings)
+  }).then(function (settings) {
+    console.log("Getted settings:");
+    console.log(settings);
+    if (!(typeof settings == "undefined")) {
+      // if setting is not empty
+      console.log("Send settings:");
+      return settings;
+    } else {
+      console.log("New guild");
+      insert("settings", "`guild_id`", guild.id); // Add the settings
+      return select("settings", "guild_id", guild.id); // return one
+    }
+  });
 }
 
 function insert(table, column, value) {
