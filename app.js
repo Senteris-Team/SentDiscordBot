@@ -78,7 +78,7 @@ client.on("message", message => {
       break;
     case "!-testmysql":
       console.log(db.get_giuld_settings(message.guild));
-      msg.reply(db.get_giuld_settings(message.guild));
+      message.reply(db.get_giuld_settings(message.guild));
       break;
   }
 });
@@ -112,10 +112,10 @@ function makeChannel(message, name, limit, message) {
     .edit({ bitrate: 96000 })
     .then(vc => {})
     .catch(console.error);
-    if (msg.member.voiceChannel) {
-      msg.member.setVoiceChannel(channel);
+    if (message.member.voiceChannel) {
+      message.member.setVoiceChannel(channel);
     }
-    console.log(`User ${msg.member.tag} create voice channel ${name}`);
+    console.log(`User ${message.member.tag} create voice channel ${name}`);
   }).catch(console.error);
   if (message.member.voiceChannel) {
     message.member.setVoiceChannel(channel);
