@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const db = require("./db.js");
-const ms = require("ms")
+const ms = require("ms");
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -29,36 +29,56 @@ client.on("message", message => {
       message.reply("Oh, it does not work yet=(");
       break;
     case `!-unmute`:
-        if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You don't have the **Unmute Members** permission!");
-        let toumute = message.guild.member(message.mentions.users.first() || message.guild.members.get(command[1]));
-        if(!toumute) return message.reply("Couldn't find user.");
-        let unmuterole = message.guild.roles.find(muterole => muterole.name === "Muted");
-        tomute.removeRole(unmuterole.id);
+      if (!message.member.hasPermission("MUTE_MEMBERS"))
+        return message.reply(
+          "**Error:** You don't have the **Unmute Members** permission!"
+        );
+      let toumute = message.guild.member(
+        message.mentions.users.first() || message.guild.members.get(command[1])
+      );
+      if (!toumute) return message.reply("Couldn't find user.");
+      let unmuterole = message.guild.roles.find(
+        muterole => muterole.name === "Muted"
+      );
+      tomute.removeRole(unmuterole.id);
       break;
     case "!-mute":
-          if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You don't have the **Mute Members** permission!");
-          let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(command[1]));
-          if(!tomute) return message.reply("Couldn't find user.");
-          if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Can't mute them!");
-          let muterole = message.guild.roles.find(muterole => muterole.name === "Muted");
-          tomute.addRole(muterole.id);
-          message.guild.channels.forEach(channel => channel.overwritePermissions(muterole, {
-          SEND_MESSAGES: false,
-          ADD_REACTIONS: false
+      if (!message.member.hasPermission("MUTE_MEMBERS"))
+        return message.reply(
+          "**Error:** You don't have the **Mute Members** permission!"
+        );
+      let tomute = message.guild.member(
+        message.mentions.users.first() || message.guild.members.get(command[1])
+      );
+      if (!tomute) return message.reply("Couldn't find user.");
+      if (tomute.hasPermission("MANAGE_MESSAGES"))
+        return message.reply("Can't mute them!");
+      let muterole = message.guild.roles.find(
+        muterole => muterole.name === "Muted"
+      );
+      tomute.addRole(muterole.id);
+      message.guild.channels.forEach(channel =>
+        channel
+          .overwritePermissions(muterole, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false
           })
-          .then(updated => console.log(updated.permissionOverwrites.get(muterole.id)))
-          .catch(console.error))
-          let mutetime = command[2];
-          if(!mutetime) return message.reply("You didn't specify a time!");
-          
-          message.reply(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
-          
-          setTimeout(function(){
-          tomute.removeRole(muterole.id);
-          message.channel.send(`<@${tomute.id}> has been unmuted!`);
-          }, ms(mutetime));
-          
-          break;
+          .then(updated =>
+            console.log(updated.permissionOverwrites.get(muterole.id))
+          )
+          .catch(console.error)
+      );
+      let mutetime = command[2];
+      if (!mutetime) return message.reply("You didn't specify a time!");
+
+      message.reply(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
+
+      setTimeout(function() {
+        tomute.removeRole(muterole.id);
+        message.channel.send(`<@${tomute.id}> has been unmuted!`);
+      }, ms(mutetime));
+
+      break;
     case "!-createchannel":
       if (allowNewChannel) {
         if (command.length == 1) {
@@ -102,21 +122,22 @@ function makeChannel(message, name, limit, message) {
     c => c.name == "Игровые" && c.type == "category"
   );
   server
-  .createChannel(name, { type: "voice" })
-  .then(channel => {
-    channel.userLimit = limit;
+    .createChannel(name, { type: "voice" })
+    .then(channel => {
+      channel.userLimit = limit;
 
-    if (!category) throw new Error("Category of the channel does not exist");
-    channel.setParent(category.id);
-    channel
-    .edit({ bitrate: 96000 })
-    .then(vc => {})
+      if (!category) throw new Error("Category of the channel does not exist");
+      channel.setParent(category.id);
+      channel
+        .edit({ bitrate: 96000 })
+        .then(vc => {})
+        .catch(console.error);
+      if (message.member.voiceChannel) {
+        message.member.setVoiceChannel(channel);
+      }
+      console.log(`User ${message.member.tag} create voice channel ${name}`);
+    })
     .catch(console.error);
-    if (message.member.voiceChannel) {
-      message.member.setVoiceChannel(channel);
-    }
-    console.log(`User ${message.member.tag} create voice channel ${name}`);
-  }).catch(console.error);
   if (message.member.voiceChannel) {
     message.member.setVoiceChannel(channel);
   }
