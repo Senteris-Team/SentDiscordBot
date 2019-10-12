@@ -3,6 +3,8 @@ const client = new Discord.Client();
 const db = require("./db.js");
 const ms = require("ms");
 
+var prefix = "!-";
+
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
   client.user.setActivity("!-help for DogeHelp");
@@ -11,44 +13,44 @@ client.on("ready", () => {
 client.on("message", message => {
   var command = message.content.split(" ");
   switch (command[0].toLowerCase()) {
-    case "!-help": {
+    case `${prefix}help`: {
       message.reply(
         "```" +
-        "!-hi"+
-        "!-createchannel *name* *slots* \n" +
-        "!-mute *user* *time**Unit* // *Unit* (time unit) can be s,m,h,d. for example !-mute TSDoge 666d "+
-        "!-unmute *user*"+
+        `${prefix}hi\n`+
+        `${prefix}createchannel *name* *slots*\n ` +
+        `${prefix}mute *user* *time**Unit* // *Unit* (time unit) can be s,m,h,d. for example !-mute TSDoge 666d\n`+
+        `${prefix}unmute *user*`+
         "```"
       );
       break;
     }
 
-    case "!-homework_help": case "!-homework": {
+    case `${prefix}!-homework_help`: case `${prefix}!-homework`: {
       message.reply(
         "```" +
-        "!-showhomework"+
-        "!-addhomework \n" +
+        `${prefix}showhomework\n`+
+        `${prefix}addhomework\n`+
         "```"
       );
       break;
     }
 
-    case "!-hi": {
+    case `${prefix}hi`: {
       message.reply("Hi! I am super cool bot!");
       break;
     }
 
-    case "!-showhomework": {
+    case `${prefix}showhomework`: {
       message.reply("Oh, it does not work yet=(");
       break;
     }
 
-    case `!-addhomework`: {
+    case `${prefix}addhomework`: {
       message.reply("Oh, it does not work yet=(");
       break;
     }
 
-    case `!-unmute`: {
+    case `${prefix}unmute`: {
       if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You don't have the **Unmute Members** permission!");
       let toumute = message.guild.member(message.mentions.users.first() || message.guild.members.get(command[1]));
       if(!toumute) return message.reply("Couldn't find user.");
@@ -57,7 +59,7 @@ client.on("message", message => {
       break;
     }
 
-    case "!-mute": {
+    case `${prefix}mute`: {
       if (!message.member.hasPermission("MUTE_MEMBERS"))
         return message.reply(
           "**Error:** You don't have the **Mute Members** permission!"
@@ -94,7 +96,7 @@ client.on("message", message => {
       break;
     }
 
-    case "!-createchannel": {
+    case `${prefix}createchannel`: {
       if (allowNewChannel) {
         if (command.length == 1) {
           message.reply("Not enough arguments. Type !-help");
@@ -113,7 +115,7 @@ client.on("message", message => {
       break;
     }
 
-    case "!-testmysql": {
+    case `${prefix}testmysql`: {
       console.log(db.get_giuld_settings(message.guild));
       message.reply(db.get_giuld_settings(message.guild));
       break;
