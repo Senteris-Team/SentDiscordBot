@@ -3,8 +3,6 @@ const client = new Discord.Client();
 const db = require("./db.js");
 const ms = require("ms");
 
-var prefix = "!-";
-
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
@@ -18,14 +16,16 @@ client.on("ready", () => {
 });
 
 client.on("message", message => {
+  var prefix = "!-";
   var command = message.content.split(" ");
   switch (command[0].toLowerCase()) {
     case `${prefix}help`: {
       message.reply(
         "```" +
         `${prefix}hi\n`+
-        `${prefix}createchannel *name* *slots*\n ` +
-        `${prefix}mute *user* *time**Unit* // *Unit* (time unit) can be s,m,h,d. for example !-mute TSDoge 666d\n`+
+        `${prefix}createchannel *name* *slots*\n`+
+        `${prefix}mute *user* *time**Unit*\n`+
+        `// *Unit* (time unit) can be s, m, h, d. for example ${prefix}mute TSDoge 666d\n`+
         `${prefix}unmute *user*`+
         "```"
       );
