@@ -7,7 +7,14 @@ var prefix = "!-";
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  client.user.setActivity("!-help for DogeHelp");
+  
+  client.user.setPresence({
+    status: "online",
+    game: {
+      status: "you:b !-help for DogeHelp",
+      type: "Watching"
+    }
+  })
 });
 
 client.on("message", message => {
@@ -155,8 +162,7 @@ function makeChannel(message, name, limit, message) {
         message.member.setVoiceChannel(channel);
       }
       console.log(`User ${message.member.tag} create voice channel ${name}`);
-    })
-    .catch(console.error);
+    }).catch(console.error);
   if (message.member.voiceChannel) {
     message.member.setVoiceChannel(channel);
   }
