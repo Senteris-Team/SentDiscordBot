@@ -102,8 +102,8 @@ function update(table, column, value, where_col, where_var) {
 
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    console.log(`UPDATE ${table} SET ${updateString} WHERE ${where_col} = '${where_var}'`);
-    conn.query(`UPDATE ${table} SET ${updateString} WHERE ${where_col} = '${where_var}'`, function( err, result, fields ) {
+    console.log(`UPDATE ${table} SET ${column} = ${updateString} WHERE ${where_col} = '${where_var}'`);
+    conn.query(`UPDATE ${table} SET ${column} =  ${updateString} WHERE ${where_col} = '${where_var}'`, function( err, result, fields ) {
       if (err) throw err;
       console.log(result);
       console.log(fields);

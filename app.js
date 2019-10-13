@@ -152,11 +152,11 @@ client.on("message", message => {
     case `${prefix}setsettings`: {
       if (!message.member.hasPermission("ADMINISTRATOR"))
         return message.reply("**Error:** You don't have the need permission!");
-      if (command[2] == "guild_id")
+      if (command[1] == "guild_id")
         return message.reply("**Error:** You don't can change guild id!")
-      var valueToUpdate = command.slice(3, command.length - 1).join(" ");
-      db.update("settings", command[2], valueToUpdate, "`guild_id`", message.guild.id)
-      message.reply(`Setting ${command[2]} updated to ${valueToUpdate}`)
+      var valueToUpdate = command.slice(2, command.length).join(" ");
+      db.update("settings", command[1], valueToUpdate, "`guild_id`", message.guild.id)
+      message.reply(`Setting ${command[1]} updated to ${valueToUpdate}`)
       break;
     }
   }
