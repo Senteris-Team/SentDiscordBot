@@ -109,8 +109,9 @@ function update(table, column, value, where_col, where_var, msg = '') {
             msg.reply("This setting not exist!")
           }
         }
-        else { console.log(err); }
-        console.log(`Update ${table}: ${column} set to '${value}'`)
+        else { console.log(err); }  
+      } else {
+        console.log(`Update ${table}: ${column} set to '${value}' where ${where_col} = '${where_var}'`)
       }
       endConnect(conn);
     });
