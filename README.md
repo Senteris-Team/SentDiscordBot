@@ -5,9 +5,11 @@ The bot will create voice channels(and delete one when it will be empty) and mut
 
 Working commands:
 !-hi!
+!-help
 !-createchannel *Channel_Name* *User_limit*
+!-mute *username* *time**Unit*
+!-unmute *username*
 
 Soon:
-!-mute
 !-addhomework !-removehomework !-showhomework
 !-changeprefix
