@@ -30,6 +30,7 @@ function select(table, col, value, resolve) {
       if (err) throw err;
       endConnect(conn);
       var json;
+      console.log(result);
       result.forEach(function(row) {
         let string = JSON.stringify(row);
         json = JSON.parse(string);
