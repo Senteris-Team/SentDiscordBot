@@ -102,11 +102,13 @@ function update(table, column, value, where_col, where_var) {
 
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    console.log(`UPDATE ${table} SET \`${column}\` = '${value}' WHERE ${where_col} = '${where_var}'`);
     conn.query(`UPDATE ${table} SET \`${column}\` =  '${value}' WHERE ${where_col} = '${where_var}'`, function( err, result, fields ) {
-      if (err) console.log(err);
-      console.log(result);
-      console.log(fields);
+      if (err) {
+        if (err.code == "ER_BAD_FIELD_ERROR") {
+          console.log("No this column!");
+        }
+        else { console.log(err);}
+      }
       endConnect(conn);
     });
   });
