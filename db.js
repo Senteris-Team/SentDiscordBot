@@ -30,7 +30,8 @@ function select(table, col, value, resolve) {
       if (err) throw err;
       endConnect(conn);
       var json;
-      if (typeof result !== 'undefined' || result.length > 0) {
+      console.log(typeof result + ' ' + result.length);
+      if (typeof result == 'undefined' || result.length == 0) {
         resolve(undefined)
         result(undefined)
       }        
