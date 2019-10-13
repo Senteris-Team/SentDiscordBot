@@ -156,7 +156,7 @@ client.on("message", message => {
         return message.reply("**Error:** You don't can change guild id!")
       var valueToUpdate = command.slice(3, command.length - 1).join(" ");
       db.update("settings", command[2], valueToUpdate, "`guild_id`", message.guild.id)
-      message.reply(`Setting ${command[2]} updated to ${varToUpdate}`)
+      message.reply(`Setting ${command[2]} updated to ${valueToUpdate}`)
       break;
     }
   }

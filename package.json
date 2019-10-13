@@ -2,8 +2,12 @@
   "name": "sntr-bot",
   "version": "0.0.0",
   "description": "SntrBot",
-  "main": "scr/app.js",
+  "main": "app.js",
   "author": {
     "name": ""
+  },
+  "dependencies": {
+    "ascii-table": "0.0.9",
+    "discord.js": "^11.5.1"
   }
 }
