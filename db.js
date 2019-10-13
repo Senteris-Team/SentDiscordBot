@@ -90,7 +90,7 @@ function insert(table, column, value) {
   });
 }
 
-function update(table, column, value) {
+function update(table, column, value, where_col, where_var) {
   let updateString;
   if (Object.prototype.toString.call(column) === "[object Array]") {
     // as in the function insert
@@ -102,8 +102,10 @@ function update(table, column, value) {
 
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    conn.query(`UPDATE ${table} SET ${updateString}`, function( err, result, fields ) {
+    conn.query(`UPDATE ${table} SET ${updateString} WHERE ${where_col} = '${where_var}'`, function( err, result, fields ) {
       if (err) throw err;
+      console.log(result);
+      console.log(fields);
       endConnect(connection);
     });
   });

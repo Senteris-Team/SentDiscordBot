@@ -32,6 +32,7 @@ client.on("message", message => {
         `${prefix}mute *user* *time**Unit*\n` +
         `// *Unit* (time unit) can be s, m, h, d. for example ${prefix}mute TSDoge 666d\n` +
         `${prefix}unmute *user*` +
+        `${prefix}getsetting` +
         "```"
       );
       break;
@@ -140,10 +141,22 @@ client.on("message", message => {
           "Bot server settings:\n" +
           "```" +
           `ID server: ${settings.guild_id}\n` +
-          `White channel list: ${str_white_channel_list}` +
-          "```"
+          `White channel list (white_channel_list): ${str_white_channel_list}` +
+          "```" +
+          `To update settings type ${prefix}setsettings *setting_name* *setting_var*`
         );
       });
+      break;
+    }
+
+    case `${prefix}setsettings`: {
+      if (!message.member.hasPermission("ADMINISTRATOR"))
+        return message.reply("**Error:** You don't have the need permission!");
+      if (command[2] == "guild_id")
+        return message.reply("**Error:** You don't can change guild id!")
+      var valueToUpdate = command.slice(3, command.length - 1).join(" ");
+      db.update("settings", command[2], valueToUpdate, "`guild_id`", message.guild.id)
+      message.reply(`Setting ${command[2]} updated to ${varToUpdate}`)
       break;
     }
   }
