@@ -27,18 +27,17 @@ client.on("message", message => {
     case `${prefix}help`: {
       message.reply(
         "```" +
-          `${prefix}hi\n` +
-          `${prefix}createchannel *name* *slots*\n` +
-          `${prefix}mute *user* *time**Unit*\n` +
-          `// *Unit* (time unit) can be s, m, h, d. for example ${prefix}mute TSDoge 666d\n` +
-          `${prefix}unmute *user*` +
-          "```"
+        `${prefix}hi\n` +
+        `${prefix}createchannel *name* *slots*\n` +
+        `${prefix}mute *user* *time**Unit*\n` +
+        `// *Unit* (time unit) can be s, m, h, d. for example ${prefix}mute TSDoge 666d\n` +
+        `${prefix}unmute *user*` +
+        "```"
       );
       break;
     }
 
-    case `${prefix}homework_help`:
-    case `${prefix}homework`: {
+    case `${prefix}homework_help`: case `${prefix}homework`: {
       message.reply(
         "```" + `${prefix}showhomework\n` + `${prefix}addhomework\n` + "```"
       );
@@ -78,9 +77,7 @@ client.on("message", message => {
 
     case `${prefix}mute`: {
       if (!message.member.hasPermission("MUTE_MEMBERS"))
-        return message.reply(
-          "**Error:** You don't have the **Mute Members** permission!"
-        );
+        return message.reply( "**Error:** You don't have the **Mute Members** permission!" );
       let tomute = message.guild.member(
         message.mentions.users.first() || message.guild.members.get(command[1])
       );
@@ -93,14 +90,12 @@ client.on("message", message => {
       tomute.addRole(muterole.id);
       message.guild.channels.forEach(channel =>
         channel
-          .overwritePermissions(muterole, {
-            SEND_MESSAGES: false,
-            ADD_REACTIONS: false
-          })
-          .then(updated =>
-            console.log(updated.permissionOverwrites.get(muterole.id))
-          )
-          .catch(console.error)
+        .overwritePermissions(muterole, {
+          SEND_MESSAGES: false,
+          ADD_REACTIONS: false
+        }).then(updated =>
+          console.log(updated.permissionOverwrites.get(muterole.id))
+        ).catch(console.error)
       );
       let mutetime = command[2];
       if (!mutetime) return message.reply("You didn't specify a time!");
@@ -143,10 +138,10 @@ client.on("message", message => {
         let str_white_channel_list = settings.white_channel_list.join(", ");
         message.reply(
           "Bot server settings:\n" +
-            "```" +
-            `ID server: ${settings.guild_id}\n` +
-            `White channel list: ${str_white_channel_list}` +
-            "```"
+          "```" +
+          `ID server: ${settings.guild_id}\n` +
+          `White channel list: ${str_white_channel_list}` +
+          "```"
         );
       });
       break;
@@ -173,22 +168,21 @@ function makeChannel(message, name, limit, message) {
     c => c.name == "Игровые" && c.type == "category"
   );
   server
-    .createChannel(name, { type: "voice" })
-    .then(channel => {
-      channel.userLimit = limit;
+  .createChannel(name, { type: "voice" })
+  .then(channel => {
+    channel.userLimit = limit;
 
-      if (!category) throw new Error("Category of the channel does not exist");
-      channel.setParent(category.id);
-      channel
-        .edit({ bitrate: 96000 })
-        .then(vc => {})
-        .catch(console.error);
-      if (message.member.voiceChannel) {
-        message.member.setVoiceChannel(channel);
-      }
-      console.log(`User ${message.member.tag} create voice channel ${name}`);
-    })
-    .catch(console.error);
+    if (!category) throw new Error("Category of the channel does not exist");
+    channel.setParent(category.id);
+    channel
+      .edit({ bitrate: 96000 })
+      .then(vc => {})
+      .catch(console.error);
+    if (message.member.voiceChannel) {
+      message.member.setVoiceChannel(channel);
+    }
+    console.log(`User ${message.member.tag} create voice channel ${name}`);
+  }).catch(console.error);
 }
 
 client.login(process.argv[2]);
