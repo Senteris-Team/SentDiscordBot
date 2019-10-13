@@ -140,8 +140,6 @@ client.on("message", message => {
       new Promise(function(resolve) {
         db.get_giuld_settings(message.guild, resolve);
       }).then(function(settings) {
-        console.log("Requested settings: ");
-        console.log(settings);
         let str_white_channel_list = settings.white_channel_list.join(", ");
         message.reply(
           "Bot server settings:\n" +

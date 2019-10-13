@@ -37,7 +37,6 @@ function select(table, col, value, resolve) {
       result.forEach(function(row) {
         let string = JSON.stringify(row);
         json = JSON.parse(string);
-        console.log(json);
         resolve(json);
         return json;
       });
@@ -47,13 +46,13 @@ function select(table, col, value, resolve) {
 
 function get_giuld_settings(guild, resolveMain) {
   new Promise(function (resolve) {
-    console.log("Getting setings...");
     select("settings", "guild_id", guild.id, resolve);
   }).then(function (settings) {
-    console.log(settings);
     if (!(typeof settings == "undefined")) {
       // if setting is not empty
       settings.white_channel_list = JSON.parse(settings.white_channel_list);
+      console.log("Requested settings: ");
+      console.log(settings);
       resolveMain(settings);
     } else {
       console.log("New guild!")
@@ -93,10 +92,8 @@ function insert(table, column, value) {
       result,
       fields
     ) {
-      console.log(result);
       if (err) throw err;
       endConnect(conn);
-      console.log(err);
     });
   });
 }
