@@ -22,11 +22,7 @@ function endConnect(connection) {
 function select(table, col, value, resolve) {
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    conn.query(`SELECT * FROM ${table} WHERE ${col} = '${value}'`, function(
-      err,
-      result,
-      fields
-    ) {
+    conn.query(`SELECT * FROM ${table} WHERE ${col} = '${value}'`, function( err, result, fields ) {
       if (err) throw err;
       endConnect(conn);
       var json;
@@ -87,11 +83,7 @@ function insert(table, column, value) {
 
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    conn.query(`INSERT INTO ${table} (${columns}) values (${values})`, function(
-      err,
-      result,
-      fields
-    ) {
+    conn.query(`INSERT INTO ${table} (${columns}) values (${values})`, function( err, result, fields ) {
       if (err) throw err;
       endConnect(conn);
     });
@@ -110,11 +102,7 @@ function update(table, column, value) {
 
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    conn.query(`UPDATE ${table} SET ${updateString}`, function(
-      err,
-      result,
-      fields
-    ) {
+    conn.query(`UPDATE ${table} SET ${updateString}`, function( err, result, fields ) {
       if (err) throw err;
       endConnect(connection);
     });
