@@ -90,7 +90,7 @@ function insert(table, column, value) {
   });
 }
 
-function update(table, column, value, where_col, where_var) {
+function update(table, column, value, where_col, where_var, msg = '') {
   let updateString;
   if (Object.prototype.toString.call(column) === "[object Array]") {
     // as in the function insert
@@ -105,7 +105,9 @@ function update(table, column, value, where_col, where_var) {
     conn.query(`UPDATE ${table} SET \`${column}\` =  '${value}' WHERE ${where_col} = '${where_var}'`, function( err, result, fields ) {
       if (err) {
         if (err.code == "ER_BAD_FIELD_ERROR") {
-          console.log("No this column!");
+          if (msg !== '') {
+            msg.reply("This setting not exist!")
+          }
         }
         else { console.log(err);}
       }
