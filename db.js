@@ -84,7 +84,7 @@ function insert(table, column, value) {
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
     conn.query(`INSERT INTO ${table} (${columns}) values (${values})`, function( err, result, fields ) {
-      if (err) throw err;
+      if (err) console.log(err);
       endConnect(conn);
     });
   });
@@ -104,7 +104,7 @@ function update(table, column, value, where_col, where_var) {
     if (err) return console.log(err);
     console.log(`UPDATE ${table} SET \`${column}\` = '${value}' WHERE ${where_col} = '${where_var}'`);
     conn.query(`UPDATE ${table} SET \`${column}\` =  '${value}' WHERE ${where_col} = '${where_var}'`, function( err, result, fields ) {
-      if (err) throw err;
+      if (err) console.log(err);
       console.log(result);
       console.log(fields);
       endConnect(conn);
