@@ -150,6 +150,7 @@ client.on("message", message => {
     }
 
     case `${prefix}setsettings`: {
+      console.log(command);
       if (!message.member.hasPermission("ADMINISTRATOR"))
         return message.reply("**Error:** You don't have the need permission!");
       if (command[1] == "guild_id")
