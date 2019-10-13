@@ -12,15 +12,7 @@ var pool = mysql.createPool({
   socketPath: "/var/lib/mysql/mysql.sock"
 });
 
-function connect() {
-  pool.getConnection(function(err, conn) {
-    if (err) return console.log(err);
-    //return conn; // Xef - Why?
-  });
-}
-
 function endConnect(connection) {
-  // stop... IT'S END CONNECTION?! FOR WHAT?!
   connection.release(function(err) {
     if (err) throw err;
     console.log("A connection is closed:)");
@@ -28,14 +20,12 @@ function endConnect(connection) {
 }
 
 function select(table, col, value, resolve) {
-  //let connection = connect(); // Xef - Why?
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    //return conn; // Xef - Why?
     conn.query(`SELECT * FROM ${table} WHERE ${col} = '${value}'`, function(
       err,
       result,
-      fields // TODO select ${STH} from
+      fields
     ) {
       if (err) throw err;
       endConnect(conn);
@@ -59,6 +49,7 @@ function get_giuld_settings(guild, resolveMain) {
       settings.white_channel_list = JSON.parse(settings.white_channel_list);
       resolveMain(settings);
     } else {
+      console.log("New guild!")
       insert("settings", "`guild_id`", guild.id); // Add the settings
       get_giuld_settings(guild, resolveMain);
     }
@@ -88,15 +79,14 @@ function insert(table, column, value) {
     values = value;
   }
 
-  //let connection = connect();
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    //return conn;
     conn.query(`INSERT INTO ${table} (${columns}) values (${values})`, function(
       err,
       result,
       fields
     ) {
+      console.log(result);
       if (err) throw err;
       endConnect(conn);
       console.log(err);
@@ -114,11 +104,8 @@ function update(table, column, value) {
     updateString += column[-0] + "=" + value[-0];
   } else updateString += column + "=" + value;
 
-  //let connection = connect();
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    //return conn;
-
     conn.query(`UPDATE ${table} SET ${updateString}`, function(
       err,
       result,
@@ -130,4 +117,7 @@ function update(table, column, value) {
   });
 }
 
+exports.update = update;
+exports.insert = insert;
+exports.select = select;
 exports.get_giuld_settings = get_giuld_settings;
