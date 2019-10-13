@@ -30,10 +30,9 @@ function select(table, col, value, resolve) {
       if (err) throw err;
       endConnect(conn);
       var json;
-      console.log(typeof result + ' ' + result.length);
-      if (typeof result == 'undefined' || result.length == 0) {
+      if (result.length == 0) {
         resolve(undefined)
-        result(undefined)
+        return(undefined)
       }        
       result.forEach(function(row) {
         let string = JSON.stringify(row);
