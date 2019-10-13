@@ -152,6 +152,8 @@ client.on("message", message => {
     case `${prefix}setsettings`: {
       if (!message.member.hasPermission("ADMINISTRATOR"))
         return message.reply("**Error:** You don't have the need permission!");
+      if (command.length < 3)
+        return message.reply("**Error:** Not enough arguments.");
       if (command[1] == "guild_id")
         return message.reply("**Error:** You don't can change guild id!")
       var valueToUpdate = command.slice(2, command.length).join(" ");
