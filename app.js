@@ -3,6 +3,8 @@ const client = new Discord.Client();
 const db = require("./db.js");
 const ms = require("ms");
 
+var allowNewChannel = true;
+
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
