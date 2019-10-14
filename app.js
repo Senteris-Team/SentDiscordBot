@@ -112,13 +112,17 @@ client.on("message", message => {
     }
 
     case `${prefix}createchannel`: {
-      if (command.length == 1) message.reply("Not enough arguments. Type !-help");
-      else if (command.length == 2) {
-        channel = makeChannel(message, command[1], 0, message);
-        message.reply("The channel is created.");
+      if (!message.member.voiceChannel) {
+        if (command.length == 1) message.reply("Not enough arguments. Type !-help");
+        else if (command.length == 2) {
+          channel = makeChannel(message, command[1], 0, message);
+          message.reply("The channel is created.");
+        } else {
+          channel = makeChannel(message, command[1], command[2], message);
+          message.reply("The channel is created.");
+        }
       } else {
-        channel = makeChannel(message, command[1], command[2], message);
-        message.reply("The channel is created.");
+        message.reply("First enter to a voice channel");
       }
       break;
     }
