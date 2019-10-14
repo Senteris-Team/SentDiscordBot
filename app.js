@@ -3,8 +3,6 @@ const client = new Discord.Client();
 const db = require("./db.js");
 const ms = require("ms");
 
-var allowNewChannel = true;
-
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
@@ -114,19 +112,13 @@ client.on("message", message => {
     }
 
     case `${prefix}createchannel`: {
-      if (allowNewChannel) {
-        if (command.length == 1) message.reply("Not enough arguments. Type !-help");
-        else if (command.length == 2) {
-          channel = makeChannel(message, command[1], 0, message);
-          message.reply("The channel is created.");
-          allowNewChannel = false;
-        } else {
-          channel = makeChannel(message, command[1], command[2], message);
-          message.reply("The channel is created.");
-          allowNewChannel = false;
-        }
+      if (command.length == 1) message.reply("Not enough arguments. Type !-help");
+      else if (command.length == 2) {
+        channel = makeChannel(message, command[1], 0, message);
+        message.reply("The channel is created.");
       } else {
-        message.reply("First enter the previously created channel");
+        channel = makeChannel(message, command[1], command[2], message);
+        message.reply("The channel is created.");
       }
       break;
     }
@@ -167,7 +159,7 @@ client.on("message", message => {
 
 client.on("voiceStateUpdate", (oldMember, newMember) => {
   new Promise(function (resolve) {
-    db.get_giuld_settings(message.guild, resolve);
+    db.get_giuld_settings(oldMember.guild, resolve);
   }).then(function (settings) {
     if (oldMember.voiceChannel) {
       if (oldMember.voiceChannel.members.size == 0) {
@@ -176,7 +168,6 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
           oldMember.voiceChannel.delete();
       }
       if (newMember.voiceChannel) {
-        allowNewChannel = true;
       }
     }
   });
