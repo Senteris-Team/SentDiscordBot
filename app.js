@@ -167,16 +167,20 @@ client.on("message", message => {
 });
 
 client.on("voiceStateUpdate", (oldMember, newMember) => {
-  if (oldMember.voiceChannel) {
-    if (oldMember.voiceChannel.members.size == 0) {
-      var noDelete = ["69", "for unconfirmed", "AFK", "GParty!", "Invisible"];
-      if (!noDelete.includes(oldMember.voiceChannel.name))
-        oldMember.voiceChannel.delete();
+  new Promise(function (resolve) {
+    db.get_giuld_settings(message.guild, resolve);
+  }).then(function (settings) {
+    if (oldMember.voiceChannel) {
+      if (oldMember.voiceChannel.members.size == 0) {
+        var noDelete = settings.white_channel_list;
+        if (!noDelete.includes(oldMember.voiceChannel.name))
+          oldMember.voiceChannel.delete();
+      }
+      if (newMember.voiceChannel) {
+        allowNewChannel = true;
+      }
     }
-    if (newMember.voiceChannel) {
-      allowNewChannel = true;
-    }
-  }
+  });
 });
 
 function makeChannel(message, name, limit, message) {
