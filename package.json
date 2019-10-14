@@ -9,6 +9,7 @@
   "dependencies": {
     "ascii-table": "0.0.9",
     "discord.js": "^11.5.1",
-    "ms": "^2.1.2"
+    "ms": "^2.1.2",
+    "mysql": "^2.17.1"
   }
 }
