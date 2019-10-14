@@ -114,10 +114,10 @@ client.on("message", message => {
     }
 
     case `${prefix}createchannel`: {
+      if(!message.member.voiceChannel) message.reply("Enter to a voice channel");
       if (allowNewChannel) {
-        if (command.length == 1) {
-          message.reply("Not enough arguments. Type !-help");
-        } else if (command.length == 2) {
+        if (command.length == 1) message.reply("Not enough arguments. Type !-help"); 
+        else if (command.length == 2) {
           channel = makeChannel(message, command[1], 0, message);
           message.reply("The channel is created.");
           allowNewChannel = false;
@@ -189,8 +189,8 @@ function makeChannel(message, name, limit, message) {
     c => c.name == "Игровые" && c.type == "category"
   );
   server
-  .createChannel(name, { type: "voice" })
-  .then(channel => {
+    .createChannel(name, { type: "voice" })
+    .then(channel => {
     channel.userLimit = limit;
 
     if (!category) throw new Error("Category of the channel does not exist");
