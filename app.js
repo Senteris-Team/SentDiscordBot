@@ -20,7 +20,7 @@ client.on("message", message => {
   var command = message.content.split(" ");
 
   if (message.author.bot) return;
-  if (!message.guild) return; // !if message sent in something kind of PM
+  if (!message.guild) return;
   if (!message.content.startsWith(prefix)) return;
 
   switch (command[0].toLowerCase()) {
@@ -67,12 +67,13 @@ client.on("message", message => {
     }
 
     case `${prefix}unmute`: { //Test this command pls /Xefise
-      if (!message.member.hasPermission("MUTE_MEMBERS"))
-        return message.reply( "**Error:** You don't have the **Unmute Members** permission!" );
+      if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply( "**Error:** You don't have the **Unmute Members** permission!" );
+
       let tounmute = message.guild.member(
         message.mentions.users.first() || message.guild.members.get(command[1])
       );
       if (!tounmute) return message.reply("Couldn't find user.");
+
       let unmuterole = message.guild.roles.find( muterole => muterole.name === "Muted" );
       tounmute.removeRole(unmuterole.id).catch(console.error);
       message.reply("The user has been unmuted.");
@@ -92,7 +93,7 @@ client.on("message", message => {
       tomute.addRole(muterole.id);
       message.guild.channels.forEach(channel =>
         channel
-        .overwritePermissions(muterole, {
+          .overwritePermissions(muterole, {
           SEND_MESSAGES: false
         }).then(updated => // Remove flood console logs pls /Xefise
           console.log(updated.permissionOverwrites.get(muterole.id))
@@ -100,7 +101,6 @@ client.on("message", message => {
       );
       let mutetime = command[2];
       if (!mutetime) return message.reply("You didn't specify a time!");
-
       message.reply(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
 
       setTimeout(function() {
@@ -120,15 +120,13 @@ client.on("message", message => {
           channel = makeChannel(message, command[1], command[2], message);
           message.reply("The channel is created.");
         }
-      } else {
-        message.reply("First enter to a voice channel");
-      }
+      } else message.reply("First enter to a voice channel");
       break;
     }
 
     case `${prefix}getsettings`: {
-      if (!message.member.hasPermission("VIEW_AUDIT_LOG"))
-        return message.reply("**Error:** You don't have the need permission!");
+      if (!message.member.hasPermission("VIEW_AUDIT_LOG")) return message.reply("**Error:** You don't have the need permission!");
+
       new Promise(function(resolve) {
         db.get_giuld_settings(message.guild, resolve);
       }).then(function(settings) {
@@ -146,12 +144,10 @@ client.on("message", message => {
     }
 
     case `${prefix}setsettings`: {
-      if (!message.member.hasPermission("ADMINISTRATOR"))
-        return message.reply("**Error:** You don't have the need permission!");
-      if (command.length < 3)
-        return message.reply("**Error:** Not enough arguments.");
-      if (command[1] == "guild_id")
-        return message.reply("**Error:** You don't can change guild id!")
+      if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply("**Error:** You don't have the need permission!");
+      if (command.length < 3) return message.reply("**Error:** Not enough arguments.");
+      if (command[1] == "guild_id") return message.reply("**Error:** You don't can change guild id!")
+      
       var valueToUpdate = command.slice(2, command.length).join(" ");
       db.update("settings", command[1], valueToUpdate, "`guild_id`", message.guild.id, message)
       message.reply(`Setting ${command[1]} updated to '${valueToUpdate}'`)
