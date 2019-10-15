@@ -69,7 +69,7 @@ client.on("message", message => {
       );
       if (!tounmute) return message.reply("Couldn't find user.");
       let unmuterole = message.guild.roles.find( muterole => muterole.name === "Muted" );
-      tomute.removeRole(unmuterole.id);
+      unmuterole.removeRole(unmuterole.id);
       break;
     }
 
