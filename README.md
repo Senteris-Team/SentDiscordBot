@@ -7,7 +7,7 @@ Working commands:
 - !-hi!
 - !-help
 - !-createchannel *Channel_Name* *User_limit*
-- !-mute *username* *time**Unit*
+- !-mute *username* *time* *Unit* //example !-mute @User123 313s
 - !-unmute *username*
 
 Soon:
