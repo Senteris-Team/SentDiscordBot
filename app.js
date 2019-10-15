@@ -31,8 +31,9 @@ client.on("message", message => {
         `${prefix}createchannel *name* *slots*\n` +
         `${prefix}mute *user* *time**Unit*\n` +
         `// *Unit* (time unit) can be s, m, h, d. for example ${prefix}mute TSDoge 666d\n` +
-        `${prefix}unmute *user*` +
-        `${prefix}getsetting` +
+        `${prefix}unmute *user*\n` +
+        `${prefix}getsetting\n` +
+        `${prefix}homework` +
         "```"
       );
       break;
