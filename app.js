@@ -33,7 +33,7 @@ client.on("message", message => {
         `// *Unit* (time unit) can be s, m, h, d. for example ${prefix}mute TSDoge 666d\n` +
         `${prefix}unmute *user*\n` +
         `${prefix}getsetting\n` +
-        `${prefix}homework` +
+        `${prefix}homework\n` +
         "```"
       );
       break;
@@ -41,7 +41,12 @@ client.on("message", message => {
 
     case `${prefix}homework_help`: case `${prefix}homework`: {
       message.reply(
-        "```" + `${prefix}showhomework\n` + `${prefix}addhomework\n` + "```"
+        "```" + 
+        `${prefix}showhomework\n` + 
+        `${prefix}addhomework\n` + 
+        `${prefix}removehomework\n` +
+        `${prefix}rewritehomework\n` +
+        "```"
       );
       break;
     }
@@ -61,7 +66,7 @@ client.on("message", message => {
       break;
     }
 
-    case `${prefix}unmute`: {
+    case `${prefix}unmute`: { //Test this command pls /Xefise
       if (!message.member.hasPermission("MUTE_MEMBERS"))
         return message.reply( "**Error:** You don't have the **Unmute Members** permission!" );
       let tounmute = message.guild.member(
@@ -75,24 +80,21 @@ client.on("message", message => {
     }
 
     case `${prefix}mute`: {
-      if (!message.member.hasPermission("MUTE_MEMBERS"))
-        return message.reply( "**Error:** You don't have the **Mute Members** permission!" );
+      if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply( "**Error:** You don't have the **Mute Members** permission!" );
+
       let tomute = message.guild.member(
         message.mentions.users.first() || message.guild.members.get(command[1])
       );
       if (!tomute) return message.reply("Couldn't find user.");
-      if (tomute.hasPermission("MANAGE_MESSAGES"))
-        return message.reply("Can't mute them!");
-      let muterole = message.guild.roles.find(
-        muterole => muterole.name === "Muted"
-      );
+      if (tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Can't mute them!");
+
+      let muterole = message.guild.roles.find( muterole => muterole.name === "Muted" );
       tomute.addRole(muterole.id);
       message.guild.channels.forEach(channel =>
         channel
         .overwritePermissions(muterole, {
-          SEND_MESSAGES: false,
-          ADD_REACTIONS: false
-        }).then(updated =>
+          SEND_MESSAGES: false
+        }).then(updated => // Remove flood console logs pls /Xefise
           console.log(updated.permissionOverwrites.get(muterole.id))
         ).catch(console.error)
       );
@@ -105,7 +107,6 @@ client.on("message", message => {
         tomute.removeRole(muterole.id);
         message.channel.send(`<@${tomute.id}> has been unmuted!`);
       }, ms(mutetime));
-
       break;
     }
 
