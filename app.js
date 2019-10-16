@@ -103,7 +103,7 @@ client.on("message", message => {
       let mutetime = command[2];
       if (!mutetime) return message.reply("You didn't specify a time!");
       message.reply(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
-      log(`mute ${tomute.id}`, "Guild " + message.guild, message.author.tag);
+      log(`mute ${tomute.tag}`, "Guild " + message.guild, message.author.tag);
       setTimeout(function() {
         tomute.removeRole(muterole.id);
         message.channel.send(`<@${tomute.id}> has been unmuted!`);
