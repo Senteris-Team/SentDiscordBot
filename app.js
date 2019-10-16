@@ -82,8 +82,6 @@ client.on("message", message => {
     }
 
     case `${prefix}mute`: {
-      console.log(message.member);
-      let tag = message.member.tag;
       if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply( "**Error:** You don't have the **Mute Members** permission!" );
 
       let tomute = message.guild.member(
@@ -105,7 +103,7 @@ client.on("message", message => {
       let mutetime = command[2];
       if (!mutetime) return message.reply("You didn't specify a time!");
       message.reply(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
-      log(`mute ${tomute.id}`, "Guild " + message.guild, tag);
+      log(`mute ${tomute.id}`, "Guild " + message.guild, message.author.tag);
       setTimeout(function() {
         tomute.removeRole(muterole.id);
         message.channel.send(`<@${tomute.id}> has been unmuted!`);
@@ -142,7 +140,7 @@ client.on("message", message => {
           "```" +
           `To update settings type ${prefix}setsettings *setting_name* *setting_var*`
         );
-        log("requested settings", "Guild " + message.guild.id, message.author.tag);
+        log("requested settings", "Guild " + message.guild, message.author.tag);
       });
       break;
     }
@@ -155,7 +153,7 @@ client.on("message", message => {
       var valueToUpdate = command.slice(2, command.length).join(" ");
       db.update("settings", command[1], valueToUpdate, "`guild_id`", message.guild.id, message)
       message.reply(`Setting ${command[1]} updated to '${valueToUpdate}'`)
-      log(`update settings`, "Guild " + message.guild.id, message.member.tag);
+      log(`update settings`, "Guild " + message.guild, message.member.tag);
       break;
     }
   }
@@ -196,7 +194,7 @@ function makeChannel(message, name, limit, message) {
     if (message.member.voiceChannel) {
       message.member.setVoiceChannel(channel);
     }
-      log(`create voice channel ${name}`, "Guild " + message.guild.id, message.member.tag);
+      log(`create voice channel ${name}`, "Guild " + message.guild, message.member.tag);
   }).catch(console.error);
 }
 
