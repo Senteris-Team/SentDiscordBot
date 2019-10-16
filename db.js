@@ -44,7 +44,8 @@ function get_giuld_settings(guild, resolveMain) {
   new Promise(function (resolve) {
     select("settings", "guild_id", guild.id, resolve);
   }).then(function (settings) {
-    if (!(typeof settings == "undefined")) {
+    console.log(settings);
+    if (settings == JSON.parse('')) {
       // if setting is not empty
       settings.white_channel_list = JSON.parse(settings.white_channel_list);
       resolveMain(settings);
