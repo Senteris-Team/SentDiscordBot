@@ -195,4 +195,18 @@ function makeChannel(message, name, limit, message) {
   }).catch(console.error);
 }
 
+function log(message, where = "", who = "") {
+  var now = new Date();
+  var options = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric'
+  };
+  let date = now.toLocaleString("ru", options));
+  console.log(`[${date}] (${where}) ${who} ${message}`)
+}
+
 client.login(process.argv[2]);
