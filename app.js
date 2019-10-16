@@ -82,6 +82,8 @@ client.on("message", message => {
     }
 
     case `${prefix}mute`: {
+      console.log(message.member);
+      let tag = message.member.tag;
       if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply( "**Error:** You don't have the **Mute Members** permission!" );
 
       let tomute = message.guild.member(
@@ -103,7 +105,7 @@ client.on("message", message => {
       let mutetime = command[2];
       if (!mutetime) return message.reply("You didn't specify a time!");
       message.reply(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
-      log(`mute ${tomute.id}`, "Guild " + message.guild.tag, message.member.tag);
+      log(`mute ${tomute.id}`, "Guild " + message.guild, tag);
       setTimeout(function() {
         tomute.removeRole(muterole.id);
         message.channel.send(`<@${tomute.id}> has been unmuted!`);
