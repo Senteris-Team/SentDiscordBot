@@ -205,7 +205,7 @@ function log(message, where = "", who = "") {
     minute: 'numeric',
     second: 'numeric'
   };
-  let date = now.toLocaleString("ru", options));
+  let date = now.toLocaleString("ru", options);
   console.log(`[${date}] (${where}) ${who} ${message}`)
 }
 
