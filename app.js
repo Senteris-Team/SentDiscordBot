@@ -97,6 +97,7 @@ client.on("message", message => {
           .overwritePermissions(muterole, {
           SEND_MESSAGES: false
         }).then(updated => // Remove flood console logs pls /Xefise
+          {}
         ).catch(console.error)
       );
       let mutetime = command[2];
