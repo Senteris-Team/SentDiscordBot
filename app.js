@@ -5,7 +5,7 @@ const ms = require("ms");
 const fs = require("fs");
 
 client.on("ready", () => {
-  log(`Logged in as ${client.user.tag}!`, "", "BOT");
+  log(`logged in as ${client.user.tag}!`, "BOT", "Client");
 
   client.user.setPresence({
     status: "online",
@@ -201,7 +201,7 @@ function log(message, where = "", who = "") {
   var now = new Date();
   var options = {
     year: 'numeric',
-    month: 'long',
+    month: 'numeric',
     day: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
