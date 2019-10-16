@@ -2,9 +2,10 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const db = require("./db.js");
 const ms = require("ms");
+const fs = require("fs");
 
 client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+  log(`Logged in as ${client.user.tag}!`, "", "BOT");
 
   client.user.setPresence({
     status: "online",
@@ -96,7 +97,6 @@ client.on("message", message => {
           .overwritePermissions(muterole, {
           SEND_MESSAGES: false
         }).then(updated => // Remove flood console logs pls /Xefise
-          console.log(updated.permissionOverwrites.get(muterole.id))
         ).catch(console.error)
       );
       let mutetime = command[2];
@@ -139,6 +139,7 @@ client.on("message", message => {
           "```" +
           `To update settings type ${prefix}setsettings *setting_name* *setting_var*`
         );
+        log("requested settings", message.guild.id, message.author.tag);
       });
       break;
     }
@@ -191,7 +192,7 @@ function makeChannel(message, name, limit, message) {
     if (message.member.voiceChannel) {
       message.member.setVoiceChannel(channel);
     }
-    console.log(`User ${message.member.tag} create voice channel ${name}`);
+      log(`create voice channel ${name}`, message.member.tag, message.guild.id);
   }).catch(console.error);
 }
 
@@ -206,7 +207,12 @@ function log(message, where = "", who = "") {
     second: 'numeric'
   };
   let date = now.toLocaleString("ru", options);
-  console.log(`[${date}] (${where}) ${who} ${message}`)
+  let log_str = `[${date}] (${where}) ${who} ${message}`
+  console.log(log_str)
+
+  fs.appendFile("log.txt", log_str, function (error) {
+    if (error) throw console.error(error); // если возникла ошибка
+  });
 }
 
 client.login(process.argv[2]);

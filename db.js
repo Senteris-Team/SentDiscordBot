@@ -47,8 +47,6 @@ function get_giuld_settings(guild, resolveMain) {
     if (!(typeof settings == "undefined")) {
       // if setting is not empty
       settings.white_channel_list = JSON.parse(settings.white_channel_list);
-      console.log("Requested settings: ");
-      console.log(settings);
       resolveMain(settings);
     } else {
       console.log("New guild!")
