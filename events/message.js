@@ -1,3 +1,5 @@
+//const { log } = require("../functions.js");
+
 module.exports = (client, message) => {
     if (message.author.bot) return;
 
