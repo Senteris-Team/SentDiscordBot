@@ -68,13 +68,13 @@ client.on("message", message => {
       break;
     }
 
-    case `${prefix}unmute`: { //Test this command pls /Xefise
-      if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply( "**Error:** You don't have the **Unmute Members** permission!" );
+    case `${prefix}unmute`: {
+      if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply( "**Error:** You do not have the **Unmute Members** permission!" );
 
       let tounmute = message.guild.member(
         message.mentions.users.first() || message.guild.members.get(command[1])
       );
-      if (!tounmute) return message.reply("Couldn't find user.");
+      if (!tounmute) return message.reply("Could not find user.");
 
       let unmuterole = message.guild.roles.find( muterole => muterole.name === "Muted" );
       tounmute.removeRole(unmuterole.id).catch(console.error);
@@ -97,12 +97,12 @@ client.on("message", message => {
         channel
           .overwritePermissions(muterole, {
           SEND_MESSAGES: false
-        }).then(updated => // Remove flood console logs pls /Xefise
+        }).then(updated =>
           {}
         ).catch(console.error)
       );
       let mutetime = command[2];
-      if (!mutetime) return message.reply("You didn't specify a time!");
+      if (!mutetime) return message.reply("You did not specify a time!");
       message.reply(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
       log(`mute ${tomute.user.tag}`, "Guild " + message.guild, message.author.tag);
       setTimeout(function() {
@@ -213,7 +213,7 @@ function log(message, where = "", who = "") {
   console.log(log_str)
 
   fs.appendFile("log.txt", log_str, function (error) {
-    if (error) throw console.error(error); // если возникла ошибка
+    if (error) throw console.error(error);
   });
 }
 
