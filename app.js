@@ -128,8 +128,9 @@ client.on("message", message => {
 
     case `${prefix}getsettings`: {
       if (!message.member.hasPermission("VIEW_AUDIT_LOG")) return message.reply("**Error:** You do not have the need permission!");
-
-      new Promise(function(resolve) {
+      log("1", "BOT");
+      new Promise(function (resolve) {
+        log("2", "BOT");
         db.get_giuld_settings(message.guild, resolve);
       }).then(function(settings) {
         let str_white_channel_list = settings.white_channel_list.join(", ");
