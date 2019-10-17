@@ -1,6 +1,6 @@
 const db = require("../db.js");
 
-module.exports = (oldMember, newMember) => {
+module.exports = (client, oldMember, newMember) => {
     new Promise(function (resolve) {
         console.log(oldMember.guild);
         db.get_giuld_settings(oldMember.guild, resolve);
