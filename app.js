@@ -18,7 +18,8 @@ fs.readdir("./events/", (err, files) => {
 
 client.commands = new Discord.Collection();
 
-fs.readdir("./commands/", function (err, dirs) {
+p = "./commands/"
+fs.readdir(p, function (err, dirs) {
   if (err) {
     throw err;
   }
