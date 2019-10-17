@@ -105,12 +105,12 @@ function update(table, column, value, where_col, where_var, msg = '') {
         if (err.code == "ER_BAD_FIELD_ERROR") {
           if (msg !== '') {
             msg.reply("This setting not exist!")
-            console.log(`Update ${table}: ${column} set to '${value}' where ${where_col} = '${where_var}' BUT column not exist!`)
+            //console.log(`Update ${table}: ${column} set to '${value}' where ${where_col} = '${where_var}' BUT column not exist!`)
           }
         }
         else { console.log(err); }  
       } else {
-        console.log(`Update ${table}: ${column} set to '${value}' where ${where_col} = '${where_var}'`)
+        //console.log(`Update ${table}: ${column} set to '${value}' where ${where_col} = '${where_var}'`)
       }
       endConnect(conn);
     });
