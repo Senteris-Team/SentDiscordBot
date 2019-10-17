@@ -23,6 +23,7 @@ client.on("message", message => {
   if (message.author.bot) return;
   if (!message.guild) return;
   if (!message.content.startsWith(prefix)) return;
+  log("4", "BOT");
 
   switch (command[0].toLowerCase()) {
     case `${prefix}help`: {
@@ -127,6 +128,7 @@ client.on("message", message => {
     }
 
     case `${prefix}getsettings`: {
+      log("3", "BOT");
       if (!message.member.hasPermission("VIEW_AUDIT_LOG")) return message.reply("**Error:** You do not have the need permission!");
       log("1", "BOT");
       new Promise(function (resolve) {
