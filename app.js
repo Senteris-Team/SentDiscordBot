@@ -5,6 +5,8 @@ const fs = require("fs"),
 const client = new Discord.Client();
 const config = require("./config.json");
 
+const { log } = require("./functions.js");
+
 client.config = config;
 
 fs.readdir("./events/", (err, files) => {
@@ -12,6 +14,7 @@ fs.readdir("./events/", (err, files) => {
   files.forEach(file => {
     const event = require(`./events/${file}`);
     let eventName = file.split(".")[0];
+    log(`Attempting to load event ${eventName}`);
     client.on(eventName, event.bind(null, client));
   });
 });
@@ -35,7 +38,7 @@ fs.readdir(p, function (err, dirs) {
         if (!file.endsWith(".js")) return;
         let props = require(`./${dir}/${file}`);
         let commandName = file.split(".")[0];
-        console.log(`Attempting to load command ${commandName}`);
+        log(`Attempting to load command ${commandName}`);
         client.commands.set(commandName, props);
       });
     });
