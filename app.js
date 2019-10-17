@@ -12,6 +12,7 @@ client.config = config;
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
+    if (!file.endsWith(".js")) return;
     const event = require(`./events/${file}`);
     let eventName = file.split(".")[0];
     log(`event ${eventName}`, "BOT", "Load");
