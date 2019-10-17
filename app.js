@@ -18,7 +18,7 @@ fs.readdir("./events/", (err, files) => {
 
 client.commands = new Discord.Collection();
 
-p = "./commands/"
+var p = "./commands/"
 fs.readdir(p, function (err, dirs) {
   if (err) {
     throw err;
@@ -33,7 +33,7 @@ fs.readdir(p, function (err, dirs) {
       if (err) return console.error(err);
       files.forEach(file => {
         if (!file.endsWith(".js")) return;
-        let props = require(`./commands/${dir}/${file}`);
+        let props = require(`./${dir}/${file}`);
         let commandName = file.split(".")[0];
         console.log(`Attempting to load command ${commandName}`);
         client.commands.set(commandName, props);
