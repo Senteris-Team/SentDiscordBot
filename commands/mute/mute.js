@@ -1,4 +1,4 @@
-const { log } = require("../functions.js");
+const { log } = require("../../functions.js");
 
 exports.run = (client, message, args) => {
     if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You do not have the **Mute Members** permission!");
