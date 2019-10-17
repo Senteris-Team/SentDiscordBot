@@ -49,7 +49,7 @@ function get_giuld_settings(guild, resolveMain) {
       settings.white_channel_list = JSON.parse(settings.white_channel_list);
       resolveMain(settings);
     } else {
-      console.log("New guild!")
+      console.log(`New guild! (${guild})`)
       insert("settings", "`guild_id`", guild.id); // Add the settings
       get_giuld_settings(guild, resolveMain);
     }
