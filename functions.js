@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 function log(message, where = "BOT", who = "") {
     var now = new Date();
     var options = {
