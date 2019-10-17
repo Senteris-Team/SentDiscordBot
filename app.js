@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const Enmap = require("enmap");
 const fs = require("fs"),
   path = require("path");
 
@@ -17,7 +16,7 @@ fs.readdir("./events/", (err, files) => {
   });
 });
 
-client.commands = new Enmap();
+client.commands = new Discord.Collection();
 
 fs.readdir("./commands/", function (err, dirs) {
   if (err) {
