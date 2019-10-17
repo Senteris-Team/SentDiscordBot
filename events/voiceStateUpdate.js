@@ -2,7 +2,7 @@ const db = require("../db.js");
 
 module.exports = (oldMember, newMember) => {
     new Promise(function (resolve) {
-        console.log(oldMember);
+        console.log(oldMember.guild);
         db.get_giuld_settings(oldMember.guild, resolve);
     }).then(function (settings) {
         if (oldMember.voiceChannel) {
