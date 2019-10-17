@@ -34,7 +34,7 @@ client.on("message", message => {
         `// *Unit* (time unit) can be s, m, h, d. for example ${prefix}mute TSDoge 666d\n` +
         `${prefix}unmute *user*\n` +
         `${prefix}getsettings\n` +
-        `${prefix}setsettings\n` +
+        `${prefix}setsettings *setting_name* *setting_var* //For developers\n` +
         `${prefix}homework\n` +
         "```"
       );
@@ -83,13 +83,13 @@ client.on("message", message => {
     }
 
     case `${prefix}mute`: {
-      if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply( "**Error:** You don't have the **Mute Members** permission!" );
+      if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply( "**Error:** You do not have the **Mute Members** permission!" );
 
       let tomute = message.guild.member(
         message.mentions.users.first() || message.guild.members.get(command[1])
       );
-      if (!tomute) return message.reply("Couldn't find user.");
-      if (tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Can't mute them!");
+      if (!tomute) return message.reply("Could not find user.");
+      if (tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Cannot mute them!");
 
       let muterole = message.guild.roles.find( muterole => muterole.name === "Muted" );
       tomute.addRole(muterole.id);
@@ -127,19 +127,18 @@ client.on("message", message => {
     }
 
     case `${prefix}getsettings`: {
-      if (!message.member.hasPermission("VIEW_AUDIT_LOG")) return message.reply("**Error:** You don't have the need permission!");
+      if (!message.member.hasPermission("VIEW_AUDIT_LOG")) return message.reply("**Error:** You do not have the need permission!");
 
       new Promise(function(resolve) {
         db.get_giuld_settings(message.guild, resolve);
       }).then(function(settings) {
         let str_white_channel_list = settings.white_channel_list.join(", ");
         message.reply(
-          "Bot server settings:\n" +
+          "Guild settings:\n" +
           "```" +
-          `ID server: ${settings.guild_id}\n` +
-          `White channel list (white_channel_list): ${str_white_channel_list}` +
-          "```" +
-          `To update settings type ${prefix}setsettings *setting_name* *setting_var*`
+          `Guild ID: ${settings.guild_id}\n` +
+          `white_channel_list: ${str_white_channel_list}` +
+          "```"
         );
         log("requested settings", "Guild " + message.guild, message.author.tag);
       });
@@ -147,9 +146,9 @@ client.on("message", message => {
     }
 
     case `${prefix}setsettings`: {
-      if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply("**Error:** You don't have the need permission!");
+      if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply("**Error:** You do not have the need permission!");
       if (command.length < 3) return message.reply("**Error:** Not enough arguments.");
-      if (command[1] == "guild_id") return message.reply("**Error:** You don't can change guild id!")
+      if (command[1] == "guild_id") return message.reply("**Error:** You cannot change guild id!")
       
       var valueToUpdate = command.slice(2, command.length).join(" ");
       db.update("settings", command[1], valueToUpdate, "`guild_id`", message.guild.id, message)
