@@ -1,6 +1,6 @@
 {
   "name": "sntr-bot",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "SntrBot",
   "main": "app.js",
   "author": {
