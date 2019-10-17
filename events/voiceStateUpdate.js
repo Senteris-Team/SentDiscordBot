@@ -1,3 +1,5 @@
+const db = require("../db.js");
+
 module.exports = (oldMember, newMember) => {
     new Promise(function (resolve) {
         db.get_giuld_settings(oldMember.guild, resolve);
