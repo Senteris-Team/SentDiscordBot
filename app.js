@@ -33,7 +33,8 @@ client.on("message", message => {
         `${prefix}mute *user* *time**Unit*\n` +
         `// *Unit* (time unit) can be s, m, h, d. for example ${prefix}mute TSDoge 666d\n` +
         `${prefix}unmute *user*\n` +
-        `${prefix}getsetting\n` +
+        `${prefix}getsettings\n` +
+        `${prefix}setsettings\n` +
         `${prefix}homework\n` +
         "```"
       );
