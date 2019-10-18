@@ -1,3 +1,3 @@
 exports.run = (client, message, args) => {
-  message.reply("It is not work yet:(");
+  message.reply("It does not work yet:(");
 }
