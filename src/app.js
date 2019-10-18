@@ -3,7 +3,7 @@ const fs = require("fs"),
   path = require("path");
 
 const client = new Discord.Client();
-const config = require("./src/config.json");
+const config = require("./config.json");
 
 const { log } = require("./src/functions.js");
 
