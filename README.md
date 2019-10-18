@@ -8,12 +8,10 @@ Working commands:
 - !-help
 - !-createchannel *Channel_Name* *User_limit*
 - !-mute *username* *time* *Unit* //example !-mute @User123 313s
-- !-unmute *username*  
-
-And:
-- commandhandler (by neis, ~~xef did not cope~~)
-- db.js ~~(xuyna)~~
+- !-unmute *username* 
 
 Soon:
+- ~~command handler~~
 - !-changeprefix
 - music
+
