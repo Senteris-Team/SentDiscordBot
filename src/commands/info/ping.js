@@ -1,5 +1,5 @@
 exports.run = (client, message, args) => {
-    msg.channel.send({
+    message.channel.send({
         embed: {
             color: 0x2ed32e,
             fields: [{
