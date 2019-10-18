@@ -4,7 +4,7 @@ exports.run = (client, message, args) => {
   let tounmute = message.guild.member(
     message.mentions.users.first() || message.guild.members.get(args[1])
   );
-  if (!tounmute) return message.reply("Could not find user.");
+  if (!tounmute) return message.reply("Could not find the user.");
 
   let unmuterole = message.guild.roles.find(muterole => muterole.name === "Muted");
   tounmute.removeRole(unmuterole.id).catch(console.error);

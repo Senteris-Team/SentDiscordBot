@@ -7,8 +7,8 @@ exports.run = (client, message, args) => {
   let tomute = message.guild.member(
     message.mentions.users.first() || message.guild.members.get(args[0])
   );
-  if (!tomute) return message.reply("Could not find user.");
-  if (tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Cannot mute them!");
+  if (!tomute) return message.reply("Could not find the user.");
+  if (tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("you can not mute the user!");
 
   let muterole = message.guild.roles.find(muterole => muterole.name === "Muted");
   tomute.addRole(muterole.id);
