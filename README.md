@@ -14,4 +14,4 @@ Soon:
 - ~~command handler~~
 - !-changeprefix
 - music
-
+- !-AddWhiteChannel and !-DeleteWhiteChannel
