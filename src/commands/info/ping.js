@@ -1,5 +1,5 @@
 exports.run = (client, message, args) => {
-    const msg = await message.channel.send(`Pinging....`);
+    const msg = message.channel.send(`Pinging....`);
 
         msg.edit(`Pong!
         Latency is ${Math.floor(msg.createdTimestap - message.createdTimestap)}ms
