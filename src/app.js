@@ -13,7 +13,7 @@ fs.readdir("./src/events/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
     if (!file.endsWith(".js")) return;
-    const event = require(`./src/events/${file}`);
+    const event = require(`./events/${file}`);
     let eventName = file.split(".")[0];
     log(`event ${eventName}`, "BOT", "Load");
     client.on(eventName, event.bind(null, client));
@@ -37,7 +37,7 @@ fs.readdir(p, function (err, dirs) {
       if (err) throw err;
       files.forEach(file => {
         if (!file.endsWith(".js")) return;
-        let props = require(`./src/${dir}/${file}`);
+        let props = require(`./${dir}/${file}`);
         let commandName = file.split(".")[0];
         log(`command ${commandName}`, "BOT", "Load");
         client.commands.set(commandName, props);
