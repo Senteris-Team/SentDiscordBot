@@ -5,7 +5,7 @@ const fs = require("fs"),
 const client = new Discord.Client();
 const config = require("./config.json");
 
-const { log } = require("./src/functions.js");
+const { log } = require("./functions.js");
 
 client.config = config;
 
