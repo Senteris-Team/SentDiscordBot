@@ -11,7 +11,7 @@ exports.run = (client, message, args) => {
   if (tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("you can not mute the user!");
 
   try{ let muterole = message.guild.roles.find(muterole => muterole.name === "MutedWithSntr")
-  } catch {
+  } catch (e) {
     guild.createRole({
       name: 'MutedWithSntr'
     }).catch(message.reply("ERROR: Can not create the role"))
