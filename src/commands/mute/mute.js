@@ -10,16 +10,18 @@ exports.run = (client, message, args) => {
   if (!tomute) return message.reply("Could not find the user.");
   if (tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("you can not mute the user!");
 
-  try{ let muterole = message.guild.roles.find(muterole => muterole.name === "MutedWithSntr")
+  try{ 
+    let muterole = message.guild.roles.find(muterole => muterole.name === "MutedWithSntr")
+    tomute.addRole(muterole.id).catch();
   } catch (e) {
     guild.createRole({
       name: 'MutedWithSntr'
     }).catch(message.reply("ERROR: Can not create the role"))
 
-    let muterole = message.guild.roles.find(muterole => muterole.name === "MutedWithSntr").catch();
+    let muterole = message.guild.roles.find(muterole => muterole.name === "MutedWithSntr")
+    tomute.addRole(muterole.id).catch();
   }
 
-  tomute.addRole(muterole.id);
   message.guild.channels.forEach(channel =>
     channel
       .overwritePermissions(muterole, {
