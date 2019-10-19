@@ -1,13 +1,13 @@
 const { log } = require("../functions.js");
 
 module.exports = (client) => {
-    log(`logged in as ${client.user.tag}!`, "BOT", "Client");
+  log(`logged in as ${client.user.tag}!`, "BOT", "Client");
 
-    client.user.setPresence({
-        status: "online",
-        game: {
-            name: "you:b !-help for DogeHelp",
-            type: "WATCHING"
-        }
-    });
+  client.user.setPresence({
+    status: "online",
+    game: {
+      name: "you:b !-help for DogeHelp",
+      type: "WATCHING"
+    }
+  });
 }
