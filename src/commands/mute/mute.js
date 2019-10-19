@@ -14,7 +14,7 @@ exports.run = (client, message, args) => {
     let muterole = message.guild.roles.find(muterole => muterole.name === "MutedWithSntr")
     tomute.addRole(muterole.id).catch();
   } catch (e) {
-    guild.createRole({
+    message.guild.createRole({
       name: 'MutedWithSntr'
     }).catch(message.reply("ERROR: Can not create the role"))
 
