@@ -6,9 +6,8 @@ exports.run = (client, message, args) => {
   );
   if (!tounmute) return message.reply("Could not find the user.");
 
-  let unmuterole = message.guild.roles.find(muterole => muterole.name === "Muted");
+  let unmuterole = message.guild.roles.find(muterole => muterole.name === "MutedWithSntr");
   try{
-    console.log(unmuterole);
     tounmute.removeRole(unmuterole.id);
     message.reply("The user has been unmuted.");
   }

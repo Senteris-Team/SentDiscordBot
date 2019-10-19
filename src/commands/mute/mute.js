@@ -10,7 +10,7 @@ exports.run = (client, message, args) => {
   if (!tomute) return message.reply("Could not find the user.");
   if (tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("you can not mute the user!");
 
-  let muterole = message.guild.roles.find(muterole => muterole.name === "Muted");
+  let muterole = message.guild.roles.find(muterole => muterole.name === "MutedWithSntr"); // - Conflicts with other bots
   tomute.addRole(muterole.id);
   message.guild.channels.forEach(channel =>
     channel
