@@ -6,6 +6,7 @@ The bot will create voice channels(and delete one when it will be empty) and mut
 Working commands:
 - !-hi!
 - !-help
+- !-ping
 - !-createchannel *Channel_Name* *User_limit*
 - !-mute *username* *time* *Unit* //example !-mute @User123 313s
 - !-unmute *username* 
