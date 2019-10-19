@@ -5,12 +5,20 @@ exports.run = (client, message, args) => {
   if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You do not have the **Mute Members** permission!");
 
   let tomute = message.guild.member(
-    message.mentions.users.first() || message.guild.members.get(args[0])
+    message.mentions.users.first() // does not work || message.guild.members.get(args[0])
   );
   if (!tomute) return message.reply("Could not find the user.");
   if (tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("you can not mute the user!");
 
-  let muterole = message.guild.roles.find(muterole => muterole.name === "MutedWithSntr"); // - Conflicts with other bots
+  try{ let muterole = message.guild.roles.find(muterole => muterole.name === "MutedWithSntr")
+  } catch {
+    guild.createRole({
+      name: 'MutedWithSntr'
+    }).catch(message.reply("ERROR: Can not create the role"))
+
+    let muterole = message.guild.roles.find(muterole => muterole.name === "MutedWithSntr").catch();
+  }
+
   tomute.addRole(muterole.id);
   message.guild.channels.forEach(channel =>
     channel

@@ -12,7 +12,7 @@ exports.run = (client, message, args) => {
     message.reply("The user has been unmuted.");
   }
   catch (error){
-    message.reply("Error!"); // There is SO MUCH information
+    message.reply("Error! The role does not exist"); // There is SO MUCH information
     console.error('Error ' + e.name + ":" + e.message + "\n" + e.stack);
   }
 }
