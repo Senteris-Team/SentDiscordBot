@@ -8,8 +8,8 @@ Working commands:
 - !-help
 - !-ping
 - !-createchannel *Channel_Name* *User_limit*
-- !-mute *username* *time* *Unit* //example !-mute @User123 313s
-- !-unmute *username* 
+- ~~!-mute *username* *time* *Unit* //example !-mute @User123 313s~~
+- ~~!-unmute *username*~~ 
 
 Soon:
 - ~~command handler~~

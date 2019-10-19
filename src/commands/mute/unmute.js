@@ -1,4 +1,9 @@
 exports.run = (client, message, args) => {
+  message.reply("It does not work yet:(");
+}
+
+/*
+exports.run = (client, message, args) => {
   if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You do not have the **Unmute Members** permission!");
 
   let tounmute = message.guild.member(
@@ -16,3 +21,4 @@ exports.run = (client, message, args) => {
     console.error('Error ' + e.name + ":" + e.message + "\n" + e.stack);
   }
 }
+*/

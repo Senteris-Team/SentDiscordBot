@@ -1,6 +1,11 @@
-const { log } = require("../../functions.js");
-const ms = require("ms");
+//const { log } = require("../../functions.js");
+//const ms = require("ms");
 
+exports.run = (client, message, args) => {
+  message.reply("It does not work yet:(");
+}
+
+/*
 exports.run = (client, message, args) => {
   if (!message.member.hasPermission("MUTE_MEMBERS")) return message.reply("**Error:** You do not have the **Mute Members** permission!");
 
@@ -19,7 +24,7 @@ exports.run = (client, message, args) => {
     }).catch(message.reply("ERROR: Can not create role 'MutedWithSntr'"))
 
     let muterole = message.guild.roles.find(muterole => muterole.name === "MutedWithSntr");
-    tomute.addRole(muterole.id).catch();
+    tomute.addRole(muterole.id).catch(console.error()); // ERROR: Cannot read property 'id' of null
   }
 
   message.guild.channels.forEach(channel =>
@@ -38,3 +43,4 @@ exports.run = (client, message, args) => {
     message.channel.send(`<@${tomute.id}> has been unmuted!`);
   }, ms(mutetime));
 }
+*/
