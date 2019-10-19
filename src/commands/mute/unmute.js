@@ -8,6 +8,7 @@ exports.run = (client, message, args) => {
 
   let unmuterole = message.guild.roles.find(muterole => muterole.name === "Muted");
   try{
+    console.log(unmuterole);
     tounmute.removeRole(unmuterole.id);
     message.reply("The user has been unmuted.");
   }
