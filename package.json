@@ -1,10 +1,10 @@
 {
-  "name": "sntr-bot",
+  "name": "sent-bot",
   "version": "0.1.0",
-  "description": "SntrBot",
+  "description": "Sent Discord Bot",
   "main": "src/app.js",
   "author": {
-    "name": "SNTR TEAM"
+    "name": "Senteris-Team"
   },
   "dependencies": {
     "discord.js": "^11.5.1",
