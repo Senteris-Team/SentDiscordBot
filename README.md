@@ -1,6 +1,6 @@
-# Sent Discord Bot (In the archive until mid-November)
+# Sent Discord Bot
 
-The bot is still under development and useless:(
+The bot is still under development and do not work yet:(
 
 
 Oh my! It is Sent discord bot! ARE WE GONNA DIE!?

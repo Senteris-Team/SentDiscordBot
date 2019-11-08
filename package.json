@@ -1,7 +1,7 @@
 {
   "name": "sent-bot",
-  "version": "0.1.0",
-  "description": "Sent Discord Bot",
+  "version": "0.0.0",
+  "description": "It is Sent Discord Bot",
   "main": "src/app.js",
   "author": {
     "name": "Senteris-Team"
