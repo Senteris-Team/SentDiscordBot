@@ -15,26 +15,29 @@ exports.run = (client, message, args) => {
 }
 
 function makeChannel(message, name, limit, message) {
-  var guild = message.guild;
+  let guild = message.guild;
   new Promise(function (resolve) {
     db.select("settings", "guild_id", guild, resolve);
   }).then(function (settings) {
+    console.log(settings);
     let category = guild.channels.find( c => c.name == settings.voice_channels_category && c.type == "category" );
-  });
-  guild
+    console.log(category);
+
+    guild
     .createChannel(name, { type: "voice" })
     .then(channel => {
-    channel.userLimit = limit;
+      channel.userLimit = limit;
 
-    if (!category) throw new Error("Category of the channel does not exist");
-    channel.setParent(category.id);
-    channel
-      .edit({ bitrate: 96000 })
-      .then(vc => { })
-      .catch(console.error);
-    if (message.member.voiceChannel) {
-      message.member.setVoiceChannel(channel);
-    }
-    log(`Created a voice channel ${name}`, "Guild " + message.guild, message.member.tag);
-  }).catch(console.error);
+      if (!category) throw new Error("Category of the channel does not exist");
+      channel.setParent(category.id);
+      channel
+        .edit({ bitrate: 96000 })
+        .then(vc => { })
+        .catch(console.error);
+      if (message.member.voiceChannel) {
+        message.member.setVoiceChannel(channel);
+      }
+      log(`Created a voice channel ${name}`, "Guild " + message.guild, message.member.tag);
+    }).catch(console.error);
+  });
 }
