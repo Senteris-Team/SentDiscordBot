@@ -16,10 +16,11 @@ exports.run = (client, message, args) => {
 
 function makeChannel(message, name, limit, message) {
   let guild = message.guild;
+  var category;
   new Promise(function (resolve) {
     db.select("settings", "guild_id", guild.id, resolve);
   }).then(function (settings) {
-    var category = guild.channels.find( c => c.name == settings.voice_channels_category && c.type == "category" );
+    category = guild.channels.find( c => c.name == settings.voice_channels_category && c.type == "category" );
   });
   guild
     .createChannel(name, { type: "voice" })
