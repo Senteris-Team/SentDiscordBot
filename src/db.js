@@ -27,14 +27,14 @@ function select(table, col, value, resolve) {
       endConnect(conn);
       var json;
       if (result.length == 0) {
-        resolve(undefined)
-        return(undefined)
+        resolve(undefined);
+        return(undefined); // for what?
       }        
       result.forEach(function(row) {
-        let string = JSON.stringify(row);
-        json = JSON.parse(string);
+        let string = JSON.stringify(row); // ?
+        json = JSON.parse(string); // decode JSON
         resolve(json);
-        return json;
+        return json; // for what?
       });
     });
   });
@@ -44,8 +44,7 @@ function get_giuld_settings(guild, resolveMain) {
   new Promise(function (resolve) {
     select("settings", "guild_id", guild.id, resolve);
   }).then(function (settings) {
-    if (!(typeof settings == "undefined")) {
-      // if setting is not empty
+    if (!(typeof settings == "undefined")) { // if setting is not empty
       settings.white_channel_list = JSON.parse(settings.white_channel_list);
       resolveMain(settings);
     } else {
