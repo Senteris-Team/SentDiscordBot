@@ -19,7 +19,7 @@ function makeChannel(message, name, limit, message) {
   new Promise(function (resolve) {
     db.select("settings", "guild_id", guild.id, resolve);
   }).then(function (settings) {
-    let category = guild.channels.find( c => c.name == settings.voice_channels_category && c.type == "category" );
+    var category = guild.channels.find( c => c.name == settings.voice_channels_category && c.type == "category" );
   });
   guild
     .createChannel(name, { type: "voice" })
