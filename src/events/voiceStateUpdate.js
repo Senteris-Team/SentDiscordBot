@@ -10,6 +10,7 @@ module.exports = (client, oldMember, newMember) => {
       new Promise(function (resolve) {
         db.select("settings", "guild_id", oldMember.guild.id, resolve); // Get settings
       }).then(function (settings) {
+        console.log(settings.voice_channels_category.name + "\n" + oldMember.voiceChannel.parent.name);
         if(settings.voice_channels_category.name != oldMember.voiceChannel.parent.name) return;
       });
 
