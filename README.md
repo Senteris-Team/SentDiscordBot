@@ -9,7 +9,7 @@ The bot will create a voice channels(and delete one when it will be empty) and m
 
 
 Working commands:
-- !-Hi!
+- !-Hi
 - !-Help
 - !-Ping
 - !-CreateChannel *Channel_Name* *User_limit*
@@ -17,7 +17,7 @@ Working commands:
 
 Soon:
 - !-AddWhiteChannel and !-DeleteWhiteChannel
-- !-ChangeVoiceCategoryName | Change the name of a category in which the voice channels will create
+- !-ChangeVoiceCategory | Change the name of a category in which the voice channels will create
 - !-ShowSettings
 - !-ChangePrefix
 - !-Mute  *username*  *time* *Unit* | example !-mute @User313#4584 313s

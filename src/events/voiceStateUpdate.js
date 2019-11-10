@@ -9,7 +9,7 @@ module.exports = (client, oldMember, newMember) => {
         var noDelete = settings.white_channel_list;
         if (!noDelete.includes(oldMember.voiceChannel.name)) 
           oldMember.voiceChannel.delete();
-      } //if (newMember.voiceChannel) { }
+      }
     }
   });
 }

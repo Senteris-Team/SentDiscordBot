@@ -17,11 +17,10 @@ exports.run = (client, message, args) => {
         name: "Help",
         value:  `${client.config.prefix}hi\n` +
           `${client.config.prefix}createchannel *name* *slots*\n` +
-          `${client.config.prefix}mute *user* *time**Unit*\n` +
-          `// *Unit* (time unit) can be s, m, h, d. for example ${client.config.prefix}mute @N0Name#4213 666h\n` +
-          `${client.config.prefix}unmute *user*\n` +
+          //`${client.config.prefix}mute *user* *time**Unit*\n` +
+          //`// *Unit* (time unit) can be s, m, h, d. for example ${client.config.prefix}mute @N0Name#4213 666h\n` +
+          //`${client.config.prefix}unmute *user*\n` +
           `${client.config.prefix}getsettings\n` +
-          `${client.config.prefix}setsettings *setting_name* *setting_var* //For developers\n` +
           `${client.config.prefix}ping`
       }],
     }
