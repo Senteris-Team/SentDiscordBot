@@ -8,7 +8,7 @@ module.exports = (client, oldMember, newMember) => {
       if (oldMember.voiceChannel.members.size != 0) return;
 
       new Promise(function (resolve) {
-        db.select("settings", "guild_id", guild.id, resolve); // Get settings
+        db.select("settings", "guild_id", oldMember.guild.id, resolve); // Get settings
       }).then(function (settings) {
         if(settings.voice_channels_category.name != oldMember.voiceChannel.parent.name) return;
       });
