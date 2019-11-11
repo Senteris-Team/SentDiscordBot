@@ -61,11 +61,8 @@ function insert(table, column, value) {
     // if column == array => columns = "column1, column2..."
     for (i = 0; i != column.length; i++) {
       columns += column[i] + ", ";
-    }
-    columns += column[-0]; // columns = "... column5, column6 (w/o ',')"
-  } else {
-    columns = column;
-  } // else columns == column
+    } columns += column[-0]; // columns = "... column5, column6 (w/o ',')"
+  } else columns = column; // else columns == column
 
   let values;
   if (Object.prototype.toString.call(value) === "[object Array]") {
@@ -106,8 +103,7 @@ function update(table, column, value, where_col, where_var, msg = '') {
             msg.reply("This setting not exist!")
             //console.log(`Update ${table}: ${column} set to '${value}' where ${where_col} = '${where_var}' BUT column not exist!`)
           }
-        }
-        else { console.log(err); }  
+        } else { console.log(err); }  
       } else {
         //console.log(`Update ${table}: ${column} set to '${value}' where ${where_col} = '${where_var}'`)
       }
