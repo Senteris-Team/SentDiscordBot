@@ -14,6 +14,7 @@ Working commands:
 - !-Help
 - !-Ping
 - !-CreateChannel *Channel_Name* *User_limit*
+- !-GetSettings // Will be removed soon
 
 
 Soon:
