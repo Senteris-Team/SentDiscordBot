@@ -30,7 +30,7 @@ function makeChannel(message, name, limit, message) {
     if (!category) throw new Error("Category of the channel does not exist");
     channel.setParent(category.id);
     channel
-      .edit({ bitrate: 96000 })
+      .edit({ bitrate: 128000 })
       .then(vc => { })
       .catch(console.error);
     if (message.member.voiceChannel) message.member.setVoiceChannel(channel);
