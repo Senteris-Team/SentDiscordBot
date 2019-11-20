@@ -10,7 +10,7 @@ module.exports = (messageReaction, user) => {
     let member = message.guild.members.find(member => member.id === user.id);
     if (!member) return; // We can add log too
 
-    try { await member.roles.add(role); }
+    try { member.roles.add(role); }
     catch(err) { log(err) }
   }
 };
