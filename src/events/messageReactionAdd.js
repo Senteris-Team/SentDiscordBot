@@ -1,7 +1,7 @@
 const { log } = require("../functions.js");
 
 module.exports = (messageReaction, user) => {
-  const message = messageReaction.message;
+  var message = messageReaction.message;
   console.log("Channel.name: "+ message.channel.name); // for debug
 
   if(message.id === "646435588827774997" && message.channel.name === "welcome-to-the-club-buddy"){
