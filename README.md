@@ -9,6 +9,7 @@ There are rumors that it sent to ~~kill guilds~~ make guilds better.
 The bot will create a voice channels(and delete one when it will be empty) and mute users for a while!
 
 
+
 Working commands:
 - !-Hi
 - !-Help
@@ -17,12 +18,19 @@ Working commands:
 - !-GetSettings // Will be removed soon
 
 
-Soon:
+Focus:
+- Getting and removing roles.
+- !-ShowSettings
+
+
+ToDo by New Year:
 - !-AddWhiteChannel and !-DeleteWhiteChannel
 - !-ChangeVoiceCategory | Change the name of a category in which the voice channels will create
-- !-ShowSettings
 - !-ChangePrefix
 - !-Mute  *username*  *time* *Unit* | example !-mute @User313#4584 313s
 - !-Unmute *username*
-- Getting and removing roles.
+
+
+Soon:
 - Music
+- !-ban *time* (*role*)
