@@ -1,6 +1,6 @@
 const { log } = require("../functions.js");
 
-module.exports = (messageReaction, user) => {
+module.exports = (client, messageReaction, user) => {
   var message = messageReaction.message;
   console.log("Channel.name: "+ messageReaction.message.channel.name); // for debug
 
