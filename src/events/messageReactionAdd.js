@@ -10,10 +10,10 @@ module.exports = (client, messageReaction, user) => {
     log("required role " + role.name);
     if (!role) return; // We can add log `${messageReaction.emoji.name} role doesn't exist` to logs channel
     console.log("Role exist"); // for debug
-    let member = message.guild.members.find(member => member.id === user.id);
-    if (!member) return; // We can add log too
-    console.log("Member exist"); // for debug
+    let guildMember = message.guild.members.find(member => member.id === user.id);
+    if (!guildMember) return; // We can add log too
+    console.log("guildMember exist"); // for debug
 
-    member.roles.addRole(role).catch(console.error());
+    guildMember.addRole(role).catch(console.error());
   }
 };
