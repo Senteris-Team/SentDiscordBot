@@ -1,7 +1,7 @@
 const { log } = require("../functions.js");
 
 module.exports = (client, messageReaction, user) => {
-  console.log("messageReactionAdd"); // for debug
+  log("messageReactionAdd"); // for debug
   var message = messageReaction.message;
 
   if(message.id == "646435588827774997" && message.channel.name === "welcome-to-the-club-buddy"){
@@ -10,10 +10,10 @@ module.exports = (client, messageReaction, user) => {
     log("required role " + role.name);
     if (!role) return; // We can add log `${messageReaction.emoji.name} role doesn't exist` to logs channel
     console.log("Role exist"); // for debug
-    let guildMember = message.guild.members.find(member => member.id === user.id);
-    if (!guildMember) return; // We can add log too
-    console.log("guildMember exist"); // for debug
+    let member = message.guild.members.find(member => member.id === user.id);
+    if (!member) return; // We can add log too
+    console.log("Member exist"); // for debug
 
-    guildMember.addRole(role).catch(console.error());
+    member.addRole(role.id).catch(console.error());
   }
 };
