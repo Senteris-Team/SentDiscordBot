@@ -6,7 +6,7 @@ module.exports = (client) => {
   client.user.setPresence({
     status: "online",
     game: {
-      name: "you:b | !-help for DogeHelp",
+      name: " The bot is being tested! It can turn off at ANY moment!",
       type: "WATCHING"
     }
   });

@@ -14,8 +14,6 @@ module.exports = (client, messageReaction, user) => {
     if (!member) return; // We can add log too
     console.log("Member exist"); // for debug
 
-    try { member.roles.remove(role); }
-    catch(err) { log(err) } //for debug
-    //catch(err) { }
+    member.roles.removeRole(role).catch(console.error());
   }
 };
