@@ -6,7 +6,7 @@ module.exports = (client) => {
   client.user.setPresence({
     status: "online",
     game: {
-      name: "TEST! The bot is being tested! It can turn off at ANY moment!", // remove the status in before merge/in conflict
+      name: "you:b | !-help for DogeHelp",
       type: "WATCHING"
     }
   });
