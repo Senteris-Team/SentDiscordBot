@@ -8,7 +8,7 @@ exports.run = (client, message, args) => {
       channel = makeChannel(message, args[0], 0, message);
       message.reply("The channel is created.");
     } else {
-      channel = makeChannel(message, args[0], args[1], message);
+      channel = makeChannel(message, args[0], args[args.length - 1], message);
       message.reply("The channel is created.");
     }
   } else message.reply("First enter to a voice channel");
@@ -26,7 +26,6 @@ function makeChannel(message, name, limit, message) {
     .createChannel(name, { type: "voice" })
     .then(channel => {
     channel.userLimit = limit;
-
     if (!category) throw new Error("Category of the channel does not exist");
     channel.setParent(category.id);
     channel
