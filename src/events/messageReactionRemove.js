@@ -1,5 +1,3 @@
-const { log } = require("../functions.js");
-
 module.exports = (client, messageReaction, user) => {
   var message = messageReaction.message;
 

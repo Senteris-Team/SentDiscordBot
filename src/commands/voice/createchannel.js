@@ -34,6 +34,6 @@ function makeChannel(message, name, limit, message) {
       .catch(console.error);
     if (message.member.voiceChannel) message.member.setVoiceChannel(channel);
     //channel.lockPermissions().catch(console.error);
-    log(`Created a voice channel ${name}`, "Guild " + message.guild, message.member.tag);
+    log(`Created a voice channel ${name}`, message.guild, "Guild " + message.guild, message.member.tag);
   }).catch(console.error);
 }
