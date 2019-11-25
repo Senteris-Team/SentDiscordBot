@@ -23,12 +23,10 @@ function log(message, guild, where = "BOT", who = "") {
     if (error) throw console.error(error);
   });
 
-  if (!guild) return;
-  console.log("Guild.id: "+ guild.id); // debug
+  if (!guild) return; 
+  if (!logs_channel_id) return;
   const logs_channel = guild.channels.find(c => c.id == logs_channel_id && c.type === 'text');
-  console.log("logs_channel: "+ logs_channel.id); // debug
-  logs_channel.send(`[${date}] ${who} ${message}`)
-    .catch(console.error); // then change
+  logs_channel.send(`[${date}] ${who} ${message}`).catch();
 }
 
 exports.log = log;
