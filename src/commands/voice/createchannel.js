@@ -2,6 +2,7 @@ const { log } = require("../../functions.js");
 const db = require("../../db.js");
 
 exports.run = (client, message, args) => {
+  if (!message.member.hasPermission("CONNECT")) return message.reply("**Error:** You do not have the **connect** permission!");
   if (message.member.voiceChannel) {
     if (args.length == 0) message.reply("Not enough arguments. Type !-help");
     else if (args.length == 1) {
@@ -27,12 +28,12 @@ function makeChannel(message, name, limit, message) {
     .then(channel => {
     channel.userLimit = limit;
     if (!category) throw new Error("Category of the channel does not exist");
-    channel.setParent(category.id);
+    channel.setParent(category.id)
     channel
       .edit({ bitrate: 128000 })
-      .then(vc => { })
       .catch(console.error);
     if (message.member.voiceChannel) message.member.setVoiceChannel(channel);
+    //channel.lockPermissions().catch(console.error);
     log(`Created a voice channel ${name}`, "Guild " + message.guild, message.member.tag);
   }).catch(console.error);
 }
