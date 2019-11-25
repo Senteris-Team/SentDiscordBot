@@ -24,7 +24,9 @@ function log(message, guild, where = "BOT", who = "") {
   });
 
   if (!guild) return;
-  let logs_channel = guild.channels.find(channel => channel.id === logs_channel_id);
+  console.log("Guild.id: "+ guild.id); // debug
+  let logs_channel = guild.channels.find(logs_channel => logs_channel.id === logs_channel_id);
+  console.log("logs_channel: "+ logs_channel.id); // debug
   logs_channel.send(`[${date}] ${who} ${message}`)
     .catch(console.error); // then change
 }
