@@ -2,6 +2,7 @@ const { log } = require("../../functions.js");
 const db = require("../../db.js");
 
 exports.run = (client, message, args) => {
+  if (!message.member.hasPermission("CONNECT")) return message.reply("**Error:** You do not have the **connect** permission!");
   if (message.member.voiceChannel) {
     if (args.length == 0) message.reply("Not enough arguments. Type !-help");
     else if (args.length == 1) {
@@ -30,6 +31,7 @@ function makeChannel(message, name, limit, message) {
     channel.setParent(category.id);
     channel
       .edit({ bitrate: 128000 })
+      .lockPermissions()
       .then(vc => { })
       .catch(console.error);
     if (message.member.voiceChannel) message.member.setVoiceChannel(channel);
