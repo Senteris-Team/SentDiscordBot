@@ -28,12 +28,12 @@ function makeChannel(message, name, limit, message) {
     .then(channel => {
     channel.userLimit = limit;
     if (!category) throw new Error("Category of the channel does not exist");
-    channel.setParent(category.id).then(channel.lockPermissions().catch(console.error));
+    channel.setParent(category.id)
     channel
       .edit({ bitrate: 128000 })
-      .then(vc => { })
       .catch(console.error);
-    if (message.member.voiceChannel) message.member.setVoiceChannel(channel);
+    if (message.member.voiceChannel) message.member.setVoiceChannel(channel)
+      .then(channel.lockPermissions().catch(console.error));
     log(`Created a voice channel ${name}`, "Guild " + message.guild, message.member.tag);
   }).catch(console.error);
 }
