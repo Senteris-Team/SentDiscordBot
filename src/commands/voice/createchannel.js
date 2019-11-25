@@ -32,8 +32,8 @@ function makeChannel(message, name, limit, message) {
     channel
       .edit({ bitrate: 128000 })
       .catch(console.error);
-    if (message.member.voiceChannel) message.member.setVoiceChannel(channel)
-      .then(channel.lockPermissions().catch(console.error));
+    if (message.member.voiceChannel) message.member.setVoiceChannel(channel);
+    //channel.lockPermissions().catch(console.error);
     log(`Created a voice channel ${name}`, "Guild " + message.guild, message.member.tag);
   }).catch(console.error);
 }
