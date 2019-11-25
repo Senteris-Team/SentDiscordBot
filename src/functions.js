@@ -15,7 +15,9 @@ function log(message, guild, where = "BOT", who = "") {
   };
   let date = now.toLocaleString("ru", options);
 
-  console.log(`[${date}] (${where})${who} ${message}`);
+  let log_str = `[${date}] (${where})${who} ${message}`;
+
+  console.log(log_str);
 
   fs.appendFile("log.txt", log_str, function (error) {
     if (error) throw console.error(error);
