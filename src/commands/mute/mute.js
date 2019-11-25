@@ -37,7 +37,7 @@ exports.run = (client, message, args) => {
   let mutetime = args[1];
   if (!mutetime) return message.reply("You did not specify a time!");
   message.reply(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
-  log(`mute ${tomute.user.tag}`, "Guild " + message.guild, message.author.tag);
+  log(`mute ${tomute.user.tag}`, message.guild, "Guild " + message.guild, message.author.tag);
   setTimeout(function () {
     tomute.removeRole(muterole.id);
     message.channel.send(`<@${tomute.id}> has been unmuted!`);

@@ -33,6 +33,6 @@ function makeChannel(message, name, limit, message) {
       .then(vc => { })
       .catch(console.error);
     if (message.member.voiceChannel) message.member.setVoiceChannel(channel);
-    log(`Created a voice channel ${name}`, "Guild " + message.guild, message.member.tag);
+    log(`Created a voice channel ${name}`, message.guild, "Guild " + message.guild, message.member.tag);
   }).catch(console.error);
 }

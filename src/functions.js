@@ -15,15 +15,16 @@ function log(message, guild, where = "BOT", who = "") {
   };
   let date = now.toLocaleString("ru", options);
 
-  let logs_channel = guild.channels.find(channel => channel.id === logs_channel_id);
-
   console.log(`[${date}] (${where})${who} ${message}`);
-  logs_channel.send(`[${date}] ${who} ${message}`)
-    .catch(console.error); // then change
 
   fs.appendFile("log.txt", log_str, function (error) {
     if (error) throw console.error(error);
   });
+
+  if (!guild) return;
+  let logs_channel = guild.channels.find(channel => channel.id === logs_channel_id);
+  logs_channel.send(`[${date}] ${who} ${message}`)
+    .catch(console.error); // then change
 }
 
 exports.log = log;
