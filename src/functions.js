@@ -15,7 +15,7 @@ function log(message, guild, where = "BOT", who = "") {
   };
   const date = now.toLocaleString("ru", options);
 
-  const log_str = `[${date}] (${where})${who} ${message}`;
+  const log_str = `[${date}](${where})${who} ${message}`;
 
   console.log(log_str);
 
