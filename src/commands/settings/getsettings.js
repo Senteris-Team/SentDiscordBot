@@ -14,6 +14,6 @@ exports.run = (client, message, args) => {
       `white_channel_list: ${str_white_channel_list}` +
       "```"
     );
-  log("requested settings", message.guild, "Guild " + message.guild, message.author.tag);
+  log("Requested settings", undefined, "Guild " + message.guild, message.author.tag);
   });
 }

@@ -9,5 +9,5 @@ exports.run = (client, message, args) => {
   var valueToUpdate = args.slice(1, args.length).join(" ");
   db.update("settings", args[0], valueToUpdate, "`guild_id`", message.guild.id, message)
   message.reply(`Setting ${args[0]} updated to '${valueToUpdate}'`)
-  log(`update settings`, message.guild, "Guild " + message.guild, message.member.tag);
+  log(`Updated settings`, message.guild, "Guild " + message.guild, message.member.tag);
 }
