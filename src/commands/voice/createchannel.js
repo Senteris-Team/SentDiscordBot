@@ -16,7 +16,7 @@ exports.run = (client, message, args) => {
 }
 
 function makeChannel(message, name, limit, message) {
-  let guild = message.guild;
+  const guild = message.guild;
   var category;
   new Promise(function (resolve) {
     db.select("settings", "guild_id", guild.id, resolve);

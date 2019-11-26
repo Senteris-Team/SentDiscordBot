@@ -8,7 +8,7 @@ module.exports = (client, oldMember, newMember) => {
       if (oldMember.voiceChannel.members.size != 0) return;
       if(settings.voice_channels_category != oldMember.voiceChannel.parent.name) return;
 
-      var noDelete = settings.white_channel_list;
+      const noDelete = settings.white_channel_list;
       if (noDelete.includes(oldMember.voiceChannel.name)) return;
 
       oldMember.voiceChannel.delete();

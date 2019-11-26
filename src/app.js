@@ -37,8 +37,8 @@ fs.readdir(p, function (err, dirs) {
       if (err) throw err;
       files.forEach(file => {
         if (!file.endsWith(".js")) return;
-        let props = require(`../${dir}/${file}`);
-        let commandName = file.split(".")[0];
+        const props = require(`../${dir}/${file}`);
+        const commandName = file.split(".")[0];
         log(`command ${commandName}`, undefined, "BOT", "Load");
         client.commands.set(commandName, props);
       });

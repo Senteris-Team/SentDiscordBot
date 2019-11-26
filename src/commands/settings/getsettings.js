@@ -6,7 +6,7 @@ exports.run = (client, message, args) => {
   new Promise(function (resolve) {
     db.get_giuld_settings(message.guild, resolve);
   }).then(function (settings) {
-    let str_white_channel_list = settings.white_channel_list.join(", ");
+    const str_white_channel_list = settings.white_channel_list.join(", ");
     message.reply(
       "Guild settings:\n" +
       "```" +
