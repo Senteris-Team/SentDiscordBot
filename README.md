@@ -13,13 +13,12 @@ The bot will create a voice channels(and delete one when it will be empty) and m
 Working commands:
 - !-Hi
 - !-Help
-- !-Ping
 - !-CreateChannel *Channel_Name* *User_limit*
 - !-GetSettings // Will be removed soon
 
 
 Focus:
-- Getting and removing roles.
+- ~~Getting and removing roles.~~
 - !-ShowSettings
 
 
