@@ -3,6 +3,6 @@ exports.run = (client, message, args) => {
   message.channel.send('Ping!')
   .then((reply) => {
     let pongTimestamp = reply.createdTimestamp;
-    reply.edit(`Pong! Ping: \`${pongTimestamp-pingTimestamp}ms\``);
+    reply.edit(`Pong! \`Ping: ${pongTimestamp-pingTimestamp}ms\``);
   });
 }
