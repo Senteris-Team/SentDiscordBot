@@ -1,19 +1,20 @@
 # Sent Discord Bot
 
-The bot is still under development and useless:(
+The bot is still under development and works only in our server:(
 
 
 Oh my! It is 'Sent discord bot'! ARE WE GONNA DIE!?
 Say hello to the new, great discord bot....... Sent!
 There are rumors that it sent to ~~kill guilds~~ make guilds better.
-The bot will create a voice channels(and delete one when it will be empty) and mute users for a while!
-
+The bot will create voice channels(and delete one when it will be empty) and mute users for a while!
+Also it will give game roles with reactions!
 
 
 Working commands:
 - !-Hi
 - !-Help
-- !-CreateChannel *Channel_Name* *User_limit*
+- !-Ping
+- !-CreateChannel *Channel_Name* (*User_limit*)
 - !-GetSettings // Will be removed soon
 
 
