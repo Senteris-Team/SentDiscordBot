@@ -49,7 +49,7 @@ function getGuild(guild, resolveMain) {
       resolveMain(settings);
     } else {
       console.log(`New guild! (${guild})`)
-      insert("Guilds", "`guild_id`", guild.id); // Add the settings
+      insert("guilds", "`guild_id`", guild.id); // Add the settings
       get_giuld_settings(guild, resolveMain);
     }
   });
