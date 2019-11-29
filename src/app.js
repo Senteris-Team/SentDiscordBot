@@ -1,10 +1,8 @@
 const Discord = require("discord.js");
 const fs = require("fs"),
   path = require("path");
-
 const client = new Discord.Client();
 const config = require("./config.json");
-
 const { log } = require("./functions.js");
 
 client.config = config;

@@ -1,12 +1,22 @@
+const db = require("../../db.js");
+
 exports.run = (client, message, args) => {
+  
+  var prefix;
+  new Promise(function (resolve) {
+    db.getGuild(message.guild, resolve);
+  }).then(function (guildDB) {
+    prefix = guildDB.prefix;
+  });
+
   if (!message.member.hasPermission("ADMINISTRATOR")) message.channel.send({
     embed: {
       color: 0x2ed32e,
       fields: [{
         name: "Help",
-        value:  `${client.config.prefix}hi\n` +
-          `${client.config.prefix}createchannel *name* *slots*\n` +
-          `${client.config.prefix}ping`
+        value: `${prefix}hi\n` +
+          `${prefix}createchannel *name* *slots*\n` +
+          `${prefix}ping`
       }],
     }
   });
@@ -15,13 +25,13 @@ exports.run = (client, message, args) => {
       color: 0x2ed32e,
       fields: [{
         name: "Help",
-        value:  `${client.config.prefix}hi\n` +
-          `${client.config.prefix}createchannel *name* *slots*\n` +
-          //`${client.config.prefix}mute *user* *time**Unit*\n` +
+        value: `${prefix}hi\n` +
+          `${prefix}createchannel *name* *slots*\n` +
+          //`${prefix}mute *user* *time**Unit*\n` +
           //`// *Unit* (time unit) can be s, m, h, d. for example ${client.config.prefix}mute @N0Name#4213 666h\n` +
-          //`${client.config.prefix}unmute *user*\n` +
-          `${client.config.prefix}getsettings\n` +
-          `${client.config.prefix}ping`
+          //`${prefix}unmute *user*\n` +
+          `${prefix}getsettings\n` +
+          `${prefix}ping`
       }],
     }
   });

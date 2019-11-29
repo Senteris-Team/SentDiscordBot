@@ -40,9 +40,9 @@ function select(table, col, value, resolve) {
   });
 }
 
-function get_giuld_settings(guild, resolveMain) {
+function getGuild(guild, resolveMain) {
   new Promise(function (resolve) {
-    select("settings", "guild_id", guild.id, resolve);
+    select("guilds", "guild_id", guild.id, resolve);
   }).then(function (settings) {
     if (!(typeof settings == "undefined")) { // if setting is not empty
       settings.whiteChannels = JSON.parse(settings.whiteChannels);

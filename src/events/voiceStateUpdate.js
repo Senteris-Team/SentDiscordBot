@@ -2,13 +2,13 @@ const db = require("../db.js");
 
 module.exports = (client, oldMember, newMember) => {
   new Promise(function (resolve) {
-    db.select("settings", "guild_id", oldMember.guild.id, resolve);
-  }).then(function (settings) {
+    db.select("guilds", "guild_id", oldMember.guild.id, resolve);
+  }).then(function (guildDB) {
     if (oldMember.voiceChannel) {
       if (oldMember.voiceChannel.members.size != 0) return;
-      if(settings.voice_channels_category != oldMember.voiceChannel.parent.name) return;
+      if(guildDB.voiceChannelsCategory != oldMember.voiceChannel.parent.name) return;
 
-      const noDelete = settings.white_channel_list;
+      const noDelete = guildDB.whiteChannels;
       if (noDelete.includes(oldMember.voiceChannel.name)) return;
 
       oldMember.voiceChannel.delete();

@@ -2,7 +2,12 @@ const fs = require("fs");
 
 function log(message, guild, where = "BOT", who = "") {
 
-  const logs_channel_id = 647523442589171714;
+  var logChannelID;
+  new Promise(function (resolve) {
+    db.getGuild(message.guild, resolve);
+  }).then(function (guildDB) {
+    logChannelID = guildDB.logChannel;
+  });
 
   var now = new Date();
   var options = {
@@ -15,18 +20,18 @@ function log(message, guild, where = "BOT", who = "") {
   };
   const date = now.toLocaleString("ru", options);
 
-  const log_str = `[${date}](${where})${who} ${message}`;
+  const logStr = `[${date}](${where})${who} ${message}`;
 
-  console.log(log_str);
+  console.log(logStr);
 
-  fs.appendFile("log.txt", log_str, function (error) {
+  fs.appendFile("log.txt", logStr, function (error) {
     if (error) throw console.error(error);
   });
 
   if (!guild) return; 
-  if (!logs_channel_id) return;
-  const logs_channel = guild.channels.find(c => c.id == logs_channel_id && c.type === 'text');
-  logs_channel.send(`[${date}] ${who} ${message}`).catch();
+  if (!logChannelID) return;
+  const logChannel = guild.channels.find(c => c.id == logChannelID && c.type === 'text');
+  logChannel.send(`[${date}] ${who} ${message}`).catch();
 }
 
 exports.log = log;

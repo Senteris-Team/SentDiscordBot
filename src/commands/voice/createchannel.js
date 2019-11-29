@@ -17,23 +17,23 @@ exports.run = (client, message, args) => {
 
 function makeChannel(message, name, limit, message) {
   const guild = message.guild;
-  var category;
   new Promise(function (resolve) {
-    db.select("settings", "guild_id", guild.id, resolve);
-  }).then(function (settings) {
-    category = guild.channels.find( c => c.name == settings.voice_channels_category && c.type == "category" );
-  });
-  guild
+    db.select("guilds", "guild_id", guild.id, resolve);
+  }).then(function (guildDB) {
+    const category = guild.channels.find( c => c.id == guildDB.voiceChannelsCategory && c.type == "category" );
+  
+    guild
     .createChannel(name, { type: "voice" })
     .then(channel => {
     channel.userLimit = limit;
     if (!category) throw new Error("Category of the channel does not exist");
     channel.setParent(category.id)
     channel
-      .edit({ bitrate: 128000 })
-      .catch(console.error);
+      .edit({ bitrate: guildDB.bitrate })
+      .catch(message.reply("Cannot edit bitrate."));
     if (message.member.voiceChannel) message.member.setVoiceChannel(channel);
     //channel.lockPermissions().catch(console.error);
     log(`Created voice channel "${name}" by ${message.author.tag}`, message.guild, "Guild " + message.guild, message.member.tag);
-  }).catch(console.error);
+    }).catch(console.error);
+  });
 }
