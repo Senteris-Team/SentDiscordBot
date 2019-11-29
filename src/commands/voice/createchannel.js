@@ -18,7 +18,7 @@ exports.run = (client, message, args) => {
 function makeChannel(message, name, limit, message) {
   const guild = message.guild;
   new Promise(function (resolve) {
-    db.select("guilds", "guild_id", guild.id, resolve);
+    db.select("guilds", "guildID", guild.id, resolve);
   }).then(function (guildDB) {
     const category = guild.channels.find( c => c.id == guildDB.voiceChannelsCategory && c.type == "category" );
   

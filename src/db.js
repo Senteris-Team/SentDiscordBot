@@ -42,7 +42,7 @@ function select(table, col, value, resolve) {
 
 function getGuild(guild, resolveMain) {
   new Promise(function (resolve) {
-    select("guilds", "guild_id", guild.id, resolve);
+    select("guilds", "guildID", guild.id, resolve);
   }).then(function (settings) {
     if (!(typeof settings == "undefined")) { // if setting is not empty
       settings.whiteChannels = JSON.parse(settings.whiteChannels);
