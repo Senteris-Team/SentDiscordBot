@@ -115,4 +115,4 @@ function update(table, column, value, where_col, where_var, msg = '') {
 exports.update = update;
 exports.insert = insert;
 exports.select = select;
-exports.get_giuld_settings = get_giuld_settings;
+exports.getGuild = getGuild;
