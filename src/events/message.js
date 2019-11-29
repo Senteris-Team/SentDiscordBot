@@ -1,5 +1,6 @@
-module.exports = (client, message) => {
+const db = require("../db.js");
 
+module.exports = (client, message) => {
   var prefix;
   new Promise(function (resolve) {
     db.getGuild(message.guild, resolve);

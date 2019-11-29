@@ -1,4 +1,5 @@
 const fs = require("fs");
+const db = require("./db.js");
 
 function log(message, guild, where = "BOT", who = "") {
 
