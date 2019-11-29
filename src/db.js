@@ -5,7 +5,7 @@ var pool = mysql.createPool({
   host: "localhost",
   user: "admin",
   password: DBpassword,
-  database: "Discord",
+  database: "SentDiscordBot",
   queueLimit: 0, // unlimited queueing
   connectionLimit: 0, // unlimited connections
   multipleStatements: true, // I like this because it helps prevent nested sql statements, it can be buggy though, so be careful
@@ -45,11 +45,11 @@ function get_giuld_settings(guild, resolveMain) {
     select("settings", "guild_id", guild.id, resolve);
   }).then(function (settings) {
     if (!(typeof settings == "undefined")) { // if setting is not empty
-      settings.white_channel_list = JSON.parse(settings.white_channel_list);
+      settings.whiteChannels = JSON.parse(settings.whiteChannels);
       resolveMain(settings);
     } else {
       console.log(`New guild! (${guild})`)
-      insert("settings", "`guild_id`", guild.id); // Add the settings
+      insert("Guilds", "`guild_id`", guild.id); // Add the settings
       get_giuld_settings(guild, resolveMain);
     }
   });
