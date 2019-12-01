@@ -84,6 +84,31 @@ function insert(table, column, value) {
   });
 }
 
+function updateGuild(column, value, guildID, resolveMain) {
+  let updateString;
+  if (Object.prototype.toString.call(column) === "[object Array]") {
+    // as in the function insert
+    for (i = 0; i != column.length; i++) {
+      updateString += `\`${column[i]}\`` + "= '" + value[i] + "' , ";
+    }
+    updateString += column[column.length - 1] + "=" + value[value.length - 1];
+  } else updateString += `\`${column}\`` + "= '" + value+ "'";
+  console.log(updateString);
+
+  pool.getConnection(function(err, conn) {
+    if (err) return console.log(err);
+    console.log(`UPDATE guilds SET ${updateString}' WHERE ${guildID} = 'guildID'`);
+    conn.query(`UPDATE guilds SET ${updateString}' WHERE ${guildID} = 'guildID'`, function( err, result, fields ) {
+      if (err) {
+        console.error(err);
+        resolveMain(false);
+      }
+      resolveMain(true);
+      endConnect(conn);
+    });
+  });
+}
+
 function update(table, column, value, where_col, where_var, msg = '') {
   let updateString;
   if (Object.prototype.toString.call(column) === "[object Array]") {
@@ -113,6 +138,7 @@ function update(table, column, value, where_col, where_var, msg = '') {
 }
 
 exports.update = update;
+exports.updateGuild = updateGuild;
 exports.insert = insert;
 exports.select = select;
 exports.getGuild = getGuild;
