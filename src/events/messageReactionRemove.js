@@ -7,6 +7,6 @@ module.exports = (client, messageReaction, user) => {
     const member = message.guild.members.find(member => member.id === user.id);
     if (!member) return; // We can add log too
 
-    member.removeRole(role.id).catch(console.error());
+    member.removeRole(role.id).catch();
   }
 };
