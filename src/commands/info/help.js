@@ -12,9 +12,9 @@ exports.run = (client, message, args) => {
         color: 0x2ed32e,
         fields: [{
           name: "Help",
-          value: `${prefix}hi\n` +
-            `${prefix}createchannel *name* *slots*\n` +
-            `${prefix}ping`
+          value: `${prefix}Hi\n` +
+            `${prefix}CreateChannel *name* *slots*\n` +
+            `${prefix}Ping`
         }],
       }
     });
@@ -23,13 +23,15 @@ exports.run = (client, message, args) => {
         color: 0x2ed32e,
         fields: [{
           name: "Help",
-          value: `${prefix}hi\n` +
-            `${prefix}createchannel *name* *slots*\n` +
+          value: `${prefix}Hi\n` +
+            `${prefix}CreateChannel *name* *slots*\n` +
             //`${prefix}mute *user* *time**Unit*\n` +
             //`// *Unit* (time unit) can be s, m, h, d. for example ${client.config.prefix}mute @N0Name#4213 666h\n` +
             //`${prefix}unmute *user*\n` +
-            `${prefix}getsettings\n` +
-            `${prefix}ping`
+            `${prefix}ShowSettings\n` +
+            `${prefix}Ping\n` +
+            `${prefix}ChangePrefix\n`+
+            `${prefix}ChangeVoiceCategory`
         }],
       }
     });

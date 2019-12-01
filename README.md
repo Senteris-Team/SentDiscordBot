@@ -16,12 +16,12 @@ Working commands:
 - !-Ping
 - !-CreateChannel *Channel_Name* (*User_limit*)
 - !-ShowSettings
+- !-ChangePrefix
+- !-ChangeVoiceCategory | Change the name of a category in which the voice channels will create
 
 
 Focus:
 - !-AddWhiteChannel and !-DeleteWhiteChannel
-- !-ChangeVoiceCategory | Change the name of a category in which the voice channels will create
-- !-ChangePrefix
 - Game roles(for any guild)
 
 
