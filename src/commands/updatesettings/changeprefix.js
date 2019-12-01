@@ -3,11 +3,13 @@ const { log } = require("../../functions.js");
 
 exports.run = (client, message, args) => {
   if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply("**Error:** You are **not administrator**!");
+  if(args[0].length < 6) return message.reply("Max prefix size is 5 symbols!");
 
   new Promise(function (resolve) {
     db.updateGuild("prefix", "'"+args[0]+"'", message.guild, resolve);
   }).then(function (res) {
     if(res) message.reply("prefix has been updated!");
-    else message.reply("Error :(");
+    else return message.reply("Error :(");
+    log(`Prefix has been changed by ${message.author.tag}`, message.guild, "Guild " + message.guild, message.member.tag);
   });
 }
