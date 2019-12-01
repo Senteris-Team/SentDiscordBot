@@ -2,14 +2,7 @@ const fs = require("fs");
 const db = require("./db.js");
 
 function log(message, guild, where = "BOT", who = "") {
-
-  var logChannelID;
-  new Promise(function (resolve) {
-    db.getGuild(message.guild, resolve);
-  }).then(function (guildDB) {
-    logChannelID = guildDB.logChannel;
-  });
-
+  
   var now = new Date();
   var options = {
     year: 'numeric',
@@ -30,9 +23,15 @@ function log(message, guild, where = "BOT", who = "") {
   });
 
   if (!guild) return; 
-  if (!logChannelID) return;
-  const logChannel = guild.channels.find(c => c.id == logChannelID && c.type === 'text');
-  logChannel.send(`[${date}] ${who} ${message}`).catch();
+  new Promise(function (resolve) {
+    db.getGuild(guild, resolve);
+  }).then(function (guildDB) {
+    guildDB.logChannel;
+
+    if (!guildDB.logChannel) return;
+    const logChannel = guild.channels.find(c => c.id == guildDB.logChannel && c.type === 'text');
+    logChannel.send(`[${date}] ${who} ${message}`).catch();
+  });
 }
 
 exports.log = log;
