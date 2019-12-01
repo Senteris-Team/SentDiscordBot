@@ -3,7 +3,7 @@ const { log } = require("../../functions.js");
 
 exports.run = (client, message, args) => {
   if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply("**Error:** You are **not administrator**!");
-  if(args[0].length < 6) return message.reply("Max prefix size is 5 symbols!");
+  if(args[0].length > 5) return message.reply("Max prefix size is 5 symbols!");
 
   new Promise(function (resolve) {
     db.updateGuild("prefix", "'"+args[0]+"'", message.guild, resolve);
