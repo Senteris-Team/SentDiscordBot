@@ -4,10 +4,15 @@ module.exports = (client) => {
   log(`logged in as ${client.user.tag}!`, undefined , "BOT", "Client");
 
   client.user.setPresence({
-    status: "online",
+    status: "idle",
+    game: {
+      name: "TEST!",
+      type: "WATCHING"
+    }
+    /*status: "online",
     game: {
       name: "you:b | !-help for DogeHelp",
       type: "WATCHING"
-    }
+    }*/
   });
 }
