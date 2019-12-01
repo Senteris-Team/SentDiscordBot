@@ -88,17 +88,17 @@ function updateGuild(column, value, guild, resolveMain) {
   let updateString = "";
   if (Object.prototype.toString.call(column) === "[object Array]") {
     // as in the function insert
-    for (i = 0; i != column.length; i++) {
-      updateString += `\`${column[i]}\`` + " = '" + value[i] + "' , ";
+    for (i = 0; i != column.length - 2; i++) { // TEST later
+      updateString += `${column[i]}` + " = " + value[i] + ", ";
     }
-    updateString += `\`${column[column.length - 1]}\`` + " = '" + value[value.length - 1] + "' , ";
-  } else updateString += `\`${column}\`` + " = '" + value+ "'";
+    updateString += `${column[column.length - 1]}` + " = " + value[value.length - 1];
+  } else updateString += `${column}` + " = " + value;
   console.log(updateString);
 
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    console.log(`UPDATE guilds SET ${updateString} WHERE ${guild.id} = 'guildID';`);
-    conn.query(`UPDATE guilds SET ${updateString} WHERE ${guild.id} = 'guildID';`, function( err, result, fields ) {
+    console.log(`UPDATE guilds SET ${updateString} WHERE guildID = ${guild.id};`);
+    conn.query(`UPDATE guilds SET ${updateString} WHERE guildID = ${guild.id};`, function( err, result, fields ) {
       if (err) {
         console.error(err);
         resolveMain(false);
