@@ -15,22 +15,20 @@ Working commands:
 - !-Help
 - !-Ping
 - !-CreateChannel *Channel_Name* (*User_limit*)
-- !-GetSettings // Will be removed soon
-
-
-Focus:
-- ~~Getting and removing roles.~~
 - !-ShowSettings
 
 
-ToDo by New Year:
+Focus:
 - !-AddWhiteChannel and !-DeleteWhiteChannel
 - !-ChangeVoiceCategory | Change the name of a category in which the voice channels will create
 - !-ChangePrefix
+- Game roles(for any guild)
+
+
+ToDo by New Year:
 - !-Mute  *username*  *time* *Unit* | example !-mute @User313#4584 313s
 - !-Unmute *username*
 
 
 Soon:
 - Music
-- !-ban *time* (*role*)
