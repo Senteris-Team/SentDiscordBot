@@ -97,8 +97,8 @@ function updateGuild(column, value, guild, resolveMain) {
 
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    console.log(`UPDATE guilds SET ${updateString} WHERE ${guild.id} = 'guildID'`);
-    conn.query(`UPDATE guilds SET ${updateString} WHERE ${guild.id} = 'guildID'`, function( err, result, fields ) {
+    console.log(`UPDATE guilds SET ${updateString} WHERE ${guild.id} = 'guildID';`);
+    conn.query(`UPDATE guilds SET ${updateString} WHERE ${guild.id} = 'guildID';`, function( err, result, fields ) {
       if (err) {
         console.error(err);
         resolveMain(false);
