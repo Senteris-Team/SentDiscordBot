@@ -31,7 +31,8 @@ exports.run = (client, message, args) => {
             //`${prefix}unmute *user*\n` +
             `${prefix}ShowSettings\n` +
             `${prefix}ChangePrefix *prefix*\n`+
-            `${prefix}ChangeVoiceCategory *ID*`
+            `${prefix}ChangeVoiceCategory *ID*\n`+
+            `${prefix}ChangeLogChannel *ID*`
         }],
       }
     });

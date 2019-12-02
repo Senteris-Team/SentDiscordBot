@@ -17,7 +17,8 @@ Working commands:
 - !-CreateChannel *Channel_Name* (*User_limit*)
 - !-ShowSettings
 - !-ChangePrefix *prefix*
-- !-ChangeVoiceCategory *ID* | Change the name of a category in which the voice channels will create
+- !-ChangeVoiceCategory *categoryID* | Change category id in which the voice channels will create
+- !-ChangeLogChannel *channelID* | Change text channel id in which bot sends logs
 
 
 Focus:
