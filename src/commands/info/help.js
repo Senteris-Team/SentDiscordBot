@@ -13,8 +13,8 @@ exports.run = (client, message, args) => {
         fields: [{
           name: "Help",
           value: `${prefix}Hi\n` +
-            `${prefix}CreateChannel *name* *slots*\n` +
-            `${prefix}Ping`
+            `${prefix}Ping\n` +
+            `${prefix}CreateChannel *name* *slots*`
         }],
       }
     });
@@ -24,16 +24,16 @@ exports.run = (client, message, args) => {
         fields: [{
           name: "Help",
           value: `${prefix}Hi\n` +
+            `${prefix}Ping\n` +
             `${prefix}CreateChannel *name* *slots*\n` +
             //`${prefix}mute *user* *time**Unit*\n` +
             //`// *Unit* (time unit) can be s, m, h, d. for example ${client.config.prefix}mute @N0Name#4213 666h\n` +
             //`${prefix}unmute *user*\n` +
             `${prefix}ShowSettings\n` +
-            `${prefix}Ping\n` +
-            `${prefix}ChangePrefix\n`+
-            `${prefix}ChangeVoiceCategory`
+            `${prefix}ChangePrefix *prefix*\n`+
+            `${prefix}ChangeVoiceCategory *ID*`
         }],
       }
     });
-});
+  });
 }

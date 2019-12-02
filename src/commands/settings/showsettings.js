@@ -7,17 +7,20 @@ exports.run = (client, message, args) => {
     db.getGuild(message.guild, resolve);
   }).then(function (guildDB) {
     const strWhiteChannels = guildDB.whiteChannels.join(", ");
-    message.reply(
-      "Guild settings:\n" +
-      "```" +
-      `Guild ID: ${guildDB.guildID}\n` +
-      `Bitrate: ${guildDB.bitrate}\n`+
-      `Log channel ID: ${guildDB.logChannel}\n`+
-      `White channels: ${strWhiteChannels}\n` +
-      `Voice channels category ID: ${guildDB.voiceChannelsCategory}\n`+
-      `Prefix: ${guildDB.prefix}\n`+
-      "```"
-    );
+    message.channel.send({ // for administrators
+      embed: {
+        color: 0x2ed32e,
+        fields: [{
+          name: "Guild settings",
+          value: `Guild ID: ${guildDB.guildID}\n` +
+            `Bitrate: ${guildDB.bitrate}\n`+
+            `Log channel ID: ${guildDB.logChannel}\n`+
+            `White channels: ${strWhiteChannels}\n` +
+            `Voice channels category ID: ${guildDB.voiceChannelsCategory}\n`+
+            `Prefix: ${guildDB.prefix}`
+        }],
+      }
+    });
   log("Requested settings", undefined, "Guild " + message.guild, message.author.tag);
   });
 }

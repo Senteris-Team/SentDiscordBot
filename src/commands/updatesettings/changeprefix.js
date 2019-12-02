@@ -8,7 +8,7 @@ exports.run = (client, message, args) => {
   new Promise(function (resolve) {
     db.updateGuild("prefix", "'"+args[0]+"'", message.guild, resolve);
   }).then(function (res) {
-    if(res) message.reply("prefix has been updated!");
+    if(res) message.reply("prefix has been changed!");
     else return message.reply("Error :(");
     log(`Prefix has been changed by ${message.author.tag}`, message.guild, "Guild " + message.guild, message.member.tag);
   });

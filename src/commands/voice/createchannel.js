@@ -24,16 +24,16 @@ function makeChannel(message, name, limit, message) {
     guild
     .createChannel(name, { type: "voice" })
     .then(channel => {
-    channel.userLimit = limit;
-    if (!category) throw new Error("Category of the channel does not exist");
-    channel.setParent(category.id)
-    const voiceBitrate = guildDB.bitrate * 1000;
-    channel
-      .edit({ bitrate: voiceBitrate })
-      .catch(console.error());
-    if (message.member.voiceChannel) message.member.setVoiceChannel(channel);
-    //channel.lockPermissions().catch(console.error);
-    log(`Created voice channel "${name}" by ${message.author.tag}`, message.guild, "Guild " + message.guild, message.member.tag);
+      channel.userLimit = limit;
+      if (!category) throw new Error("Category of the channel does not exist");
+      channel.setParent(category.id)
+      const voiceBitrate = guildDB.bitrate * 1000;
+      channel
+        .edit({ bitrate: voiceBitrate })
+        .catch(console.error());
+      if (message.member.voiceChannel) message.member.setVoiceChannel(channel);
+      //channel.lockPermissions().catch(console.error);
+      log(`Created voice channel "${name}" by ${message.author.tag}`, message.guild, "Guild " + message.guild, message.member.tag);
     }).catch(console.error);
   });
 }

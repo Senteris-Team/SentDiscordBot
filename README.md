@@ -16,8 +16,8 @@ Working commands:
 - !-Ping
 - !-CreateChannel *Channel_Name* (*User_limit*)
 - !-ShowSettings
-- !-ChangePrefix
-- !-ChangeVoiceCategory | Change the name of a category in which the voice channels will create
+- !-ChangePrefix *prefix*
+- !-ChangeVoiceCategory *ID* | Change the name of a category in which the voice channels will create
 
 
 Focus:
