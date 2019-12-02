@@ -7,7 +7,7 @@ exports.run = (client, message, args) => {
     db.getGuild(message.guild, resolve);
   }).then(function (guildDB) {
     const strWhiteChannels = guildDB.whiteChannels.join(", ");
-    message.channel.send({ // for administrators
+    message.channel.send({ // for administrators 
       embed: {
         color: 0x2ed32e,
         fields: [{
