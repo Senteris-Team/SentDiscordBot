@@ -3,16 +3,23 @@ const db = require("../../db.js");
 
 exports.run = (client, message, args) => {
   if (!message.member.hasPermission("CONNECT")) return message.reply("**Error:** You do not have the **connect** permission!");
-  if (message.member.voiceChannel) {
-    if (args.length == 0) message.reply("Not enough arguments. Type !-help");
-    else if (args.length == 1) {
-      channel = makeChannel(message, args[0], 0, message);
-      message.reply("The channel is created.");
-    } else {
-      channel = makeChannel(message, args[0], args[args.length - 1], message);
-      message.reply("The channel is created.");
-    }
-  } else message.reply("First enter to a voice channel");
+  if (args.length == 0) return message.reply("Not enough arguments. Type !-help");
+  new Promise(function (resolve) {
+    db.getGuild(member.guild, resolve);
+  }).then(function (guildDB) {
+    const noDelete = guildDB.whiteChannels;
+    if (noDelete.includes(args[0])) return message.reply("**Error:** You cannot create channel with name of a white channel!");
+
+    if (message.member.voiceChannel) {
+      if (args.length == 1) {
+        channel = makeChannel(message, args[0], 0, message);
+        message.reply("The channel is created.");
+      } else {
+        channel = makeChannel(message, args[0], args[args.length - 1], message);
+        message.reply("The channel is created.");
+      }
+    } else message.reply("First enter to a voice channel");
+  });
 }
 
 function makeChannel(message, name, limit, message) {
