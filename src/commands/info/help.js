@@ -32,7 +32,9 @@ exports.run = (client, message, args) => {
             `${prefix}ShowSettings\n` +
             `${prefix}ChangePrefix *prefix*\n`+
             `${prefix}ChangeVoiceCategory *ID*\n`+
-            `${prefix}ChangeLogChannel *ID*`
+            `${prefix}ChangeLogChannel *ID*\n`+
+            `${prefix}ChangeWhiteChannels *channel names*\n`+
+            `|For exaple ${prefix}ChangeWhiteChannels pubg pubg2 R6S GTA5`
         }],
       }
     });
