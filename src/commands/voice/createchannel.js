@@ -12,10 +12,10 @@ exports.run = (client, message, args) => {
 
     if (message.member.voiceChannel) {
       if (args.length == 1) {
-        channel = makeChannel(message, args[0], 0, message);
+        makeChannel(message, args[0], 0, message);
         message.reply("The channel is created.");
       } else {
-        channel = makeChannel(message, args[0], args[args.length - 1], message);
+        makeChannel(message, args[0], args[args.length - 1], message);
         message.reply("The channel is created.");
       }
     } else message.reply("First enter to a voice channel");
@@ -37,7 +37,7 @@ function makeChannel(message, name, limit, message) {
       const voiceBitrate = guildDB.bitrate * 1000;
       channel
         .edit({ bitrate: voiceBitrate })
-        .catch(console.error());
+        .catch();
       if (message.member.voiceChannel) message.member.setVoiceChannel(channel);
       //channel.lockPermissions().catch(console.error);
       log(`Created voice channel "${name}" by ${message.author.tag}`, message.guild, "Guild " + message.guild, message.member.tag);
