@@ -1,7 +1,5 @@
 # Sent Discord Bot
 
-The bot is still under development and works only in our server:(
-
 
 Oh my! It is 'Sent discord bot'! ARE WE GONNA DIE!?
 Say hello to the new, great discord bot....... Sent!
@@ -27,10 +25,7 @@ Focus:
 - Game roles(for any guild)
 
 
-ToDo by New Year:
+ToDo:
 - !-Mute  *username*  *time* *Unit* | example !-mute @User313#4584 313s
 - !-Unmute *username*
-
-
-Soon:
 - Music
