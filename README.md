@@ -19,11 +19,11 @@ Working commands:
 - !-ChangePrefix *prefix*
 - !-ChangeVoiceCategory *categoryID* | Change category id in which the voice channels will create
 - !-ChangeLogChannel *channelID* | Change text channel id in which bot sends logs
+- !-ChangeBitrate *bitrate(8-384)* | Change bitrate of voice channels
 - !-ChangeWhiteChannels *channel names* | Change white channels list. For example !-changewhitechannels PUBG R6S GTA5 Unturned other.
 
 
 Focus:
-- !-AddWhiteChannel and !-DeleteWhiteChannel
 - Game roles(for any guild)
 
 

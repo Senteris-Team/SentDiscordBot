@@ -33,6 +33,7 @@ exports.run = (client, message, args) => {
             `${prefix}ChangePrefix *prefix*\n`+
             `${prefix}ChangeVoiceCategory *ID*\n`+
             `${prefix}ChangeLogChannel *ID*\n`+
+            `${prefix}ChangeBitrate *bitrate(8-384)*\n`+
             `${prefix}ChangeWhiteChannels *channel names*\n`+
             `|For exaple ${prefix}ChangeWhiteChannels pubg pubg2 R6S GTA5`
         }],
