@@ -32,7 +32,7 @@ function select(table, col, value, resolve) {
       }        
       result.forEach(function(row) {
         let string = JSON.stringify(row); // ?
-        json = JSON.parse(string); // decode JSON
+        json = JSON.parse(string); // decode
         resolve(json);
         return json; // for what?
       });
@@ -109,28 +109,23 @@ function updateGuild(column, value, guild, resolveMain) {
 }
 
 function update(table, column, value, where_col, where_var, msg = '') {
-  let updateString;
-  if (Object.prototype.toString.call(column) === "[object Array]") { // I did not update this
+  let updateString = "";
+  if (Object.prototype.toString.call(column) === "[object Array]") {
     // as in the function insert
-    for (i = 0; i != column.length; i++) {
-      updateString += column[i] + "=" + value[i] + ", ";
+    for (i = 0; i != column.length - 2; i++) { // TEST later
+      updateString += `${column[i]}` + " = " + value[i] + ", ";
     }
-    updateString += column[-0] + "=" + value[-0];
-  } else updateString += column + "=" + value;
+    updateString += `${column[column.length - 1]}` + " = " + value[value.length - 1];
+  } else updateString += `${column}` + " = " + value;
 
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    conn.query(`UPDATE ${table} SET \`${column}\` =  '${value}' WHERE ${where_col} = '${where_var}'`, function( err, result, fields ) {
+    conn.query(`UPDATE ${table} SET ${updateString} WHERE ${where_col} = ${where_var}`, function( err, result, fields ) {
       if (err) {
-        if (err.code == "ER_BAD_FIELD_ERROR") {
-          if (msg !== '') {
-            msg.reply("This setting not exist!")
-            //console.log(`Update ${table}: ${column} set to '${value}' where ${where_col} = '${where_var}' BUT column not exist!`)
-          }
-        } else { console.log(err); }  
-      } else {
-        //console.log(`Update ${table}: ${column} set to '${value}' where ${where_col} = '${where_var}'`)
+        console.error(err);
+        resolveMain(false);
       }
+      resolveMain(true);
       endConnect(conn);
     });
   });
