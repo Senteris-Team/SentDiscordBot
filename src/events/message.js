@@ -5,14 +5,15 @@ module.exports = (client, message) => {
     db.getGuild(message.guild, resolve);
   }).then(function (guildDB) {
     const prefix = guildDB.prefix;
+    let msg = message.content;
 
     if (message.author.bot) return;
     if (!message.guild) return;
-    if (message.content.indexOf(prefix) !== 0)
-      if (message.content.indexOf("!-") === 0 && message.content.includes("help")) message = prefix+`help`; // if user forgot prefix
+    if (msg.indexOf(prefix) !== 0)
+      if (msg.indexOf("!-") === 0 && msg.includes("help")) msg = prefix+`help`; // if user forgot prefix
       else return;
-
-    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    
+    const args = msg.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     
     const cmd = client.commands.get(command);
