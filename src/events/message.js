@@ -9,7 +9,7 @@ module.exports = (client, message) => {
     if (message.author.bot) return;
     if (!message.guild) return;
     if (message.content.indexOf(prefix) !== 0)
-      if (message.content.indexOf("!-") === 0 && message.includes("help")) message = prefix+`help`; // if user forgot prefix
+      if (message.content.indexOf("!-") === 0 && message.content.includes("help")) message = prefix+`help`; // if user forgot prefix
       else return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
