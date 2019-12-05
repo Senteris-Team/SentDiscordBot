@@ -2,7 +2,7 @@ const db = require("../../db.js");
 const { log } = require("../../functions.js");
 
 exports.run = (client, message, args) => {
-  if (!message.member.hasPermission("VIEW_AUDIT_LOG")) return message.reply("**Error:** You do not have the 'VIEW_AUDIT_LOG' permission!");
+  if (!message.member.hasPermission("VIEW_AUDIT_LOG")) return message.reply('**Error:** You do not have "view audit log" permission!');
   new Promise(function (resolve) {
     db.getGuild(message.guild, resolve);
   }).then(function (guildDB) {

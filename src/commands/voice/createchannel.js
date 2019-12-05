@@ -2,7 +2,7 @@ const { log } = require("../../functions.js");
 const db = require("../../db.js");
 
 exports.run = (client, message, args) => {
-  if (!message.member.hasPermission("CONNECT")) return message.reply("**Error:** You do not have the **connect** permission!");
+  if (!message.member.hasPermission("CONNECT")) return message.reply('**Error:** You do not have the "connect" permission!');
   if (args.length == 0) return message.reply("Not enough arguments. Type !-help");
   new Promise(function (resolve) {
     db.getGuild(message.guild, resolve);

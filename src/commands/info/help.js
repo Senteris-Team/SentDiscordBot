@@ -1,20 +1,19 @@
 const db = require("../../db.js");
 
 exports.run = (client, message, args) => {
-
   new Promise(function (resolve) {
     db.getGuild(message.guild, resolve);
   }).then(function (guildDB) {
-    const prefix = guildDB.prefix;
+    const p = guildDB.prefix;
 
     if (!message.member.hasPermission("ADMINISTRATOR")) message.channel.send({
       embed: {
         color: 0x2ed32e,
         fields: [{
           name: "Help",
-          value: `${prefix}Hi\n` +
-            `${prefix}Ping\n` +
-            `${prefix}CreateChannel *name* *slots*`
+          value: `${p}Hi\n` +
+            `${p}Ping\n` +
+            `${p}CreateChannel *name* *slots*`
         }],
       }
     });
@@ -23,19 +22,19 @@ exports.run = (client, message, args) => {
         color: 0x2ed32e,
         fields: [{
           name: "Help",
-          value: `${prefix}Hi\n` +
-            `${prefix}Ping\n` +
-            `${prefix}CreateChannel *name* *slots*\n` +
-            //`${prefix}mute *user* *time**Unit*\n` +
-            //`// *Unit* (time unit) can be s, m, h, d. for example ${client.config.prefix}mute @N0Name#4213 666h\n` +
-            //`${prefix}unmute *user*\n` +
-            `${prefix}ShowSettings\n` +
-            `${prefix}ChangePrefix *prefix*\n`+
-            `${prefix}ChangeVoiceCategory *ID*\n`+
-            `${prefix}ChangeLogChannel *ID*\n`+
-            `${prefix}ChangeBitrate *bitrate(8-384)*\n`+
-            `${prefix}ChangeWhiteChannels *channel names*\n`+
-            `|For exaple ${prefix}ChangeWhiteChannels pubg pubg2 R6S GTA5`
+          value: `${p}Hi\n` +
+            `${p}Ping\n` +
+            `${p}CreateChannel *name* *slots*\n` +
+            //`${p}mute *user* *time**Unit*\n` +
+            //`// *Unit* (time unit) can be s, m, h, d. for example ${p}mute @N0Name#4213 666h\n` +
+            //`${p}unmute *user*\n` +
+            `${p}ShowSettings\n` +
+            `${p}ChangePrefix *prefix*\n`+
+            `${p}ChangeVoiceCategory *ID*\n`+
+            `${p}ChangeLogChannel *ID*\n`+
+            `${p}ChangeBitrate *bitrate(8-384)*\n`+
+            `${p}ChangeWhiteChannels *channel names*\n`+
+            `|For exaple ${p}ChangeWhiteChannels pubg pubg2 R6S GTA5`
         }],
       }
     });
