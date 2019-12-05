@@ -43,13 +43,13 @@ function select(table, col, value, resolve) {
 function getGuild(guild, resolveMain) {
   new Promise(function (resolve) {
     select("guilds", "guildID", guild.id, resolve);
-  }).then(function (settings) {
-    if (!(typeof settings == "undefined")) { // if setting is not empty
-      settings.whiteChannels = JSON.parse(settings.whiteChannels);
-      resolveMain(settings);
-    } else {
+  }).then(function (guildDB) {
+    if (!(typeof guildDB == "undefined")) { // if guild exists in the table
+      guildDB.whiteChannels = JSON.parse(guildDB.whiteChannels);
+      resolveMain(guildDB);
+    } else { // it inserts guild to the table
       console.log(`New guild! (${guild})`)
-      insert("guilds", "`guildID`", guild.id); // Add the settings
+      insert("guilds", "`guildID`", guild.id); // Where any promise? Neis?
       getGuild(guild, resolveMain);
     }
   });
@@ -97,7 +97,6 @@ function updateGuild(column, value, guild, resolveMain) {
 
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    console.log(`UPDATE guilds SET ${updateString} WHERE guildID = ${guild.id};`);
     conn.query(`UPDATE guilds SET ${updateString} WHERE guildID = ${guild.id};`, function( err, result, fields ) {
       if (err) {
         console.error(err);
@@ -111,7 +110,7 @@ function updateGuild(column, value, guild, resolveMain) {
 
 function update(table, column, value, where_col, where_var, msg = '') {
   let updateString;
-  if (Object.prototype.toString.call(column) === "[object Array]") {
+  if (Object.prototype.toString.call(column) === "[object Array]") { // I did not update this
     // as in the function insert
     for (i = 0; i != column.length; i++) {
       updateString += column[i] + "=" + value[i] + ", ";

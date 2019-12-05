@@ -13,7 +13,7 @@ exports.run = (client, message, args) => {
         fields: [{
           name: "Guild settings",
           value: `Guild ID: ${guildDB.guildID}\n` +
-            `Bitrate: ${guildDB.bitrate}\n`+
+            `Bitrate: ${guildDB.bitrate}Kbps\n`+
             `Log channel ID: ${guildDB.logChannel}\n`+
             `White channels: ${strWhiteChannels}\n` +
             `Voice channels category ID: ${guildDB.voiceChannelsCategory}\n`+
