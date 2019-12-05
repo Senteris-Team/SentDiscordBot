@@ -3,6 +3,7 @@ const { log } = require("../../functions.js");
 
 exports.run = (client, message, args) => {
   if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply("**Error:** You are **not administrator**!");
+  if (args.length == 0) return message.reply("Not enough arguments. Type !-help");
 
   new Promise(function (resolve) {
     db.updateGuild("voiceChannelsCategory", args[0], message.guild, resolve);

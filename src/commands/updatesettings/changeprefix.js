@@ -3,6 +3,7 @@ const { log } = require("../../functions.js");
 
 exports.run = (client, message, args) => {
   if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply("**Error:** You are **not administrator**!");
+  if (args.length == 0) return message.reply("Not enough arguments. Type !-help");
   if(args[0].length > 5) return message.reply("Max prefix size is 5 symbols!");
 
   new Promise(function (resolve) {
