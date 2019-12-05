@@ -85,16 +85,7 @@ function insert(table, column, value) {
 }
 
 function updateGuild(column, value, guild, resolveMain) {
-  let updateString = "";
-  if (Object.prototype.toString.call(column) === "[object Array]") {
-    // as in the function insert
-    for (i = 0; i != column.length - 2; i++) { // TEST later
-      updateString += `${column[i]}` + " = " + value[i] + ", ";
-    }
-    updateString += `${column[column.length - 1]}` + " = " + value[value.length - 1];
-  } else updateString += `${column}` + " = " + value;
-  console.log(updateString);
-
+  let updateString = makeUpdateString(column, value);
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
     conn.query(`UPDATE guilds SET ${updateString} WHERE guildID = ${guild.id};`, function( err, result, fields ) {
@@ -109,15 +100,7 @@ function updateGuild(column, value, guild, resolveMain) {
 }
 
 function update(table, column, value, where_col, where_var, msg = '') {
-  let updateString = "";
-  if (Object.prototype.toString.call(column) === "[object Array]") {
-    // as in the function insert
-    for (i = 0; i != column.length - 2; i++) { // TEST later
-      updateString += `${column[i]}` + " = " + value[i] + ", ";
-    }
-    updateString += `${column[column.length - 1]}` + " = " + value[value.length - 1];
-  } else updateString += `${column}` + " = " + value;
-
+  let updateString = makeUpdateString(column, value);
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
     conn.query(`UPDATE ${table} SET ${updateString} WHERE ${where_col} = ${where_var}`, function( err, result, fields ) {
@@ -129,6 +112,17 @@ function update(table, column, value, where_col, where_var, msg = '') {
       endConnect(conn);
     });
   });
+}
+
+function makeUpdateString(column, value){
+  let updateString = "";
+  if (Object.prototype.toString.call(column) === "[object Array]") {
+    for (i = 0; i != column.length - 2; i++) { // TEST later
+      updateString += `${column[i]}` + " = " + value[i] + ", ";
+    }
+    updateString += `${column[column.length - 1]}` + " = " + value[value.length - 1];
+  } else updateString += `${column}` + " = " + value;
+  return updateString;
 }
 
 exports.update = update;
