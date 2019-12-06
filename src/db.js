@@ -49,13 +49,16 @@ function getGuild(guild, resolveMain) {
       resolveMain(guildDB);
     } else { // it inserts guild to the table
       console.log(`New guild! (${guild})`)
-      insert("guilds", "`guildID`", guild.id); // Where any promise? Neis?
-      getGuild(guild, resolveMain);
+      new Promise(function (resolve2) {
+        insert("guilds", "`guildID`", guild.id, resolve2); // Where any promise? Neis?
+      }).then(function(er){
+        getGuild(guild, resolveMain);
+      });
     }
   });
 }
 
-function insert(table, column, value) {
+function insert(table, column, value, resolve) {
   let columns;
   if (Object.prototype.toString.call(column) === "[object Array]") {
     // if column == array => columns = "column1, column2..."
@@ -76,10 +79,11 @@ function insert(table, column, value) {
   }
 
   pool.getConnection(function(err, conn) {
-    if (err) return console.log(err);
+    if (err) { console.log(err); resolve("error"); return; }
     conn.query(`INSERT INTO ${table} (${columns}) values (${values})`, function( err, result, fields ) {
-      if (err) console.log(err);
+      if (err) { console.log(err); resolve("error"); return; }
       endConnect(conn);
+      resolve(undefined);
     });
   });
 }
