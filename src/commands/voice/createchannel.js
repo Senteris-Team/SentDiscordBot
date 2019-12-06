@@ -7,6 +7,7 @@ exports.run = (client, message, args) => {
   new Promise(function (resolve) {
     db.getGuild(message.guild, resolve);
   }).then(function (guildDB) {
+    if(!guildDB.voiceChannelsCategory) return message.reply("**Error** First set voice channels category");
     const noDelete = guildDB.whiteChannels;
     if (noDelete.includes(args[0])) return message.reply("**Error:** You cannot create channel with name of a white channel!");
 
@@ -21,7 +22,7 @@ exports.run = (client, message, args) => {
 function makeChannel(message, name, limit, message) {
   const guild = message.guild;
   new Promise(function (resolve) {
-    db.select("guilds", "guildID", guild.id, resolve);
+    db.getGuild(message.guild, resolve);
   }).then(function (guildDB) {
     const category = guild.channels.find( c => c.id == guildDB.voiceChannelsCategory && c.type == "category" );
     guild
