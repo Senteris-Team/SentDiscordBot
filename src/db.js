@@ -6,9 +6,9 @@ var pool = mysql.createPool({
   user: "admin",
   password: DBpassword,
   database: "SentDiscordBot",
-  queueLimit: 0, // unlimited queueing
-  connectionLimit: 0, // unlimited connections
-  multipleStatements: true, // I like this because it helps prevent nested sql statements, it can be buggy though, so be careful
+  queueLimit: 0,
+  connectionLimit: 0,
+  multipleStatements: true,
   socketPath: "/var/lib/mysql/mysql.sock"
 });
 
@@ -48,11 +48,22 @@ function getGuild(guild, resolveMain) {
       guildDB.whiteChannels = JSON.parse(guildDB.whiteChannels);
       resolveMain(guildDB);
     } else { // it inserts guild to the table
-      console.log(`New guild! (${guild})`)
       new Promise(function (resolve2) {
-        insert("guilds", "`guildID`", guild.id, resolve2); // Where any promise? Neis?
+        insert("guilds", "`guildID`", guild.id, resolve2);
       }).then(function(er){
-        getGuild(guild, resolveMain);
+        if(!er) {
+          getGuild(guild, resolveMain);
+          console.log(`New guild! "${guild}", ID: ${guild.id}`);
+        }
+        else {
+          const guildDB = {
+            guildID: guild.id,
+            bitrate: 96,
+            whiteChannels: "[]",
+            prefix: "!-" 
+          }; // default
+          resolveMain(guildDB);
+        }
       });
     }
   });
@@ -61,10 +72,9 @@ function getGuild(guild, resolveMain) {
 function insert(table, column, value, resolve) {
   let columns;
   if (Object.prototype.toString.call(column) === "[object Array]") {
-    // if column == array => columns = "column1, column2..."
     for (i = 0; i != column.length; i++) {
       columns += column[i] + ", ";
-    } columns += column[-0]; // columns = "... column5, column6 (w/o ',')"
+    } columns += column[column.length - 1]; // columns = "... column5, column6 (w/o ',')"
   } else columns = column; // else columns == column
 
   let values;
@@ -72,11 +82,8 @@ function insert(table, column, value, resolve) {
     //Same
     for (i = 0; i != value.length; i++) {
       values += value[i] + ", ";
-    }
-    values += value[-0];
-  } else {
-    values = value;
-  }
+    } values += value[value.length - 1];
+  } else values = value;
 
   pool.getConnection(function(err, conn) {
     if (err) { console.log(err); resolve("error"); return; }
