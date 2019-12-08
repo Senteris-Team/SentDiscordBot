@@ -1,7 +1,7 @@
 const fs = require("fs");
 const db = require("./db.js");
 
-function log(message, guild, where = "BOT", who = "") {
+function log(message, guild = undefined, where = "BOT", who = "") {
   
   var now = new Date();
   var options = {

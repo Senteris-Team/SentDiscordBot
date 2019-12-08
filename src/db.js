@@ -46,6 +46,7 @@ function getGuild(guild, resolveMain) {
   }).then(function (guildDB) {
     if (!(typeof guildDB == "undefined")) { // if guild exists in the table
       guildDB.whiteChannels = JSON.parse(guildDB.whiteChannels);
+      guildDB.gameRoles = JSON.parse(guildDB.gameRoles);
       resolveMain(guildDB);
     } else { // it inserts guild to the table
       new Promise(function (resolve2) {
