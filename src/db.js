@@ -85,13 +85,20 @@ function insert(table, column, value, resolve) {
     } values += value[value.length - 1];
   } else values = value;
 
-  pool.getConnection(function(err, conn) {
-    if (err) { console.log(err); resolve("error"); return; }
-    conn.query(`INSERT INTO ${table} (${columns}) values (${values})`, function( err, result, fields ) {
-      if (err) { console.log(err); resolve("error"); return; }
-      endConnect(conn);
-      resolve(undefined);
-    });
+  new Promise(function (resolve) {
+    select("guilds", "guildID", guild.id, resolve);
+  }).then(function (guildDB) {
+    if (!(typeof guildDB == "undefined")) {
+      pool.getConnection(function(err, conn) {
+        if (err) { console.log(err); resolve("error"); return; }
+        conn.query(`INSERT INTO ${table} (${columns}) values (${values})`, function( err, result, fields ) {
+          if (err) { console.log(err); resolve("error"); return; }
+          endConnect(conn);
+          resolve(undefined);
+        });
+      });
+    }
+    else resolve(undefined);
   });
 }
 
