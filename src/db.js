@@ -88,7 +88,7 @@ function insert(table, column, value, resolve) {
   new Promise(function (resolve) {
     select("guilds", "guildID", guild.id, resolve);
   }).then(function (guildDB) {
-    if (!(typeof guildDB == "undefined")) {
+    if (typeof guildDB == "undefined") { // in case if guild somehow already exist (bugfix)
       pool.getConnection(function(err, conn) {
         if (err) { console.log(err); resolve("error"); return; }
         conn.query(`INSERT INTO ${table} (${columns}) values (${values})`, function( err, result, fields ) {
