@@ -1,5 +1,5 @@
-const db = require("../../db.js");
-const { log } = require("../../functions.js");
+const db = require("../../../db.js");
+const { log } = require("../../../functions.js");
 
 exports.run = (client, message, args) => {
   if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply("**Error:** You are **not administrator**!");

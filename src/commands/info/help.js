@@ -33,8 +33,10 @@ exports.run = (client, message, args) => {
             `${p}ChangeVoiceCategory *ID*\n`+
             `${p}ChangeLogChannel *ID*\n`+
             `${p}ChangeBitrate *bitrate(8-384)*\n`+
-            `${p}ChangeWhiteChannels *channel names*\n`+
-            `|For exaple ${p}ChangeWhiteChannels pubg pubg2 R6S GTA5`
+            `${p}ChangeWCs *channel names* | WC - white channel\n`+
+            `For exaple ${p}ChangeWhiteChannels pubg pubg2 R6S GTA5\n`+
+            `${p}AddWC *channel name*\n`+
+            `${p}RemoveWC *channel name*`
         }],
       }
     });

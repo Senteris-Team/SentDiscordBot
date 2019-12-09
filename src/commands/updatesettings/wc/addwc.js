@@ -1,5 +1,5 @@
-const db = require("../../db.js");
-const { log } = require("../../functions.js");
+const db = require("../../../db.js");
+const { log } = require("../../../functions.js");
 
 exports.run = (client, message, args) => {
   if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply("**Error:** You are **not administrator**!");
@@ -8,18 +8,12 @@ exports.run = (client, message, args) => {
   new Promise(function (resolve) {
     db.getGuild(message.guild, resolve);
   }).then(function (guildDB) {
-    var deleteWCI = null;
-    let deleteWCName = new String();
-    if (args.length > 1) deleteWCName = args.slice(0, args.length).join(" ");
-    else deleteWCName = String(args[0]);
-    guildDB.whiteChannels.forEach(function(item, i, arr) {
-      if(item == String(deleteWCName)) deleteWCI = i;
-    });
-
-    if(!deleteWCI) return message.reply("Channel not found");
-    guildDB.whiteChannels.splice(deleteWCI, 1);
-
+    let nameWC = new String();
+    if (args.length > 1) nameWC = args.slice(0, args.length).join(" ");
+    else nameWC = String(args[0]);
+    guildDB.whiteChannels.push(nameWC);
     const whiteChannelsJSON = JSON.stringify(guildDB.whiteChannels);
+    if(whiteChannelsJSON.length >= 255) return message.reply("**Error:** Too much channels! Please shorten the channel names.");
 
     new Promise(function (resolve) {
       db.updateGuild("whiteChannels", `'${whiteChannelsJSON}'`, message.guild, resolve);
