@@ -10,7 +10,7 @@ exports.run = (client, message, args) => {
   }).then(function (guildDB) {
     guildDB.gameRoles.push(args[0]);
     const gameRolesJSON = JSON.stringify(guildDB.gameRoles);
-    if(gameRolesJSON.length >= 255) return message.reply("**Error:** Too much roles! Please shorten the role names.");
+    if(gameRolesJSON.length >= 255) return message.reply("**Error:** Too much roles!");
 
     new Promise(function (resolve) {
       db.updateGuild("gameRoles", `'${gameRolesJSON}'`, message.guild, resolve);
