@@ -7,6 +7,18 @@ exports.run = (client, message, args) => {
     db.getGuild(message.guild, resolve);
   }).then(function (guildDB) {
     const strWhiteChannels = guildDB.whiteChannels.join(", ");
+    const strGameRoles = guildDB.gameRoles.join(", ");
+
+    let gameRoleNames = new Array();
+    const roles = message.guild.roles;
+    guildDB.gameRoles.forEach(function(item, i, arr) {
+      gameRole = roles.find(role => role.id == item);
+      if (gameRole != null) { gameRoleNames.push(gameRole.name); }
+      else gameRoleNames.push("unknown");
+      gameRole = null;
+    });
+    const strGameRolesNames = gameRoleNames.join(", ");
+
     message.channel.send({ // for administrators 
       embed: {
         color: 0x2ed32e,
@@ -17,7 +29,11 @@ exports.run = (client, message, args) => {
             `Log channel ID: ${guildDB.logChannel}\n`+
             `White channels: ${strWhiteChannels}\n` +
             `Voice channels category ID: ${guildDB.voiceChannelsCategory}\n`+
-            `Prefix: ${guildDB.prefix}`
+            `Prefix: ${guildDB.prefix}\n\n`+
+            `GameRole ids: ${strGameRoles}\n`+
+            `GameRoles names: ${strGameRolesNames}\n`+
+            `Role message ID: ${guildDB.roleMessage}\n`+
+            `Role channel ID: ${guildDB.roleChannel}`
         }],
       }
     });
