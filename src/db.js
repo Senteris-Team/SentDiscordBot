@@ -56,7 +56,7 @@ function getGuild(guild, resolveMain) {
           getGuild(guild, resolveMain);
           console.log(`New guild! "${guild}", ID: ${guild.id}`);
         }
-        else {
+        else { // console.error in insert
           const guildDB = {
             guildID: guild.id,
             bitrate: 96,
@@ -80,7 +80,7 @@ function insert(table, column, value, resolve) {
 
   let values;
   if (Object.prototype.toString.call(value) === "[object Array]") {
-    //Same
+    //The Same
     for (i = 0; i != value.length; i++) {
       values += value[i] + ", ";
     } values += value[value.length - 1];

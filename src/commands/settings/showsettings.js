@@ -9,6 +9,7 @@ exports.run = (client, message, args) => {
     const strWhiteChannels = guildDB.whiteChannels.join(", ");
     const strGameRoles = guildDB.gameRoles.join(", ");
 
+    // role ids -> role names
     let gameRoleNames = new Array();
     const roles = message.guild.roles;
     guildDB.gameRoles.forEach(function(item, i, arr) {

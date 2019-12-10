@@ -10,7 +10,7 @@ exports.run = (client, message, args) => {
   }).then(function (guildDB) {
     let nameWC = new String();
     if (args.length > 1) nameWC = args.slice(0, args.length).join(" ");
-    else nameWC = String(args[0]);
+    else nameWC = String(args[0]); // I did not test what will be if I delete String() :)
     guildDB.whiteChannels.push(nameWC);
     const whiteChannelsJSON = JSON.stringify(guildDB.whiteChannels);
     if(whiteChannelsJSON.length >= 255) return message.reply("**Error:** Too much channels! Please shorten the channel names.");

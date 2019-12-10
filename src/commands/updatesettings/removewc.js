@@ -11,9 +11,9 @@ exports.run = (client, message, args) => {
     var deleteWCI = null;
     let deleteWCName = new String();
     if (args.length > 1) deleteWCName = args.slice(0, args.length).join(" ");
-    else deleteWCName = String(args[0]);
+    else deleteWCName = String(args[0]); // I did not test what will be if I delete String() :)
     guildDB.whiteChannels.forEach(function(item, i, arr) {
-      if(item == String(deleteWCName)) deleteWCI = i;
+      if(item == deleteWCName) deleteWCI = i; // I tried make it using indexOf() but it did not work
     });
 
     if(!deleteWCI) return message.reply("Channel not found");
