@@ -8,14 +8,7 @@ exports.run = (client, message, args) => {
   new Promise(function (resolve) {
     db.getGuild(message.guild, resolve);
   }).then(function (guildDB) {
-    var deleteRoleI = null;
-    let deleteRoleID = args[0];
-    guildDB.whiteChannels.forEach(function(item, i, arr) {
-      if(item == deleteRoleID) deleteRoleI = i;
-    });
-
-    if(!deleteRoleI) return message.reply("Game role not found");
-    guildDB.gameRoles.splice(deleteRoleI, 1);
+    guildDB.gameRoles.splice(args[0], 1);
 
     const gameRolesJSON = JSON.stringify(guildDB.gameRoles);
 
@@ -26,5 +19,5 @@ exports.run = (client, message, args) => {
       else return message.reply("Error :(");
       log(`Game roles have been changed to ${gameRolesJSON} by ${message.author.tag}`, message.guild, "Guild " + message.guild, message.member.tag);
     });
-  });
+  }).catch(message.reply("**Error**"));
 }

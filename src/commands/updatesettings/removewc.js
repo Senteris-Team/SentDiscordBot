@@ -8,16 +8,7 @@ exports.run = (client, message, args) => {
   new Promise(function (resolve) {
     db.getGuild(message.guild, resolve);
   }).then(function (guildDB) {
-    var deleteWCI = null;
-    let deleteWCName = new String();
-    if (args.length > 1) deleteWCName = args.slice(0, args.length).join(" ");
-    else deleteWCName = String(args[0]);
-    guildDB.whiteChannels.forEach(function(item, i, arr) {
-      if(item == String(deleteWCName)) deleteWCI = i;
-    });
-
-    if(!deleteWCI) return message.reply("Channel not found");
-    guildDB.whiteChannels.splice(deleteWCI, 1);
+    guildDB.whiteChannels.splice(args[0], 1);
 
     const whiteChannelsJSON = JSON.stringify(guildDB.whiteChannels);
 
@@ -28,5 +19,5 @@ exports.run = (client, message, args) => {
       else return message.reply("Error :(");
       log(`White channels have been changed to ${whiteChannelsJSON} by ${message.author.tag}`, message.guild, "Guild " + message.guild, message.member.tag);
     });
-  });
+  }).catch(message.reply("**Error**"));
 }
