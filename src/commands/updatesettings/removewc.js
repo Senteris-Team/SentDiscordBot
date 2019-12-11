@@ -19,5 +19,5 @@ exports.run = (client, message, args) => {
       else return message.reply("Error :(");
       log(`White channels have been changed to ${whiteChannelsJSON} by ${message.author.tag}`, message.guild, "Guild " + message.guild, message.member.tag);
     });
-  }).catch(message.reply("**Error**"));
+  }).catch();
 }
