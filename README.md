@@ -17,13 +17,17 @@ Working commands:
 - !-ChangePrefix *prefix*
 - !-ChangeVoiceCategory *categoryID* | Change category id in which the voice channels will create
 - !-ChangeLogChannel *channelID* | Change text channel id in which bot sends logs
-- !-ChangeBitrate *bitrate(8-384)* | Change bitrate of voice channels
-- !-ChangeWC *channel names* | Change white channels list. For example !-changewhitechannels PUBG R6S GTA5 Unturned other.
+- !-ChangeBitrate *bitrate(8-384)* | Change the bitrate of voice channels
+- !-ChangeWC *channel names* | Change the white channels list. For example !-changewhitechannels PUBG R6S GTA5 Unturned other.
 - !-AddWC *channel name* | Add white channel
 - !-RemoveWC *channel name* | Remove white channel
+- !-AddGameRole *role id*
+- !-RemoveGameRole *index*
+- !-ChangeGameRoles *role ids* | As ChangeWCs
+- !-ChangeRoleChannel *channel id* | Change id of channel where is located message for autorole
+- !-ChangeRoleMessage *message id* | Change id of message for autorole
 
 Focus:
-- Game roles(for any guild)
 - Guides
 
 
