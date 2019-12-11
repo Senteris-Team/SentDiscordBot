@@ -7,7 +7,8 @@ exports.run = (client, message, args) => {
     db.getGuild(message.guild, resolve);
   }).then(function (guildDB) {
     const strWhiteChannels = guildDB.whiteChannels.join(", ");
-    const strGameRoles = guildDB.gameRoles.join(", ");
+    const logChannelName = message.guild.channels.find(channel => channel.id == guildDB.logChannel);
+
 
     // role ids -> role names
     let gameRoleNames = new Array();
@@ -27,11 +28,10 @@ exports.run = (client, message, args) => {
           name: "Guild settings",
           value: `Guild ID: ${guildDB.guildID}\n` +
             `Bitrate: ${guildDB.bitrate}Kbps\n`+
-            `Log channel ID: ${guildDB.logChannel}\n`+
+            `Log channel: ${logChannelName}\n`+
             `White channels: ${strWhiteChannels}\n` +
             `Voice channels category ID: ${guildDB.voiceChannelsCategory}\n`+
             `Prefix: ${guildDB.prefix}\n\n`+
-            `GameRole ids: ${strGameRoles}\n`+
             `GameRoles names: ${strGameRolesNames}\n`+
             `Role message ID: ${guildDB.roleMessage}\n`+
             `Role channel ID: ${guildDB.roleChannel}`
