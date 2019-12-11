@@ -9,10 +9,10 @@ exports.run = (client, message, args) => {
   if(gameRoles.length >= 255) return message.reply("**Error:** Too much roles!");
 
   new Promise(function (resolve) {
-    db.updateGuild("gameRoles", `'${whiteChannels}'`, message.guild, resolve);
+    db.updateGuild("gameRoles", `'${gameRoles}'`, message.guild, resolve);
   }).then(function (res) {
     if(res) message.reply("Game roles have been changed!");
     else return message.reply("Error :(");
-    log(`Game roles have been changed to ${whiteChannels} by ${message.author.tag}`, message.guild, "Guild " + message.guild, message.member.tag);
+    log(`Game roles have been changed to ${gameRoles} by ${message.author.tag}`, message.guild, "Guild " + message.guild, message.member.tag);
   });
 }
