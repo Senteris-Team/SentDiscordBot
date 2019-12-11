@@ -8,16 +8,16 @@ exports.run = (client, message, args) => {
   new Promise(function (resolve) {
     db.getGuild(message.guild, resolve);
   }).then(function (guildDB) {
-    guildDB.whiteChannels.splice(args[0], 1);
+    guildDB.gameRoles.splice(args[0], 1);
 
-    const whiteChannelsJSON = JSON.stringify(guildDB.whiteChannels);
+    const gameRolesJSON = JSON.stringify(guildDB.gameRoles);
 
     new Promise(function (resolve) {
-      db.updateGuild("whiteChannels", `'${whiteChannelsJSON}'`, message.guild, resolve);
+      db.updateGuild("gameRoles", `'${gameRolesJSON}'`, message.guild, resolve);
     }).then(function (res) {
-      if(res) message.reply("White channels have been changed!");
+      if(res) message.reply("Game roles have been changed!");
       else return message.reply("Error :(");
-      log(`White channels have been changed to ${whiteChannelsJSON} by ${message.author.tag}`, message.guild, "Guild " + message.guild, message.member.tag);
+      log(`Game roles have been changed to ${gameRolesJSON} by ${message.author.tag}`, message.guild, "Guild " + message.guild, message.member.tag);
     });
   }).catch();
 }
