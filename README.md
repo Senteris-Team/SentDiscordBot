@@ -15,9 +15,9 @@ Working commands:
 - !-CreateChannel *Channel_Name* (*User_limit*)
 - !-ShowSettings
 - !-ChangePrefix *prefix*
-- !-ChangeVoiceCategory *categoryID* | Change category id in which the voice channels will create
 - !-ChangeLogChannel *channelID* | Change text channel id in which bot sends logs
 - !-ChangeBitrate *bitrate(8-384)* | Change the bitrate of voice channels
+- !-ChangeVoiceCategory *categoryID* | Change category id in which the voice channels will create
 - !-ChangeWC *channel names* | Change the white channels list. For example !-changewhitechannels PUBG R6S GTA5 Unturned other.
 - !-AddWC *channel name* | Add white channel
 - !-RemoveWC *channel name* | Remove white channel

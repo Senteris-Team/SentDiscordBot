@@ -8,7 +8,7 @@ exports.run = (client, message, args) => {
   }).then(function (guildDB) {
     const strWhiteChannels = guildDB.whiteChannels.join(", ");
     const logChannelName = message.guild.channels.find(channel => channel.id == guildDB.logChannel);
-
+    const roleChannelName = message.guild.channels.find(channel => channel.id == guildDB.roleChannel);
 
     // role ids -> role names
     let gameRoleNames = new Array();
@@ -34,7 +34,7 @@ exports.run = (client, message, args) => {
             `Prefix: ${guildDB.prefix}\n\n`+
             `GameRoles names: ${strGameRolesNames}\n`+
             `Role message ID: ${guildDB.roleMessage}\n`+
-            `Role channel ID: ${guildDB.roleChannel}`
+            `Role channel: ${roleChannelName}`
         }],
       }
     });
