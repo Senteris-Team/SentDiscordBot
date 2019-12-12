@@ -13,11 +13,19 @@ exports.run = (client, message, args) => {
 
     if (message.member.voiceChannel) {
       if (args.length == 1) makeChannel(message, args[0], 0, message);
-      else if(args.length == 2) makeChannel(message, args[0], args[1], message);
-      else {
-        const channelLimit = args.pop();
-        const channelName = args.join(' ');
-        makeChannel(message, channelName, channelLimit, message);
+      else{
+        const lastArg = args.pop();
+        let channelLimit = Number.parseInt(lastArg);
+        if (!channelLimit || channelLimit > 99 || channelLimit < 0) {
+          channelLimit = 0;
+          args.push(lastArg);
+        }
+
+        if(args.length == 1) makeChannel(message, args[0], channelLimit, message);
+        else{
+          const channelName = args.join(' ');
+          makeChannel(message, channelName, channelLimit, message);
+        }
       }
       message.reply("The channel is created.");
     } else message.reply("First enter to a voice channel");
