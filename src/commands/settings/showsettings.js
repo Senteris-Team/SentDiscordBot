@@ -9,6 +9,7 @@ exports.run = (client, message, args) => {
     const strWhiteChannels = guildDB.whiteChannels.join(", ");
     const logChannelName = message.guild.channels.find(channel => channel.id == guildDB.logChannel);
     const roleChannelName = message.guild.channels.find(channel => channel.id == guildDB.roleChannel);
+    const voiceChannelsCategory = message.guild.channels.find( c => c.id == guildDB.voiceChannelsCategory && c.type == "category" );
 
     // role ids -> role names
     let gameRoleNames = new Array();
@@ -30,7 +31,7 @@ exports.run = (client, message, args) => {
             `Bitrate: ${guildDB.bitrate}Kbps\n`+
             `Log channel: ${logChannelName}\n`+
             `White channels: ${strWhiteChannels}\n` +
-            `Voice channels category ID: ${guildDB.voiceChannelsCategory}\n`+
+            `Voice channels category: ${voiceChannelsCategory.name}\n`+
             `Prefix: ${guildDB.prefix}\n\n`+
             `GameRoles names: ${strGameRolesNames}\n`+
             `Role message ID: ${guildDB.roleMessage}\n`+
