@@ -28,6 +28,7 @@ exports.run = (client, message, args) => {
             //`${p}mute *user* *time**Unit*\n` +
             //`// *Unit* (time unit) can be s, m, h, d. for example ${p}mute @N0Name#4213 666h\n` +
             //`${p}unmute *user*\n` +
+            `${p}Guides | гайдЫ ЫЫЫ\n` +
             `${p}ShowSettings\n` +
             `${p}ChangePrefix *prefix*\n`+
             `${p}ChangeLogChannel *ID*\n`+

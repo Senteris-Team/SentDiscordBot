@@ -13,6 +13,7 @@ Working commands:
 - !-Help
 - !-Ping
 - !-CreateChannel *Channel_Name* (*User_limit*)
+- !-Guides
 - !-ShowSettings
 - !-ChangePrefix *prefix*
 - !-ChangeLogChannel *channelID* | Change text channel id in which bot sends logs
@@ -26,12 +27,14 @@ Working commands:
 - !-ChangeGameRoles *role ids* | As ChangeWCs
 - !-ChangeRoleChannel *channel id* | Change id of channel where is located message for autorole
 - !-ChangeRoleMessage *message id* | Change id of message for autorole
-
-Focus:
-- Guides
+- !-BaseGuide
+- !-VoiceChannelsGuide
+- !-GameRolesGuide
 
 
 ToDo:
 - !-Mute  *username*  *time* *Unit* | example !-mute @User313#4584 313s
 - !-Unmute *username*
 - Music
+- Fix a bug related to the removal of roles
+- Fix a bug related to display IDs in command !-showsettings

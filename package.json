@@ -1,6 +1,6 @@
 {
   "name": "sent-discord-bot",
-  "version": "0.1.21",
+  "version": "0.2.0",
   "description": "It is Sent Discord Bot",
   "main": "src/app.js",
   "author": {
