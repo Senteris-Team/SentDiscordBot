@@ -1,3 +1,5 @@
+const db = require("../../db.js");
+
 exports.run = (client, message, args) => {
   new Promise(function (resolve) {
     db.getGuild(message.guild, resolve);
