@@ -12,6 +12,8 @@ exports.run = (client, message, args) => {
     if (noDelete.includes(args[0])) return message.reply("**Error:** You cannot create channel with name of a white channel!");
 
     if (message.member.voiceChannel) {
+      if(args[0].length >= 100) return message.reply("**Error:** Too long name");
+      
       if (args.length == 1) makeChannel(message, args[0], 0, message);
       else{
         const lastArg = args.pop();
@@ -24,6 +26,8 @@ exports.run = (client, message, args) => {
         if(args.length == 1) makeChannel(message, args[0], channelLimit, message);
         else{
           const channelName = args.join(' ');
+          if(channelName.length >= 100) return message.reply("**Error:** Too long name");
+
           makeChannel(message, channelName, channelLimit, message);
         }
       }
