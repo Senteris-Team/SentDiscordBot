@@ -4,7 +4,13 @@ module.exports = (client, message) => {
   new Promise(function (resolve) {
     db.getGuild(message.guild, resolve);
   }).then(function (guildDB) {
-    const prefix = guildDB.prefix;
+    let prefix;
+    if (process.env.NODE_ENV === "test") {
+      prefix = "test!";
+    } else {
+      prefix = guildDB.prefix;
+    }
+
     let msg = message.content;
 
     if (message.author.bot) return;
