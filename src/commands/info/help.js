@@ -30,19 +30,8 @@ exports.run = (client, message, args) => {
             //`${p}unmute *user*\n` +
             `${p}Guides | гайдЫ ЫЫЫ\n` +
             `${p}ShowSettings\n` +
-            `${p}ChangePrefix *prefix*\n`+
-            `${p}ChangeLogChannel *ID*\n`+
-            `${p}ChangeBitrate *bitrate(8-384)*\n\n`+
-            `${p}ChangeVoiceCategory *ID*\n`+
-            `${p}ChangeWCs *channel names* | WC - white channel\n`+
-            `For exaple ${p}ChangeWhiteChannels pubg pubg2 R6S GTA5\n`+
-            `${p}AddWC *channel name*\n`+
-            `${p}RemoveWC *channel name*\n\n`+
-            `${p}AddGameRole *role id*\n`+
-            `${p}RemoveGameRole *index*\n`+
-            `${p}ChangeGameRoles *role ids* | As ChangeWCs\n`+
-            `${p}ChangeRoleChannel *channel id*\n`+
-            `${p}ChangeRoleMessage *message id*`
+            `${p}Setting *setting*\n` +
+            `\tSettings list: white-channels(add, remove, set)` // Дальше лень
         }],
       }
     });
