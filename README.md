@@ -1,12 +1,12 @@
 # Sent Discord Bot
 
 ### En
-Oh my! It is 'Sent discord bot'! ARE WE GONNA DIE!?
+Oh my! It's 'Sent discord bot'! ARE WE GONNA DIE!?
 Say hello to the new, great discord bot....... Sent!
-There are rumors that it sent to ~~kill guilds~~ make guilds better.
-The bot creates voice channels(and delete one when it will be empty) and gives game roles using reactions!
+There're rumors that it sent to ~~kill guilds~~ make guilds better.
+The bot creates voice channels(and deletes one when it is empty) and gives game roles using reactions!
 
-There are:
+There're:
 - Command for create a channel
 - Game roles
 - Guides (only in Russian now)
@@ -19,7 +19,7 @@ Basic working commands:
 - !-ShowSettings
 
 
-ToDo:
+To do:
 - !-Mute  *username*  *time* *Unit* | example !-mute @User313#4584 313s
 - !-Unmute *username*
 - Music
@@ -54,3 +54,8 @@ If you see a translation mistake, please correct me!
 - Музыка
 - Фикс бага с автоубиранием ролей(могут убираться со 2го раза)
 - Фикс бага с отображением ID в комманде '!-showsettings'
+
+
+### Donate
+https://qiwi.me/donatesent
+4276 3000 2277 2159
