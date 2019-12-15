@@ -18,6 +18,14 @@ exports.run = (client, message, args) => {
                         settings.whiteChannels.push(valueToUpdate);
                         valueToUpdate = JSON.stringify(settings.whiteChannels);
                         break;
+                    case "remove":
+                        const index = settings.whiteChannels.indexOf(valueToUpdate);
+                        if (index > -1) {
+                            settings.whiteChannels.splice(index, 1);
+                        } else {
+                            return message.reply("**Error:** Channel not in white channels")
+                        }
+                        break;
                     default:
                         return message.reply("**Error:** Not enough arguments.");
                 }
