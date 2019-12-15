@@ -16,7 +16,7 @@ exports.run = (client, message, args) => {
                 switch (args[1]) {
                     case "add": // ну да, зачем нам 2 файла и уменьшить длину команды, когда мы можем сделать одну...
                         settings.whiteChannels.push(valueToUpdate);
-                        valueToUpdate = JSON.stringify(settings.whiteChannels);
+                        valueToUpdate = `'${JSON.stringify(settings.whiteChannels)}'`;
                         break;
                     case "remove":
                         const index = settings.whiteChannels.indexOf(valueToUpdate);
@@ -25,17 +25,21 @@ exports.run = (client, message, args) => {
                         } else {
                             return message.reply("**Error:** Channel not in white channels")
                         }
-                        valueToUpdate = JSON.stringify(settings.whiteChannels);
+                        valueToUpdate = `'${JSON.stringify(settings.whiteChannels)}'`;
                         break;
                     default:
                         return message.reply("**Error:** This action not exist.");
                 }
                 break;
+            case "bitrate":
+                settingToUpdate = 'bitrate';
+                valueToUpdate = args[1];
+                break;
             default:
                 return message.reply("**Error:** This setting not exist.");
         }
         new Promise(function (resolve) {
-            db.updateGuild(settingToUpdate, `'${valueToUpdate}'`, message.guild, resolve);
+            db.updateGuild(settingToUpdate, valueToUpdate, message.guild, resolve);
         }).then(function (res) {
             if(res) message.reply(`Setting ${settingToUpdate} updated to '${valueToUpdate}'`);
             else return message.reply("Error :(");
