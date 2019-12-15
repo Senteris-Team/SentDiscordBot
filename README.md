@@ -1,35 +1,22 @@
 # Sent Discord Bot
 
-
+### En
 Oh my! It is 'Sent discord bot'! ARE WE GONNA DIE!?
 Say hello to the new, great discord bot....... Sent!
 There are rumors that it sent to ~~kill guilds~~ make guilds better.
-The bot will create voice channels(and delete one when it will be empty) and mute users for a while!
-Also it will give game roles with reactions!
+The bot creates voice channels(and delete one when it will be empty) and gives game roles using reactions!
+
+There are:
+- Command for create a channel
+- Game roles
+- Guides (only in Russian now)
 
 
-Working commands:
-- !-Hi
+Basic working commands:
 - !-Help
-- !-Ping
 - !-CreateChannel *Channel_Name* (*User_limit*)
 - !-Guides
 - !-ShowSettings
-- !-ChangePrefix *prefix*
-- !-ChangeLogChannel *channelID* | Change text channel id in which bot sends logs
-- !-ChangeBitrate *bitrate(8-384)* | Change the bitrate of voice channels
-- !-ChangeVoiceCategory *categoryID* | Change category id in which the voice channels will create
-- !-ChangeWC *channel names* | Change the white channels list. For example !-changewhitechannels PUBG R6S GTA5 Unturned other.
-- !-AddWC *channel name* | Add white channel
-- !-RemoveWC *channel name* | Remove white channel
-- !-AddGameRole *role id*
-- !-RemoveGameRole *index*
-- !-ChangeGameRoles *role ids* | As ChangeWCs
-- !-ChangeRoleChannel *channel id* | Change id of channel where is located message for autorole
-- !-ChangeRoleMessage *message id* | Change id of message for autorole
-- !-BaseGuide
-- !-VoiceChannelsGuide
-- !-GameRolesGuide
 
 
 ToDo:
@@ -38,3 +25,32 @@ ToDo:
 - Music
 - Fix a bug related to the removal of roles
 - Fix a bug related to display IDs in command !-showsettings
+
+
+If you see a translation mistake, please correct me!
+
+
+### Ru
+О нет! Это 'Сэнт дискорд бот'! МЫ УМРЁМ?!
+Скажи привет новому, супер дупер классному боту... Sent!
+Пс... ходят слухи что он отправлен чтобы ~~убивать сервера~~ делать сервера лучше.
+Этот бот в основном нужен, чтобы все могли содавать свои голосовые каналы, со своими названиями и т.д.(естественно эти каналы будут удаляться)
+Также он раздаёт 'ЫгловЫе' роли. На самом деле они могут быть нифига не игровыми, ну да лана! Подробнее вы можете прочитать в гайдах.
+
+
+Сейчас бот может:
+- Создавать каналы
+- Раздавать роли
+
+
+Основные команды:
+- !-Help
+- !-CreateChannel *название* *лимит*
+- !-Guides
+- !-ShowSettings
+
+Скоро(или никогда):
+- Команды для мута
+- Музыка
+- Фикс бага с автоубиранием ролей(могут убираться со 2го раза)
+- Фикс бага с отображением ID в комманде '!-showsettings'
