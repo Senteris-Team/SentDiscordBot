@@ -25,13 +25,14 @@ exports.run = (client, message, args) => {
                         } else {
                             return message.reply("**Error:** Channel not in white channels")
                         }
+                        valueToUpdate = JSON.stringify(settings.whiteChannels);
                         break;
                     default:
-                        return message.reply("**Error:** Not enough arguments.");
+                        return message.reply("**Error:** This action not exist.");
                 }
                 break;
             default:
-                return message.reply("**Error:** Not enough arguments.");
+                return message.reply("**Error:** This setting not exist.");
         }
         new Promise(function (resolve) {
             db.updateGuild(settingToUpdate, `'${valueToUpdate}'`, message.guild, resolve);
