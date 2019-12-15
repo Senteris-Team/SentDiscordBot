@@ -14,7 +14,7 @@ exports.run = (client, message, args) => {
             case "white-channels":
                 settingToUpdate = 'whiteChannels';
                 switch (args[1]) {
-                    case "add":
+                    case "add": // ну да, зачем нам 2 файла и уменьшить длину команды, когда мы можем сделать одну...
                         settings.whiteChannels.push(valueToUpdate);
                         valueToUpdate = JSON.stringify(settings.whiteChannels);
                         break;
