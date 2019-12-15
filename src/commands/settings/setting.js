@@ -12,7 +12,7 @@ exports.run = (client, message, args) => {
 
         switch (args[0]) {
             case "white-channels":
-                settingToUpdate = 'white_channel_list';
+                settingToUpdate = 'whiteChannels';
                 switch (args[1]) {
                     case "add":
                         settings.whiteChannels.push(valueToUpdate);
