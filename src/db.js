@@ -57,13 +57,14 @@ function getGuild(guild, resolveMain) {
           console.log(`New guild! "${guild}", ID: ${guild.id}`);
         }
         else { // console.error in insert
-          const guildDB = {
+          const guildDefault = {
             guildID: guild.id,
             bitrate: 96,
-            whiteChannels: "[]",
-            prefix: "!-" 
+            whiteChannels: new Array(),
+            prefix: "!-",
+            gameRoles: new Array()
           }; // default
-          resolveMain(guildDB);
+          resolveMain(guildDefault);
         }
       });
     }
