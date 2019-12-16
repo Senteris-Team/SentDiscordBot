@@ -19,10 +19,10 @@ function endConnect(connection) {
   });
 }
 
-function select(table, col, value, resolve) {
+function select(table, column, value, resolve) {
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    conn.query(`SELECT * FROM ${table} WHERE ${col} = '${value}'`, function( err, result, fields ) {
+    conn.query(`SELECT * FROM ${table} WHERE ${column} = '${value}'`, function( err, result, fields ) {
       if (err) throw err;
       endConnect(conn);
       var json;
@@ -44,7 +44,7 @@ function getGuild(guild, resolveMain) {
   new Promise(function (resolve) {
     select("guilds", "guildID", guild.id, resolve);
   }).then(function (guildDB) {
-    if (!(typeof guildDB == "undefined")) { // if guild exists in the table
+    if (guildDB != null) { // if guild exists in the table
       guildDB.whiteChannels = JSON.parse(guildDB.whiteChannels);
       guildDB.gameRoles = JSON.parse(guildDB.gameRoles);
       resolveMain(guildDB);
@@ -87,10 +87,18 @@ function insert(table, column, value, resolve) {
     } values += value[value.length - 1];
   } else values = value;
 
-  new Promise(function (resolve) {
-    select("guilds", "guildID", guild.id, resolve);
-  }).then(function (guildDB) {
-    if (typeof guildDB == "undefined") { // in case if guild somehow already exist (bugfix)
+  let col, val;
+  if (Object.prototype.toString.call(value) === "[object Array]" || Object.prototype.toString.call(column) === "[object Array]") {
+    col = column[0]; // column with 0 index must be id
+    val = value[0];
+  } else{
+    col = column;
+    val = value;
+  }
+  new Promise(function (resolve1) {
+    select(table, col, val, resolve1);
+  }).then(function (sth) {
+    if (typeof sth == "undefined") { // in case if guild somehow already exist (bugfix)
       pool.getConnection(function(err, conn) {
         if (err) { console.log(err); resolve("error"); return; }
         conn.query(`INSERT INTO ${table} (${columns}) values (${values})`, function( err, result, fields ) {
