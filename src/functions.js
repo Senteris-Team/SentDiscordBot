@@ -23,13 +23,18 @@ function log(message, guild = undefined, where = "BOT", who = "") {
   });
 
   if (!guild) return; // if the log does not need to be sent to guild's log channel -> arg guild must be empty
+  guildLog(message, guild);
+}
+
+function guildLog(message, guild) {
   new Promise(function (resolve) { // Get guildDB.logChannel
     db.getGuild(guild, resolve);
   }).then(function (guildDB) {
     if (!guildDB.logChannel) return; // if log channel unspecified
     const logChannel = guild.channels.find(c => c.id == guildDB.logChannel && c.type === 'text');
-    logChannel.send(`[${date}] ${who} ${message}`).catch();
+    if (logChannel != null) logChannel.send(message).catch();
   });
 }
 
 exports.log = log;
+exports.guildLog = guildLog;
