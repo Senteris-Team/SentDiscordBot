@@ -20,6 +20,7 @@ Basic working commands:
 
 
 To do:
+- Statistics of guild members
 - !-Mute  *username*  *time* *Unit* | example !-mute @User313#4584 313s
 - !-Unmute *username*
 - Music
@@ -50,6 +51,7 @@ If you see a translation mistake, please correct me!
 - !-ShowSettings
 
 Скоро(или никогда):
+- Статистика о участниках сервера
 - Команды для мута
 - Музыка
 - Фикс бага с автоубиранием ролей(могут убираться со 2го раза)
