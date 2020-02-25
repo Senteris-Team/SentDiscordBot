@@ -128,10 +128,16 @@ function updateGuild(column, value, guild, resolveMain) {
 }
 
 function update(table, column, value, where_col, where_var, msg = '') {
+  let whereString = "";
+  if (Object.prototype.toString.call(where_col) === "[object Array]") {
+    for (i = 0; i != where_col.length - 2; i++){
+      whereString += `${where_col[i]} = ${where_var[i]} AND `;
+    } whereString += `${where_col[where_col-1]} = ${where_var[where_col-1]}`;
+  } else whereString = `${where_col} = ${where_var}`;
   let updateString = makeUpdateString(column, value);
   pool.getConnection(function(err, conn) {
     if (err) return console.log(err);
-    conn.query(`UPDATE ${table} SET ${updateString} WHERE ${where_col} = ${where_var}`, function( err, result, fields ) {
+    conn.query(`UPDATE ${table} SET ${updateString} WHERE ${whereString}`, function( err, result, fields ) {
       if (err) {
         console.error(err);
         resolveMain(false);
