@@ -8,8 +8,7 @@ var pool = mysql.createPool({
   database: "SentDiscordBot",
   queueLimit: 0,
   connectionLimit: 0,
-  multipleStatements: true,
-  socketPath: "/var/lib/mysql/mysql.sock"
+  multipleStatements: true
 });
 
 function endConnect(connection) {
