@@ -18,7 +18,7 @@ function log(message, guild = undefined, where = "BOT", who = "") {
 
   console.log(logStr);
 
-  fs.appendFile("log.txt", logStr, function (error) {
+  fs.appendFile("log.txt", logStr + '\n', function (error) {
     if (error) throw console.error(error);
   });
 
