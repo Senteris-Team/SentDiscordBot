@@ -14,7 +14,7 @@ There're:
 
 Basic working commands:
 - !-Help
-- !-CreateChannel *Channel_Name* (*User_limit*)
+- !-CC *Channel_Name* (*User_limit*) | Create Channel
 - !-Guides
 - !-ShowSettings
 
@@ -46,7 +46,7 @@ If you see a translation mistake, please correct me!
 
 Основные команды:
 - !-Help
-- !-CreateChannel *название* *лимит*
+- !-CC *название* *лимит* | Создать канал
 - !-Guides
 - !-ShowSettings
 

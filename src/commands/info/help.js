@@ -13,7 +13,7 @@ exports.run = (client, message, args) => {
           name: "Help",
           value: `${p}Hi\n` +
             `${p}Ping\n` +
-            `${p}CreateChannel *name* *slots*`
+            `${p}CC *name* *slots* | Create Channel`
         }],
       }
     });
@@ -24,7 +24,7 @@ exports.run = (client, message, args) => {
           name: "Help",
           value: `${p}Hi\n` +
             `${p}Ping\n` +
-            `${p}CreateChannel *name* *slots*\n\n\n` +
+            `${p}CC *name* *slots* | Create Channel\n\n\n` +
             //`${p}mute *user* *time**Unit*\n` +
             //`// *Unit* (time unit) can be s, m, h, d. for example ${p}mute @N0Name#4213 666h\n` +
             //`${p}unmute *user*\n` +
