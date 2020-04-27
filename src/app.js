@@ -3,6 +3,7 @@ const fs = require("fs"),
   path = require("path");
 const client = new Discord.Client();
 const { log } = require("./functions.js");
+const config = require("../config.json");
 
 
 fs.readdir("./src/events/", (err, files) => {
@@ -42,4 +43,4 @@ fs.readdir(p, function (err, dirs) {
   });
 });
 
-client.login(process.argv[2]);
+client.login(config.dsApiKey);

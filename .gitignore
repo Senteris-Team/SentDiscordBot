@@ -2,3 +2,4 @@
 .sln
 .idea
 node_modules
+config.json

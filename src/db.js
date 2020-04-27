@@ -1,10 +1,10 @@
 var mysql = require("mysql");
+const config = require('../config.json');
 
-var DBpassword = process.argv[3];
 var pool = mysql.createPool({
   host: "localhost",
   user: "admin",
-  password: DBpassword,
+  password: config.dbPassword,
   database: "SentDiscordBot",
   queueLimit: 0,
   connectionLimit: 0,
