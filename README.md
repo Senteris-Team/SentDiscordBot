@@ -1,4 +1,4 @@
-# Sent Discord Bot
+# Sent Discord Bot v0.2.5.1 - Works at all servers
 
 ### En
 Oh my! It's 'Sent discord bot'! ARE WE GONNA DIE!?

@@ -11,7 +11,7 @@ module.exports = (client) => {
     }*/
     status: "online",
     game: {
-      name: "you:b| !-help v0.2.6",
+      name: "you:b| !-help v0.2.5",
       type: "WATCHING"
     }
   });
