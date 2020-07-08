@@ -1,5 +1,7 @@
-  
 {
+  "dbHost" : "localhost",
+  "dbName" : "SentDiscordBot",
+  "dbUser" : "",
   "dbPassword" : "",
   "dsApiKey" : ""
 }
