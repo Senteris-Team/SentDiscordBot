@@ -10,9 +10,9 @@ module.exports = (client) => {
       type: "WATCHING"
     }*/
     status: "online",
-    game: {
-      name: "you:b| !-help v0.2.5",
-      type: "WATCHING"
+    activity: {
+      name: "Watching you:b| !-help v0.3",
+      type: "CUSTOM_STATUS"
     }
   });
 }
