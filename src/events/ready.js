@@ -5,14 +5,14 @@ module.exports = (client) => {
 
   client.user.setPresence({/*
     status: "idle",
-    game: {
-      name: "TEST!",
-      type: "WATCHING"
-    }*/
-    status: "online",
     activity: {
-      name: "Watching you:b| !-help v0.3",
-      type: "CUSTOM_STATUS"
+      type: "CUSTOM_STATUS",
+      name: "Testing"
+    }*/
+    status: "idle",
+    activity: {
+      type: "CUSTOM_STATUS",
+      name: "Watching you:b| !-help v0.3"
     }
   });
 }
